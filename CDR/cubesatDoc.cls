@@ -32,6 +32,7 @@
 \RequirePackage[toc]{glossaries}
 \RequirePackage{caption}
 \RequirePackage{pgfplots}
+\RequirePackage{circuitikz}
 
 % configuracion de hipervinculos
 \hypersetup{

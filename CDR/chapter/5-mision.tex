@@ -350,16 +350,16 @@ durante el proceso de ingeniera del CubeSat.
         reducido tamaño y alta estabilidad operativa, cualidades esenciales para sistemas embarcados
         en entornos aeroespaciales.
 
-        El propósito fundamental del \acrshort{obc} es tomar y almacenar el registro de los sensores,
+        El propósito fundamental del \acrshort{obc} es leer y almacenar el registro de los sensores,
         tales como aceleración, orientación, presión atmosférica y temperatura ambiente. Estas
         mediciones son gestionadas por el firmware, y almacenadas de forma estructurada
         facilitando su posterior lectura y procesamiento.
 
         El \acrshort{obc} también es responsable del control de subsistemas clave, como el de regulación
-        térmica, utilizado para la misión secundaria mediante celdas Peltier, a través del Sistema de
-        administración de energía (\acrshort{pms}) y la lectura de los sensores ambientales. Ademas, mantiene una
-        constante conexión con este sistema, actuando como intermediario entre el \acrshort{pms} y el \acrshort{hmi}, lo
-        que permite el monitoreo en tiempo real la integridad energética de los distintos subsistemas.
+        térmica utilizado para la misión secundaria, mediante sensores de temperatura y celdas Peltier, siendo un
+        intermediario entre éstas y el sistema de administración de energía (\acrshort{pms}). Además, permite el
+        monitoreo en tiempo real de la integridad energética de los distintos subsistemas al ser también el intermediario
+        entre el \acrshort{pms} y el \acrshort{hmi}.
         Entre los parámetros supervisados se incluyen el consumo de corriente, niveles de tensión y el
         estado de carga de la batería.
 
@@ -368,19 +368,236 @@ durante el proceso de ingeniera del CubeSat.
         eficiente de recursos, manteniendo al sistema embarcado centrado
         exclusivamente en tareas criticas durante la misión.
 
-        A través del \acrshort{hmi} será posible establecer el modo de operación de la \acrshort{obc}. Teniendo los siguientes modos de operación:
+        Será posible seleccionar distintos modos de operación para el sistema mediante el \acrshort{obc}. Esto permite
+        una gestión eficiente de los recursos, especialmente en lo que respecta al consumo de potencia y la preparación
+        del cubesat para eventos críticos de la misión, mediante la adaptación de su funcionamiento según la etapa de
+        la misión. Se han definido los siguiente modos de operación:
         \begin{itemize}
            \item \textbf{Apagado}
            \item \textbf{Pre Lanzamiento:} Inicializa los subsistemas y corrobora el correcto funcionamiento.
-            Permite la conexión con la estación terrena para su verificación.
+            Permite la conexión con la estación terrena para su verificación. Una vez inicializados los subsistemas
+            y realizadas las verificiaciones pertinentes, el sistema se pone en modo de reposo.
+           \item \textbf{Reposo:} Las unidades de procesamiento principal (RPI en la OBC y Arduino Nano en el PMS) se
+           establecen en modos de bajo consumo de potencia (idle, stand-by, deep sleep, etc.). Se disminuye la
+           frecuencia de lectura de ciertos sensores. Si el modo anterior fue el de \textit{pre lanzamiento} el
+           subsistema \acrshort{tru} se mantiene activo.
            \item \textbf{Lanzamiento:} Realiza solamente las rutinas criticas para el cumplimiento de la
-          misión. Cortando cualquier va de comunicación con la estación terrestre.
+          misión. Cortando cualquier via de comunicación con la estación terrestre.
            \item \textbf{Recuperación de datos:} Rehabilita la comunicación con la estación terrestre
           permitiendo la visualización, análisis y descarga de datos.
            \item \textbf{Prueba:} Este modo será utilizado durante le desarrollo del CubeSat permitiendo
           acceso administrativo al sistema.
         \end{itemize}
 
+        La selección del modo de operación se implementa mediante un sistema simple y robusto de entrada digital basado
+        en la detección de estados lógicos en pines de la Raspberry Pi. Para ello, se ha incluido en la placa un conector
+        JST HX de 6 pines (macho), de los cuales 3 pines están conectados a entradas digitales de la Raspberry Pi 
+        configuradas internamente con resistencias pull-up. Esto significa que, en ausencia de conexión externa, dichas
+        entradas leen un nivel lógico alto (1).
+
+        El sistema de selección se realiza mediante la conexión de diferentes fichas JST HX hembra, diseñadas con
+        puentes internos que conectan ciertos pines a masa (GND). De esta forma, se genera una combinación específica
+        de niveles lógicos en los pines de entrada de la Raspberry Pi al insertar cada ficha, determinando el modo de
+        operación activo. Cada combinación binaria representa un modo de operación previamente definido y programado en
+        el firmware del sistema. A continuación se presenta un diagrama que representa esto:
+
+        \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            % Paths, nodes and wires:
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=15.965cm, minimum height=20.465cm] at (0, 10.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (4, 15.375){};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (5.031, 2.25){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (5.031, 2.625){Lanzamiento};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (0, 4.875){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (0, 5.25){Reposo};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (4.688, 9.25){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (4.688, 9.625){Rec. de datos};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (5, 4.875){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (5, 5.25){Prueba};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (-5, 4.875){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (-5, 5.25){Apagado};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (0.375, 12.25){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (0.375, 12.625){MODE\_SEL0};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (-5.625, 12.25){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (-5.625, 12.625){MODE\_SEL2};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (-2.625, 12.25){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (-2.625, 12.625){MODE\_SEL1};
+            \draw (2.438, 12.625) -- (2.438, 5.875);
+            \node[shape=rectangle, inner sep=0, minimum width=4.5cm, minimum height=0.75cm] at (4.688, 12.25){} node [anchor=north, align=center, text width=4.147cm, inner sep=5pt] at (4.688, 12.625){Modo de operación\\};
+            \draw (-6.625, 11.875) -- (6.375, 11.875);
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 11.5){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 11.875){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 8.5){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 8.875){1};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (4.688, 6.25){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (4.688, 6.625){Lanzamiento};
+            \node[shape=rectangle, inner sep=0, minimum width=4.063cm, minimum height=0.75cm] at (4.688, 8.5){} node [anchor=north, align=center, text width=3.71cm, inner sep=5pt] at (4.688, 8.875){Pre lanzamiento};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (4.688, 11.5){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (4.688, 11.875){Apagado};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (4.688, 10){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (4.688, 10.375){Prueba};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (-4.969, 2.25){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (-4.969, 2.625){Rec. de datos};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (4.688, 10.75){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (4.688, 11.125){Reposo};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (4.688, 7.75){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (4.688, 8.125){x};
+            \node[shape=rectangle, inner sep=0, minimum width=2.875cm, minimum height=0.75cm] at (4.688, 7){} node [anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (4.688, 7.375){x};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (2.125, 15.375){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (2.875, 15.375){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (3.625, 15.375){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (4.375, 15.375){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (5.125, 15.375){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (5.875, 15.375){};
+            \draw node[ground, rotate=-180, yscale=-1] at (-2.125, 14.5) {};
+            \draw (-2.125, 15.375) -| (-2.125, 14.5);
+            \draw node[ground, rotate=-180, yscale=-1] at (-3.625, 14.5) {};
+            \draw (-3.625, 14.5) -- (-3.625, 15.375);
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (5.125, 16.625){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (5.125, 17){MODE\_SEL0};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (2.125, 18.125){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (2.125, 18.5){MODE\_SEL2};
+            \node[shape=rectangle, inner sep=0, minimum width=2.5cm, minimum height=0.75cm] at (3.625, 17.375){} node [anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (3.625, 17.75){MODE\_SEL1};
+            \draw node[ground, rotate=-180, yscale=-1] at (-5.125, 14.5) {};
+            \draw (-5.125, 14.5) -- (-5.125, 15.375);
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (2, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (2, 15.25){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (2.75, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (2.75, 15.25){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (3.5, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (3.5, 15.25){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-3.75, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-3.75, 15.25){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (5, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (5, 15.25){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (5.75, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (5.75, 15.25){\tiny 6};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (-4, 15.375){};
+            \node[shape=rectangle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-5.875, 15.375){};
+            \node[shape=rectangle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-5.125, 15.375){};
+            \node[shape=rectangle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-4.375, 15.375){};
+            \node[shape=rectangle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-3.625, 15.375){};
+            \node[shape=rectangle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-2.875, 15.375){};
+            \node[shape=rectangle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-2.125, 15.375){};
+            \draw (-5.875, 16.25) to[american resistor,/tikz/circuitikz/bipoles/length=0.700cm] (-5.875, 17.5);
+            \draw node[rground, rotate=-180] at (-5.875, 17.5) {};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-6, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-6, 15.25){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-5.25, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-5.25, 15.25){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-4.5, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-4.5, 15.25){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (4.25, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (4.25, 15.25){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-3, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-3, 15.25){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-2.25, 15){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-2.25, 15.25){\tiny 6};
+            \draw (5.125, 15.375) -- (5.125, 16.25);
+            \draw (0, 13) -- (0, 19.75);
+            \node[shape=rectangle, inner sep=0, minimum width=4.5cm, minimum height=0.75cm] at (-4, 19.375){} node [anchor=north, align=center, text width=4.147cm, inner sep=5pt] at (-4, 19.75){On board computer};
+            \node[shape=rectangle, inner sep=0, minimum width=4.5cm, minimum height=0.75cm] at (4, 19.375){} node [anchor=north, align=center, text width=4.147cm, inner sep=5pt] at (4, 19.75){User};
+            \draw (-5.875, 15.375) -| (-5.875, 16.25);
+            \draw (-4.375, 16.25) to[american resistor,/tikz/circuitikz/bipoles/length=0.700cm] (-4.375, 17.5);
+            \draw node[rground, rotate=-180] at (-4.375, 17.5) {};
+            \draw (-4.375, 15.375) -| (-4.375, 16.25);
+            \draw (-2.875, 16.25) to[american resistor,/tikz/circuitikz/bipoles/length=0.700cm] (-2.875, 17.5);
+            \draw node[rground, rotate=-180] at (-2.875, 17.5) {};
+            \draw (-2.875, 15.375) -| (-2.875, 16.25);
+            \draw (2.125, 17.75) -| (2.125, 15.375);
+            \draw (3.625, 17) -| (3.625, 15.375);
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 10.75){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 11.125){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 10){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 10.375){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 9.25){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 9.625){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 7.75){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 8.125){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 7){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 7.375){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-5.625, 6.25){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-5.625, 6.625){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 11.5){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 11.875){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 10.75){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 11.125){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 10){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 10.375){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 9.25){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 9.625){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 8.5){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 8.875){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 7.75){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 8.125){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 7){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 7.375){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (-2.625, 6.25){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (-2.625, 6.625){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 11.5){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 11.875){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 10.75){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 11.125){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 10){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 10.375){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 9.25){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 9.625){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 8.5){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 8.875){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 7.75){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 8.125){1};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 7){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 7.375){0};
+            \node[shape=rectangle, inner sep=0, minimum width=1cm, minimum height=0.75cm] at (0.375, 6.25){} node [anchor=north, align=center, text width=0.647cm, inner sep=5pt] at (0.375, 6.625){1};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (-5, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-6.875, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-6.125, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-5.375, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-4.625, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-3.875, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-3.125, 3.875){};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-7, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-7, 3.75){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-6.25, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-6.25, 3.75){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-5.5, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-5.5, 3.75){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-4.75, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-4.75, 3.75){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-4, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-4, 3.75){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-3.25, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-3.25, 3.75){\tiny 6};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (5, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (3.125, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (3.875, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (4.625, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (5.375, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (6.125, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (6.875, 3.875){};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (3, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (3, 3.75){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (3.75, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (3.75, 3.75){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (4.5, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (4.5, 3.75){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (5.25, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (5.25, 3.75){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (6, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (6, 3.75){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (6.75, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (6.75, 3.75){\tiny 6};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (-4.969, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-6.844, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-6.094, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-5.344, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-4.594, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-3.844, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-3.094, 1.25){};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-6.969, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-6.969, 1.125){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-6.219, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-6.219, 1.125){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-5.469, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-5.469, 1.125){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-4.719, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-4.719, 1.125){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-3.969, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-3.969, 1.125){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-3.219, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-3.219, 1.125){\tiny 6};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (0, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-1.875, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-1.125, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-0.375, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (0.375, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (1.125, 3.875){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (1.875, 3.875){};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-2, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-2, 3.75){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-1.25, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-1.25, 3.75){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-0.5, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-0.5, 3.75){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (0.25, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (0.25, 3.75){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (1, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (1, 3.75){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (1.75, 3.5){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (1.75, 3.75){\tiny 6};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (0.031, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-1.844, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-1.094, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (-0.344, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (0.406, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (1.156, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (1.906, 1.25){};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-1.969, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-1.969, 1.125){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-1.219, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-1.219, 1.125){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (-0.469, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (-0.469, 1.125){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (0.281, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (0.281, 1.125){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (1.031, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (1.031, 1.125){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (1.781, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (1.781, 1.125){\tiny 6};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=4.465cm, minimum height=1.215cm] at (5.031, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (3.156, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (3.906, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (4.656, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (5.406, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (6.156, 1.25){};
+            \node[shape=rectangle, draw, line width=1pt, inner sep=0, minimum width=0.215cm, minimum height=0.215cm] at (6.906, 1.25){};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (3.031, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (3.031, 1.125){\tiny 1};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (3.781, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (3.781, 1.125){\tiny 2};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (4.531, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (4.531, 1.125){\tiny 3};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (5.281, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (5.281, 1.125){\tiny 4};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (6.031, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (6.031, 1.125){\tiny 5};
+            \node[shape=rectangle, inner sep=0, minimum width=0.5cm, minimum height=0.5cm] at (6.781, 0.875){} node [anchor=north, align=center, text width=0.147cm, inner sep=5pt] at (6.781, 1.125){\tiny 6};
+            \draw (-6.125, 3.875) |- (-6.875, 3.875);
+            \draw (-4.625, 3.875) -- (-5.375, 3.875);
+            \draw (-3.125, 3.875) |- (-3.875, 3.875);
+            \draw (-1.125, 3.875) |- (-1.875, 3.875);
+            \draw (0.375, 3.875) -- (-0.375, 3.875);
+            \draw (3.875, 3.875) |- (3.125, 3.875);
+            \draw (6.875, 3.875) |- (6.125, 3.875);
+            \draw (-6.094, 1.25) |- (-6.844, 1.25);
+            \draw (1.906, 1.25) |- (1.156, 1.25);
+            \draw (0.406, 1.25) -- (-0.344, 1.25);
+            \node[shape=rectangle, inner sep=0, minimum width=4.063cm, minimum height=0.75cm] at (0, 2.25){} node [anchor=north, align=center, text width=3.71cm, inner sep=5pt] at (0, 2.625){Pre lanzamiento};
+            \draw (-8, 13) -- (8, 13);
+            \draw (-8, 5.5) -- (8, 5.5);
+            \node[shape=rectangle, inner sep=0, minimum width=4.5cm, minimum height=0.75cm] at (0, 20.125){} node [anchor=north, align=center, text width=4.147cm, inner sep=5pt] at (0, 20.5){Pinout};
+            \draw (-8, 19.75) -- (8, 19.75);
+            \draw (-8, 19) -- (8, 19);
+        \end{tikzpicture}
+        \caption{diagrama selección de modos}
+        \label{fig:seleccion_modos}
+    \end{figure}
+ 
         \begin{figure}[H]
           \centering
           \begin{tikzpicture}
@@ -405,11 +622,11 @@ durante el proceso de ingeniera del CubeSat.
           \label{fig:sistema_obc}
         \end{figure}
 
-      \item \textbf{Human-Machine Interface \acrshort{hmi}:} Existen dos formas principales de interactuar con
-        el CubeSat. La primera es mediante llaves de hardware que se conectan físicamente al
-        de interacción es a través de una interfaz web mediante protocolo HTTP, accesible mediante una
-        red local generada por la \acrshort{obc}. En la Figura \ref{fig:hmi-arq} se puede ver la arquitectura
-        de la página antes mencionada.
+        \item \textbf{Human-Machine Interface \acrshort{hmi}:} La principal forma de interacción entre el usuario y el
+        cubesat es a través de una interfaz web mediante protocolo HTTP, accesible mediante una
+        red local generada por la \acrshort{obc}. La segunda forma de interacción es mediante el selector de modos con
+        las llaves o conectores de hardware explicado anteriomente. En la Figura \ref{fig:hmi-arq} se puede ver la
+        arquitectura de la página mencionada.
 
         \begin{figure}[H]
           \centering
