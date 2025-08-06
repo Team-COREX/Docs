@@ -796,9 +796,9 @@ a realizar, que será detallada en la siguiente sección.
       La fabricación del CubeSat es relativamente simple, ya que solamente se requiere una plancha de aluminio como
       materia prima para obtener el esqueleto básico del mismo. La plancha de aluminio requiere ser cortada previo al
       plegado, ya que estos cortes implementan geometrías que no solo facilitan los pliegues, si no que en algunos casos
-      los hacen posibles, agregando puntos de alivio. Ademas de los cortes, es necesario hacer las perforaciones
-      necesarias y también los avellanados, ya que se puede dificultar hacerlos después del plegado debido a la
-      complejidad de la fijación.
+      los hacen posibles, agregando puntos de alivio. Ademas de los cortes, es necesario hacer las marcas de centro para
+      las perforaciones necesarias, ya que hacer los agujeros en tamaño completo puede provocar deformaciones en los
+      mismos al momento del plegado.
       \begin{figure}[H]
         \begin{minipage}{0.5\textwidth}
           \centering
@@ -814,8 +814,60 @@ a realizar, que será detallada en la siguiente sección.
         \end{minipage}
       \end{figure}
 
-      Los cortes de las planchas de aluminio se van a realizar utilizando una CNC, y los pliegues con una plegadora de
-      chapa.  Las varillas serán cortadas, frenteadas, perforadas y roscadas (interna) en un torno.
+      Para realizar los cortes de la plancha de aluminio se utilizara la CNC disponible en el Centro de Investigacion
+      en Informatica para la Ingenieria (CIII). Luego de los cortes, se quitan las rebabas utilizando herramientas
+      manuales, y se procede al plegado.
+
+      Para el plegado, especialmente el plegado de los Lid, se requiere maquinaria especializada de plegado, que es poco
+      frecuente y su uso aumentaria significativamente el costo de fabricacion del CubeSat. Por eso, se diseñaron unas
+      matrices y punzones para ser impresos en 3D con PLA y relleno al 100\% y utilizados en una morsa de banco. Esto
+      permite que tengamos control total sobre los pliegues, radios y tensiones generadas en las chapas al momento del
+      plegado.
+
+      En las figuras \ref{fig:fabricacion.lid} y \ref{fig:fabricacion.corner} se pueden ver las herramientas que
+      diseñamos y como quedan despues de hacer el pliegue. Seguimos desarrollando herramientas que permitan tener mas
+      control sobre la linea de pliegue, pero ya fuimos capaces de crear un primer prototipo que se puede ver en la
+      figura
+      \ref{fig:fabricacion.prototipo1}.
+      \begin{figure}[!ht]
+        \centering
+        \begin{minipage}{.32\textwidth}
+          \centering
+          \includegraphics[width=\textwidth]{image/fabrication/corner_flat_top.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{.32\textwidth}
+          \centering
+          \includegraphics[width=\textwidth]{image/fabrication/corner_flat_bottom.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{.32\textwidth}
+          \centering
+          \includegraphics[width=\textwidth]{image/fabrication/corner_bent.png}
+        \end{minipage}
+        \caption{Fabricacion del Corner con matriz y punzon personalizado.}
+        \label{fig:fabricacion.corner}
+      \end{figure}
+      \begin{figure}[!ht]
+        \centering
+        \begin{minipage}{.32\textwidth}
+          \centering
+          \includegraphics[width=\textwidth]{image/fabrication/lid_flat.png}
+        \end{minipage}
+        \hspace{3cm}
+        \begin{minipage}{.32\textwidth}
+          \centering
+          \includegraphics[width=\textwidth]{image/fabrication/lid_bent.png}
+        \end{minipage}
+        \caption{Fabricacion del Lid con matriz y punzon personalizado.}
+        \label{fig:fabricacion.lid}
+      \end{figure}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{image/fabrication/prototype.jpg}
+        \caption{Prototipo plegado con herramientas personalizadas.}
+        \label{fig:fabricacion.prototipo1}
+      \end{figure}
 
     \subsubsection{Colocación de Muestras}
       La estructura del CubeSat permitirá que las muestras se puedan colocar después de finalizar el ensamblaje de la
