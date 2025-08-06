@@ -1324,11 +1324,9 @@ a realizar, que será detallada en la siguiente sección.
       \hline
     \end{longtable}
 
-  \subsection{Ensayos}
+  \subsection{Plan de Verificacion y Ensayos}
     En esta sección se detallan los ensayos que se realizarán a los distintos prototipos que surgirán durante el
     desarrollo del CubeSat, que servirán para validar y obtener una retroalimentación del proceso de diseño.
-
-    Sobre el producto final se realzaran ensayos mas exhaustivos que serán detallados en el \acrshort{cdr}.
 
     \subsubsection{Estructura}
       Para determinar la integridad estructural se realizarán distintos tipos de pruebas, donde las condiciones de cada
@@ -1377,6 +1375,23 @@ a realizar, que será detallada en la siguiente sección.
           térmica de la batería. Esto permitirá identificar posibles sobrecalentamientos que puedan comprometer la
           seguridad o el rendimiento del sistema.
       \end{itemize}
+
+    \subsubsection{Electronica}
+      Para hacer una prueba a la electronica, se ensamblara el CubeSat sin estructura ni carcasa, para poder conectarlo
+      a una fuente de alimentacion externa. Con la fuente externa podemos monitorear el consumo del CubeSat bajo
+      condiciones preestablecidas y comparar si los consumos son acordes a los estimados y si la medicion esta dentro de
+      los margenes de error establecidos. Por otro lado podemos acceder
+      a la \acrshort{pms} para medir los voltajes de las fuentes de salida y compararlos con los reportados por la misma
+      en la interfaz web. Asi mismo, se realizaran pruebas intensivas de las fuentes, para encontrar los limites
+      operativos y ver si las protecciones implementadas funcionan correctamente. Con la \acrshort{pms} probada, se
+      procede a hacer una prueba de estabilidad de programa, la cual involucra dejar el CubeSat en modo lanzamiento por
+      un periodo prolongado (por lo menos 4 veces el tiempo de mision maximo) para corroborar que los programas sean
+      estables y no generen corrupcion ni perdida de datos.
+
+    \subsubsection{Transferencia termica}
+      Se ensamblara el CubeSat y se colocaran muestras de agua para probar la capacidad de discipacion y transferencia
+      termica de las celdas peltier. Asimismo, se verificara que los cambios de temperatura no signifiquen un problema
+      para la estructura plastica. Por otro lado se validara el sistema de discipacion pasivo para las celdas peltier.
 
 \section{Plan de Proyecto}
 
