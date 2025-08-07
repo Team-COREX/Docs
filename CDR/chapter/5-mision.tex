@@ -882,6 +882,73 @@ a realizar, que será detallada en la siguiente sección.
         \label{fig:structure-muestra}
       \end{figure}
 
+    \subsubsection{Subsistemas}
+      La estructura tiene tres subsistemas: \acrshort{pms}, \acrshort{obc} y Payload Unit.
+      \begin{wrapfigure}{R}{0.35\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth]{image/structure/PMS_exploded.png}
+        \caption{Vista explotada del \acrshort{pms}.}
+      \end{wrapfigure}
+
+      El \acrshort{pms} alberga la bateria y la placa del mismo. Para la bateria fue necesario crear un soporte que
+      la agarra a la tapa y la mantiene fija en todo momento. El montaje de la placa va a depender de la disposicion
+      de los elementos de la misma. La limitante es el espacio vertical. Actualmente la placa, con componentes no puede
+      medir mas de 8.4mm de alto. Si logramos disponer los elementos de tal forma de que se pueda levantar para colocar
+      tornillos, se usaran tornillos. Caso contrario, se usaran remaches de plastico fundido. Va a existir una ventana
+      en la tapa superior de la \acrshort{pms} por donde saldran todos los cables que van a la \acrshort{obc} y a la
+      Payload Unit. La ventana no esta planteada en el diseño porque va a depender de como se puedan disponer los
+      elementos de la \acrshort{pms} y la \acrshort{obc}. La tapa que tiene en la parte frontal de la carcasa esta para
+      tener acceso a los conectores de potencia y balanceo de la bateria para desconectarla completamente del CubeSat y 
+      cargarla externamente. La tapa es removible y se fija con imanes.
+
+      La \acrshort{obc} es la mas simple de todas. Es solo una tapa con tornillos. Para el montaje de la placa tambien
+      ocurre lo mismo que para la placa de la \acrshort{pms}. La placa con componentes no puede medir mas de 8mm de
+      alto, por lo que dependiendo de la disposicion de los componentes, se vera si se usan tornillos o remaches de
+      plastico derretido. En el diseño falta tambien la misma ventana por donde van a pasar los cables.
+      \begin{figure}[!ht]
+        \centering
+        \includegraphics[width=0.5\textwidth]{image/structure/OBC_exploded.png}
+        \caption{Vista explotada del \acrshort{obc}.}
+      \end{figure}
+
+      \begin{wrapfigure}{l}{0.35\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth]{image/structure/Payload_exploded.png}
+        \caption{Vista explotada del Payload Unit.}
+      \end{wrapfigure}
+      El Payload Unit es el que alberga las tres zonas termicas reguladas, las de cuales cada una alberga dos muestras.
+      Este subsistema es el unico que no tiene placa. La potencia es controlada por la \acrshort{pms} que es tambien
+      controlada por la \acrshort{obc}, la cual tambien lee la temperatura de las zonas termicas como entrada de
+      retroalimentacion. El Payload Unit tiene una tapa superior, que como se menciono previamente, es por la cual se
+      cargaran las muestras en el momento previo a cargar el CubeSat al cohete. Por otro lado, la carcasa tiene tres
+      aberturas las cuales son para exponer una chapa que esta en contacto con las peltier de cada zona termica. Esta
+      chapa, por el momento va a estar al raz de la carcasa, para aportar discipacion para las celdas Peltier. Esta
+      planeado determinar de forma experimental si se requiere aumentar la superficie de discipacion (agregando por
+      ejemplo un discipador) o es necesario emplear un sistema de discipacion activo. Decidimos hacer pruebas
+      experimentales ya que no conocemos con exactitud cual va a ser la demanda para llevar cada bloque y las muestras a
+      la temperatura deseada. Ademas es posible que durante el periodo de estabilizacion termica la solucion de
+      discipacion no sea suficiente, pero una vez estabilizado si lo sea. Como planeamos que la estabilizacion termica
+      ocurra bajo la supervision del equipo, no seria necesario cambiar el sistema de discipacion.
+
+      Cada zona termica regulada esta compuesta por un bloque de aluminio con dos huecos que albergan dos tubos de
+      muestras con tapa hermetica de 2ml. Adosado al bloque de aluminio se encuentra la celda Peltier, la cual tiene
+      pasta termica de ambos lados. Del otro lado de la celda Peltier, hay una chapa de aluminio plegada y trabajada con
+      un CNC para hacer una hendidura donde la celda Peltier hace contacto y transfiere la energia termica para ser
+      discipada por la parte que esta expuesta hacia afuera del CubeSat.
+      \begin{figure}[!ht]
+        \centering
+        \begin{minipage}{0.4\textwidth}
+          \centering
+          \includegraphics[width=1\textwidth]{image/structure/SampleUnit.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+          \centering
+          \includegraphics[width=1\textwidth]{image/structure/SampleUnit_exploded.png}
+        \end{minipage}
+        \caption{Vistas varias de la zona termica regulada.}
+      \end{figure}
+
   \subsection{Criterios de Margenes}
     Para en análisis de presupuestos preliminares establecimos los margenes considerando las condiciones mas
     desfavorables
