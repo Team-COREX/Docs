@@ -917,27 +917,30 @@ a realizar, que será detallada en la siguiente sección.
         \caption{Vista explotada del Payload Unit.}
       \end{wrapfigure}
       El Payload Unit es el que alberga las tres zonas termicas reguladas, las de cuales cada una alberga dos muestras.
-      Este subsistema es el unico que no tiene placa. La potencia es controlada por la \acrshort{pms} que es tambien
-      controlada por la \acrshort{obc}, la cual tambien lee la temperatura de las zonas termicas como entrada de
-      retroalimentacion. El Payload Unit tiene una tapa superior, que como se menciono previamente, es por la cual se
-      cargaran las muestras en el momento previo a cargar el CubeSat al cohete. Por otro lado, la carcasa tiene tres
-      aberturas las cuales son para exponer una chapa que esta en contacto con las peltier de cada zona termica. Esta
-      chapa, por el momento va a estar al raz de la carcasa, para aportar discipacion para las celdas Peltier. Esta
-      planeado determinar de forma experimental si se requiere aumentar la superficie de discipacion (agregando por
-      ejemplo un discipador) o es necesario emplear un sistema de discipacion activo. Decidimos hacer pruebas
-      experimentales ya que no conocemos con exactitud cual va a ser la demanda para llevar cada bloque y las muestras a
-      la temperatura deseada. Ademas es posible que durante el periodo de estabilizacion termica la solucion de
-      discipacion no sea suficiente, pero una vez estabilizado si lo sea. Como planeamos que la estabilizacion termica
-      ocurra bajo la supervision del equipo, no seria necesario cambiar el sistema de discipacion.
+      Este subsistema es el unico que no tiene placa. El Payload Unit tiene una tapa superior, que como se menciono
+      previamente, es por la cual se cargaran las muestras en el momento previo a cargar el CubeSat al cohete. Por otro
+      lado, la carcasa tiene tres aberturas las cuales son para exponer una chapa que esta en contacto con las peltier
+      de cada zona termica. Esta chapa, por el momento va a estar al raz de la carcasa, para aportar discipacion para
+      las celdas Peltier. Esta planeado determinar de forma experimental si se requiere aumentar la superficie de
+      discipacion (agregando por ejemplo un discipador) o es necesario emplear un sistema de discipacion activo.
+      Decidimos hacer pruebas experimentales ya que no conocemos con exactitud cual va a ser la demanda para llevar cada
+      bloque y las muestras a la temperatura deseada. Ademas es posible que durante el periodo de estabilizacion termica
+      la solucion de discipacion no sea suficiente, pero una vez estabilizado si lo sea. Como planeamos que la
+      estabilizacion termica ocurra bajo la supervision del equipo, no seria necesario cambiar el sistema de
+      discipacion.
 
-      Cada zona termica regulada esta compuesta por un bloque de aluminio con dos huecos que albergan dos tubos de
-      muestras con tapa hermetica de 2ml. Adosado al bloque de aluminio se encuentra la celda Peltier, la cual tiene
-      pasta termica de ambos lados. Del otro lado de la celda Peltier, hay una chapa de aluminio plegada y trabajada con
-      un CNC para hacer una hendidura donde la celda Peltier hace contacto y transfiere la energia termica para ser
-      discipada por la parte que esta expuesta hacia afuera del CubeSat.
+      Cada zona termica regulada esta compuesta por una chapa plegada, perforada y mecanizada, a la cual se le agregan 4
+      separadores plasticos pegados con pegamento epoxico. A esa pieza que llamamos "Mount" se le coloca el bloque
+      mecanizado de aluminio que albergara los tubos de plastico donde se colocaran las muestras. La forma en la que el
+      bloque mecanizado se unira a el mount aun no esta definida. Dentro de las opciones estan: Soldadura aditiva (mig,
+      tig o con estaño), pegamento epoxico termico, o silicona termica. Se prefiere las soldaduras aditivas por su
+      mejor conduccion termica. Ademas, al mount se le coloca la Celda Peltier (con pasta termica de ambos lados), la
+      cual es fijada por otra chapa de aluminio plegada, perforada y mecanizada, la cual es la principal forma de
+      disipacion para la celda peltier. La parte plegada de la chapa de transferencia termica queda expuesta al exterior
+      por medio de una ventana en la carcasa de la Payload Unit.
       \begin{figure}[!ht]
         \centering
-        \begin{minipage}{0.4\textwidth}
+        \begin{minipage}{0.35\textwidth}
           \centering
           \includegraphics[width=1\textwidth]{image/structure/SampleUnit.png}
         \end{minipage}
