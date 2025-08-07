@@ -1404,44 +1404,82 @@ a realizar, que será detallada en la siguiente sección.
 
       Concluimos entonces que nuestra propuesta de estructura es valida y soportara las condiciones de lanzamiento.
 
-  \subsection{Análisis de Riesgos}
-    En esta sección se identifican posibles fallos asociados al funcionamiento de los subsistemas
-    del CubeSat, con el objetivo de implementar estrategias de mitigación que contribuyan a
-    aumentar la confiabilidad y la seguridad del sistema en cada fase de la misión. Identificación:
+\subsection{Análisis de Riesgos}
+En esta sección se presenta un análisis de riesgos para los subsistemas del CubeSat, utilizando una metodología de matriz de riesgo de 5x5. Este enfoque asigna un nivel de severidad y una probabilidad de ocurrencia a cada evento potencial, permitiendo una priorización clara de las estrategias de mitigación.
 
-    \begin{longtable}{ | m{2.5cm} | m{3cm} | m{3cm} | m{6cm} | }
-      \caption{Análisis de Riesgos} \label{tab:analisis_riesgos} \\
-      \hline
-      \textbf{Riesgo} & \textbf{Causa} & \textbf{Impacto} & \textbf{Mitigación} \\
-      \hline
-      \endfirsthead
+\subsubsection{Escala de severidad}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Insignificante:} Su ocurrencia genera consecuencias que no afectan el funcionamiento del sistema ni comprometen los objetivos del proyecto.
+    \item \textbf{Menor:} Puede causar pequeñas pérdidas, pero sus consecuencias son fácilmente gestionables.
+    \item \textbf{Moderada:} Genera un impacto considerable que requerirá de tiempo y demás recursos para ser solucionado.
+    \item \textbf{Importante:} Las consecuencias requieren intervención inmediata porque pueden causar daños a largo plazo, afectando seriamente el cumplimiento de objetivos.
+    \item \textbf{Catastrófica:} El impacto es crítico. Las consecuencias ponen en riesgo la viabilidad del proyecto o generan grandes pérdidas.
+\end{enumerate}
 
-      \hline
-      \textbf{Riesgo} & \textbf{Causa} & \textbf{Impacto} & \textbf{Mitigación} \\
-      \hline
-      \endhead
+\subsubsection{Escala de probabilidad}
+\begin{enumerate}
+    \item \textbf{Muy baja:} Ocurrencia casi imposible.
+    \item \textbf{Baja:} Podría ocurrir, pero sería extraño.
+    \item \textbf{Media:} Puede ocurrir ocasionalmente.
+    \item \textbf{Alta:} Casi seguro que suceda.
+    \item \textbf{Muy alta:} Podemos dar por hecho que sucederá.
+\end{enumerate}
 
-      \hline
-      \endfoot
+\subsubsection{Impacto del riesgo}
+Se calcula multiplicando la severidad y la probabilidad de cada riesgo.
 
-      \hline
-      \endlastfoot
+\begin{itemize}
+    \item \textbf{Bajo (1-6):} Podemos desestimar estos riesgos, ya que su ocurrencia es poco probable y, en caso de ocurrir, no afectan significativamente al proyecto.
+    \item \textbf{Medio (7-12):} No debemos ignorar estos riesgos, pero tampoco son nuestra prioridad.
+    \item \textbf{Alto (13-25):} Su mitigación es prioritaria, ya que comprometen la ejecución exitosa del proyecto.
+\end{itemize}
 
-      Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Diseño de porta-cápsulas amortiguadoras. Pruebas de vibración según estándar GEVS. Cierre redundante de las tapas. \\
-      \hline
-      Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Control de temperatura con sensores. Validación térmica en cámara climática. Modos de degradación segura que desactivan los elementos Peltier para reducir consumo. \\
-      \hline
-      Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad (checksum SHA-256). Script de conmutación automática probado en \acrshort{pdr}. Redundancia de almacenamiento de datos críticos. \\
-      \hline
-      Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en \acrshort{pms}. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. \\
-      \hline
-      Mal funcionamiento de la \acrshort{imu} o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. \\
-      \hline
-      Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. Uso de materiales biocompatibles. Control de humedad en bahía de muestras. Análisis de vacío. \\
-      \hline
-      Fallo de comunicación pre lanzamiento y pos lanzamiento  & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Conexión por UART. \\
-      \hline
-    \end{longtable}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\hline
+\multicolumn{2}{|c|}{} & \multicolumn{5}{c|}{\textbf{Severidad}}  \\
+\hline
+\multicolumn{2}{|c|}{} & \textbf{Insignificante} & \textbf{Menor} & \textbf{Moderada} & \textbf{Importante} & \textbf{Catastrófica} \\
+\hline
+\multirow{5}{*}{\rotatebox{90}{\textbf{Probabilidad}}} & \textbf{Muy baja} &  &  &  & Fallo de comunicación pre lanzamiento y pos lanzamiento & Contaminación o degradación de muestras biológicas \\
+\cline{2-7}
+& \textbf{Baja} &  &  &  & Mal funcionamiento de la IMU o barómetro & Fallo del suministro eléctrico  \\
+\cline{2-7}
+& \textbf{Media} &  &  &  & Rotura de cápsulas de muestras & Pérdida de datos por fallo de almacenamiento \\
+\cline{2-7}
+& \textbf{Alta} &  &  & Fallo del sistema de regulación térmica &  &  \\
+\cline{2-7}
+& \textbf{Muy alta} &  &  &  &  &  \\
+\hline
+\end{tabular}
+\caption{Impacto de los riesgos}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ | m{2.5cm} | m{3cm} | m{2.5cm} | m{4.5cm} | m{2cm} | }
+\hline
+\textbf{Riesgo} & \textbf{Causa} & \textbf{Consecuencias} & \textbf{Mitigación} & \textbf{Impacto} \\
+\hline
+Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Diseño de porta-cápsulas amortiguadoras. Pruebas de vibración según estándar GEVS. Cierre redundante de las tapas. & 12 - Medio\\ 
+\hline
+Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Control de temperatura con sensores. Validación térmica en cámara climática. Modos de degradación segura que desactivan los elementos Peltier para reducir consumo. & 12 - Medio \\
+\hline
+Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad (checksum SHA-256). Script de conmutación automática probado en PDR. Redundancia de almacenamiento de datos críticos. & 15 - Alto \\
+\hline
+Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en PMS. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. & 10 - Medio \\
+\hline
+Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. & 8 - Medio \\
+\hline
+Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. Uso de materiales biocompatibles. Control de humedad en bahía de muestras. Análisis de vacío. & 5 - Bajo \\
+\hline
+Fallo de comunicación pre lanzamiento y pos lanzamiento & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Conexión por UART. & 8 - Medio\\
+\hline
+\end{tabular}
+\caption{Analisis de Riesgos}
+\label{tab:mi_tabla}
+\end{table}
 
   \subsection{Plan de Verificacion y Ensayos}
     En esta sección se detallan los ensayos que se realizarán a los distintos prototipos que surgirán durante el
