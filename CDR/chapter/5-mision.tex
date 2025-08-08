@@ -385,7 +385,169 @@ a realizar, que será detallada en la siguiente sección.
       \label{fig:sistema_obc}
     \end{figure}
 
-    Revise la sección \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
+   Revise la seccion \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
+
+   En el diagrama ~\ref{fig:filesystem} se presenta la estructura del sistema de archivos diseñada para la misión.
+   Cada dato capturado por los sensores es leído por OBC, que se encarga de almacenar dicho dato en un archivo
+   específico. Junto a este archivo, se crea un segundo archivo con el mismo nombre seguido del sufijo "\_timestamp",
+   donde se guardará la marca de tiempo en que se tomó la medición.
+   
+   Estos archivos son de texto plano codificado en ASCII, y estarán continuamente sobreescribiéndose, conteniendo en
+   todo momento únicamente el dato o timestamp más reciente. Paralelamente, un programa adicional monitorea estos
+   archivos en tiempo real, leyendo los datos y sus respectivos timestamps a medida que se actualizan. Además, agrupará
+   la información y la almacenará en un archivo CSV, dentro del directorio \textit{data/}, combinando los valores con
+   sus timestamps correspondientes.
+
+   El archivo CSV resultante cumple dos funciones clave:
+    \begin{itemize}
+        \item Permite que HMI lea y muestre los datos en tiempo real para supervisión.
+        \item Facilita el post-procesamiento posterior, en el cual los datos serán graficados y analizados visualmente
+        para extraer conclusiones sobre el comportamiento del sistema.
+    \end{itemize}
+
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{0.85\textwidth}{!}{%
+        \begin{minipage}[t]{0.32\textwidth}
+        \vspace{0pt}
+        \begin{forest}
+          for tree={
+            font=\ttfamily,
+            grow'=0,
+            child anchor=west,
+            parent anchor=south,
+            anchor=west,
+            calign=first,
+            inner xsep=7pt,
+            before typesetting nodes={
+              if n=1
+                {insert before={[,phantom]}}
+                {}
+            },
+            fit=band,
+            before computing xy={l=15pt},
+          }
+        [lambda/, folder node
+          [modules/, folder node
+            [pms/, folder node
+              [bat/, folder node
+                [vbat1, file node]
+                [vbat2, file node]
+                [vbat3, file node]
+                [vbat4, file node]
+                [vbat5, file node]
+                [temp, file node]
+              ]
+            ]
+            [sources/, folder node
+               [vbat, file node]
+               [rail\_3v, file node]
+               [rail\_3v\_en, file node]
+               [rail\_5v, file node]
+               [rail\_5v\_en, file node]
+               [rail\_12v, file node]
+               [rail\_12v\_en, file node]
+            ]
+          ]
+        ]
+        \end{forest}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[t]{0.32\textwidth}
+        \vspace{0pt}
+        \begin{forest}
+          for tree={
+            font=\ttfamily,
+            grow'=0,
+            child anchor=west,
+            parent anchor=south,
+            anchor=west,
+            calign=first,
+            inner xsep=7pt,
+            before typesetting nodes={
+              if n=1
+                {insert before={[,phantom]}}
+                {}
+            },
+            fit=band,
+            before computing xy={l=15pt},
+          }
+        [lambda/, folder node
+            [modules/, folder node
+               [obc/, folder node
+                 [gyro/, folder node
+                    [x\_axis, file node]
+                    [y\_axis, file node]
+                    [z\_axis, file node]
+                 ]
+                 [accel/, folder node
+                    [x\_axis, file node]
+                    [y\_axis, file node]
+                    [z\_axis, file node]
+                 ]
+                 [magn/, folder node
+                    [x\_axis, file node]
+                    [y\_axis, file node]
+                    [z\_axis, file node]
+                 ]
+                 [temp/, folder node
+                    [bmp, file node]
+                    [mpu, file node]
+                 ]
+                 [press, file node]
+                 [mode, file node]
+               ]
+            ]
+        ]
+        \end{forest}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[t]{0.32\textwidth}
+        \vspace{0pt}
+        \begin{forest}
+          for tree={
+            font=\ttfamily,
+            grow'=0,
+            child anchor=west,
+            parent anchor=south,
+            anchor=west,
+            calign=first,
+            inner xsep=7pt,
+            before typesetting nodes={
+              if n=1
+                {insert before={[,phantom]}}
+                {}
+            },
+            fit=band,
+            before computing xy={l=15pt},
+          }
+        [lambda/, folder node
+            [modules, folder node
+              [tru/, folder node
+                [pwm/, folder node
+                  [tu1, file node]
+                  [tu2, file node]
+                  [tu3, file node]
+                 ]
+                [temp/, folder node
+                  [tu1, file node]
+                  [tu2, file node]
+                  [tu3, file node]
+                 ]
+              ]
+            ]
+          [data/, folder node
+            [log.txt, file node]
+            [mission.csv, file node]
+          ]
+        ]
+        \end{forest}
+        \end{minipage}%
+        }
+    \caption{Sistema de archivos para la misión.}
+    \label{fig:filesystem}
+    \end{figure} 
 
     \subsubsection{Human-Machine Interface \acrshort{hmi}}
       La principal forma de interacción entre el usuario y el
@@ -420,7 +582,7 @@ a realizar, que será detallada en la siguiente sección.
       diferentes puntos, los cuales son los que determinan el modo de operación. En la figura \ref{fig:seleccion_modos}
       se puede ver la parte física del \acrshort{hmi} representada.
 
-      \begin{figure}
+      \begin{figure}[H]
         \centering
         \begin{tikzpicture}
           % Paths, nodes and wires:
@@ -1240,167 +1402,6 @@ a realizar, que será detallada en la siguiente sección.
 
       Teniendo en cuenta todos los datos a ser almacenados, estimamos un volumen total de
       aproximadamente 3.7 GB.
-
-    \begin{figure}[ht]
-        \centering
-        \resizebox{0.85\textwidth}{!}{%
-        \begin{minipage}[t]{0.32\textwidth}
-        \vspace{0pt}
-        \begin{forest}
-          for tree={
-            font=\ttfamily,
-            grow'=0,
-            child anchor=west,
-            parent anchor=south,
-            anchor=west,
-            calign=first,
-            inner xsep=7pt,
-            before typesetting nodes={
-              if n=1
-                {insert before={[,phantom]}}
-                {}
-            },
-            fit=band,
-            before computing xy={l=15pt},
-          }
-        [lambda/, folder node
-          [modules/, folder node
-            [pms/, folder node
-              [bat/, folder node
-                [vbat1, file node]
-                [vbat2, file node]
-                [vbat3, file node]
-                [vbat4, file node]
-                [vbat5, file node]
-                [temp, file node]
-              ]
-            ]
-            [sources/, folder node
-               [vbat, file node]
-               [rail\_3v, file node]
-               [rail\_3v\_en, file node]
-               [rail\_5v, file node]
-               [rail\_5v\_en, file node]
-               [rail\_12v, file node]
-               [rail\_12v\_en, file node]
-            ]
-          ]
-        ]
-        \end{forest}
-        \end{minipage}%
-        \hfill
-        \begin{minipage}[t]{0.32\textwidth}
-        \vspace{0pt}
-        \begin{forest}
-          for tree={
-            font=\ttfamily,
-            grow'=0,
-            child anchor=west,
-            parent anchor=south,
-            anchor=west,
-            calign=first,
-            inner xsep=7pt,
-            before typesetting nodes={
-              if n=1
-                {insert before={[,phantom]}}
-                {}
-            },
-            fit=band,
-            before computing xy={l=15pt},
-          }
-        [lambda/, folder node
-            [modules/, folder node
-               [obc/, folder node
-                 [gyro/, folder node
-                    [x\_axis, file node]
-                    [y\_axis, file node]
-                    [z\_axis, file node]
-                 ]
-                 [accel/, folder node
-                    [x\_axis, file node]
-                    [y\_axis, file node]
-                    [z\_axis, file node]
-                 ]
-                 [magn/, folder node
-                    [x\_axis, file node]
-                    [y\_axis, file node]
-                    [z\_axis, file node]
-                 ]
-                 [temp/, folder node
-                    [bmp, file node]
-                    [mpu, file node]
-                 ]
-                 [press, file node]
-                 [mode, file node]
-               ]
-            ]
-        ]
-        \end{forest}
-        \end{minipage}%
-        \hfill
-        \begin{minipage}[t]{0.32\textwidth}
-        \vspace{0pt}
-        \begin{forest}
-          for tree={
-            font=\ttfamily,
-            grow'=0,
-            child anchor=west,
-            parent anchor=south,
-            anchor=west,
-            calign=first,
-            inner xsep=7pt,
-            before typesetting nodes={
-              if n=1
-                {insert before={[,phantom]}}
-                {}
-            },
-            fit=band,
-            before computing xy={l=15pt},
-          }
-        [lambda/, folder node
-            [modules, folder node
-              [tru/, folder node
-                [pwm/, folder node
-                  [tu1, file node]
-                  [tu2, file node]
-                  [tu3, file node]
-                 ]
-                [temp/, folder node
-                  [tu1, file node]
-                  [tu2, file node]
-                  [tu3, file node]
-                 ]
-              ]
-            ]
-          [data/, folder node
-            [log.txt, file node]
-            [mission.csv, file node]
-          ]
-        ]
-        \end{forest}
-        \end{minipage}%
-        }
-    \caption{Sistema de archivos para la misión.}
-    \label{fig:filesystem}
-    \end{figure}
-
-   En el diagrama ~\ref{fig:filesystem} se presenta la estructura del sistema de archivos diseñada para la misión.
-   Cada dato capturado por los sensores es leído por OBC, que se encarga de almacenar dicho dato en un archivo
-   específico. Junto a este archivo, se crea un segundo archivo con el mismo nombre seguido del sufijo "\_timestamp",
-   donde se guardará la marca de tiempo en que se tomó la medición.
-   
-   Estos archivos son de texto plano codificado en ASCII, y estarán continuamente sobreescribiéndose, conteniendo en
-   todo momento únicamente el dato o timestamp más reciente. Paralelamente, un programa adicional monitorea estos
-   archivos en tiempo real, leyendo los datos y sus respectivos timestamps a medida que se actualizan. Además, agrupará
-   la información y la almacenará en un archivo CSV, dentro del directorio \textit{data/}, combinando los valores con
-   sus timestamps correspondientes.
-
-   El archivo CSV resultante cumple dos funciones clave:
-    \begin{itemize}
-        \item Permite que HMI lea y muestre los datos en tiempo real para supervisión.
-        \item Facilita el post-procesamiento posterior, en el cual los datos serán graficados y analizados visualmente
-        para extraer conclusiones sobre el comportamiento del sistema.
-    \end{itemize}
 
 \section{Secuencia de Operación}
   Para poder llevar a cabo la misión, es necesario obtener las muestras primero. Para la obtención de las muestras, se
