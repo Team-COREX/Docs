@@ -2,7 +2,7 @@
 \begin{wrapfigure}{R}{0.4\textwidth}
   \centering
   \includegraphics[width=.4\textwidth]{image/parches/mision.png}
-  \caption{Parche de mision.}
+  \caption{Parche de misión.}
 \end{wrapfigure}
 El proyecto ha sido nombrado LAMBDA, acrónimo de LAMBDA Analyzes Microorganisms' Damage in
 Anomalous conditions. Este nombre resume el propósito principal de la misión: analizar la
@@ -255,8 +255,8 @@ a realizar, que será detallada en la siguiente sección.
   \subsubsection{Battery}
     Se emplearan cinco celdas de iones de litio (Li-Ion) con una tensión nominal de 3.6V y
     una capacidad individual de 3350mAh. Estas se conectaran todas en serie. Esta configuración proporciona una
-    tensión total nominal de 19V a la misma capacidad nominal de las celdas individuales. Esta bateria tiene
-    aproximadamente 63.65Wh de energia, adecuada para satisfacer los requerimientos energéticos del CubeSat durante
+    tensión total nominal de 19V a la misma capacidad nominal de las celdas individuales. Esta batería tiene
+    aproximadamente 63.65Wh de energía, adecuada para satisfacer los requerimientos energéticos del CubeSat durante
     su operación.
 
   \subsubsection{Power Managment System (\acrshort{pms})}
@@ -275,7 +275,7 @@ a realizar, que será detallada en la siguiente sección.
     \end{itemize}
 
     Con la finalidad de disminuir la carga en las baterías, se suministrará energía al \acrshort{pms} por medio de
-    una fuente de alimentación externa durante la fase inicial de regulacion de temperatura ya que este es momento
+    una fuente de alimentación externa durante la fase inicial de regulación de temperatura ya que este es momento
     donde los elementos reguladores demandan mayor cantidad de energía.  Al llegar a las temperaturas deseadas, ya
     la demanda de energía es mucho menor, posibilitando la desconexión de la fuente externa sin perjudicar la
     autonomía del CubeSat.
@@ -346,7 +346,7 @@ a realizar, que será detallada en la siguiente sección.
 
     El propósito fundamental del \acrshort{obc} es leer y almacenar el registro de los sensores, tales como
     aceleración, orientación, presión atmosférica y temperatura ambiente. Estas mediciones son gestionadas por un
-    programa que se ejecuta de manera automatica, y almacenadas de forma estructurada facilitando su posterior
+    programa que se ejecuta de manera automática, y almacenadas de forma estructurada facilitando su posterior
     lectura y procesamiento.
 
     El \acrshort{obc} también es responsable del control de subsistemas clave, como la \acrfull{tru} , utilizado
@@ -354,7 +354,7 @@ a realizar, que será detallada en la siguiente sección.
     \acrshort{obc} esta constantemente conectado a los subsistemas previamente mencionados para poder tener control
     total sobre ellos.
 
-    Una vez finalizado el vuelo, los archivos generados son puestos a disposicion usando el \acrshort{hmi},
+    Una vez finalizado el vuelo, los archivos generados son puestos a disposición usando el \acrshort{hmi},
     habilitando su análisis y visualización sin necesidad de equipo especializado. Esta separación entre adquisición
     y procesamiento permite una asignación eficiente de recursos, manteniendo al sistema embarcado centrado
     exclusivamente en tareas criticas durante la misión.
@@ -384,37 +384,37 @@ a realizar, que será detallada en la siguiente sección.
     \end{figure}
 
     \subsubsection{Human-Machine Interface \acrshort{hmi}}
-      La principal forma de interaccion entre el usuario y el
-      CubeSat es mediante la \acrshort{hmi}. Esta interfaz es un compuesto entre fisico y virtual. 
+      La principal forma de interacción entre el usuario y el
+      CubeSat es mediante la \acrshort{hmi}. Esta interfaz es un compuesto entre físico y virtual. 
 
-      La parte fisica del \acrshort{hmi} involucra un conector que esta expuesto al exterior, el cual dependiendo de que
+      La parte física del \acrshort{hmi} involucra un conector que esta expuesto al exterior, el cual dependiendo de que
       conector o "llave" se le conecte, altera el funcionamiento del CubeSat. Esto permite una gestión eficiente de los
-      recursos, especialmente en lo que respecta al consumo de potencia y la preparación del cubesat para eventos
+      recursos, especialmente en lo que respecta al consumo de potencia y la preparación del CubeSat para eventos
       críticos de la misión, mediante la adaptación de su funcionamiento según la etapa de la misión. Se han definido
       los siguiente modos de operación:
       \begin{itemize}
-        \item \textbf{Apagado:} En este modo la linea principal de alimentacion se desconecta mediante un MOSFET,
+        \item \textbf{Apagado:} En este modo la linea principal de alimentación se desconecta mediante un MOSFET,
           asegurando el apagado completo del CubeSat.
         \item \textbf{Pre Lanzamiento:} Inicializa los subsistemas y corrobora el correcto funcionamiento. Permite la
           conexión a la interfaz web mediante WiFi. Una vez inicializados los subsistemas y realizadas las
-          verificiaciones pertinentes, el sistema se pone en modo de reposo.
+          verificaciones pertinentes, el sistema se pone en modo de reposo.
         \item \textbf{Reposo:} Las unidades de procesamiento principal (RPI en la OBC y Arduino Nano en el PMS) entran
           en modos de bajo consumo de potencia (idle, stand-by, deep sleep, etc.). Se disminuye la frecuencia de lectura
           de ciertos sensores. Si el modo anterior fue el de \textit{pre lanzamiento} el subsistema \acrshort{tru} se
           mantiene activo.
         \item \textbf{Lanzamiento:} Realiza solamente las rutinas criticas para el cumplimiento de la
-          misión. Cortando cualquier via de comunicación con la estación terrestre.
+          misión. Cortando cualquier vía de comunicación con la estación terrestre.
         \item \textbf{Recuperación de datos:} Rehabilita la comunicación con la estación terrestre permitiendo la
           visualización, análisis y descarga de datos.
         \item \textbf{Prueba:} Este modo será utilizado durante le desarrollo del CubeSat permitiendo acceso
           administrativo al sistema.
       \end{itemize}
 
-      El conector utilizado es un JST HX de 6 pines (macho), de los cuales 3 pines son leidos por la Raspberry Pi. Esos
-      pines estan configurados con resistencias pull-up. Esto significa que, en ausencia de conexión externa, dichas
-      entradas leen un nivel lógico alto (1). Las diferentes "llaves" conectaran los pines leidos por la Raspberry Pi en
-      diferentes puntos, los cuales son los que determinan el modo de operacion. En la figura \ref{fig:seleccion_modos}
-      se puede ver la parte fisica del \acrshort{hmi} representada.
+      El conector utilizado es un JST HX de 6 pines (macho), de los cuales 3 pines son leídos por la Raspberry Pi. Esos
+      pines están configurados con resistencias pull-up. Esto significa que, en ausencia de conexión externa, dichas
+      entradas leen un nivel lógico alto (1). Las diferentes "llaves" conectaran los pines leídos por la Raspberry Pi en
+      diferentes puntos, los cuales son los que determinan el modo de operación. En la figura \ref{fig:seleccion_modos}
+      se puede ver la parte física del \acrshort{hmi} representada.
 
       \begin{figure}
         \centering
@@ -636,7 +636,7 @@ a realizar, que será detallada en la siguiente sección.
 
     En caso de fallos en la unidad principal como corrupción lógica o daño físico, un conjunto de scripts de
     supervisión ejecuta la des-conexión de la unidad afectada y procede a montar automáticamente el volumen
-    redundante, asegurando asi la continuidad operativa de la misión. Este mecanismo de conmutación automática
+    redundante, asegurando así la continuidad operativa de la misión. Este mecanismo de conmutación automática
     simula un entorno de dual boot resiliente, adecuado para contextos de riesgo.
 
   \subsubsection{Environmental Sensors}
@@ -675,7 +675,7 @@ a realizar, que será detallada en la siguiente sección.
   \subsubsection{Payload Unit}
     Subsistema pasivo que constituye el elemento central de la misión secundaria.
     Contiene las muestras biológicas sometidas a condiciones de temperatura controladas y es con con quien el
-    \acrshort{tru} interactua, el cual se encarga de su monitoreo y regulación.
+    \acrshort{tru} interactúa, el cual se encarga de su monitoreo y regulación.
 
   \subsection{Herramientas de Cálculo Empleadas}
     Para el desarrollo, simulación y verificación de cada uno de los subsistemas involucrados, se emplearan herramientas
@@ -793,7 +793,7 @@ a realizar, que será detallada en la siguiente sección.
       \end{figure}
 
     \subsubsection{Fabricación}
-      Para la fabricacion del CubeSat, solamente se requiere una plancha de aluminio como materia prima para obtener el
+      Para la fabricación del CubeSat, solamente se requiere una plancha de aluminio como materia prima para obtener el
       esqueleto básico del mismo. La plancha de aluminio debe ser cortada previo al plegado, ya que algunos cortes
       implementan geometrías que no solo facilitan los pliegues, si no que en algunos casos los hacen posibles,
       agregando puntos de alivio. Ademas de los cortes, es necesario hacer las marcas de centro para las perforaciones
@@ -814,18 +814,18 @@ a realizar, que será detallada en la siguiente sección.
         \end{minipage}
       \end{figure}
 
-      Para realizar los cortes de la plancha de aluminio se utilizara la CNC disponible en el Centro de Investigacion
-      en Informatica para la Ingenieria (CIII). Luego de los cortes, se quitan las rebabas utilizando herramientas
+      Para realizar los cortes de la plancha de aluminio se utilizara la CNC disponible en el Centro de Investigación
+      en Informática para la Ingeniería (CIII). Luego de los cortes, se quitan las rebabas utilizando herramientas
       manuales, y se procede al plegado.
 
       Para el plegado, especialmente el plegado de los Lid, se requiere maquinaria especializada de plegado, que es poco
-      frecuente y su uso aumentaria significativamente el costo de fabricacion del CubeSat. Por eso, se diseñaron unas
+      frecuente y su uso aumentaría significativamente el costo de fabricación del CubeSat. Por eso, se diseñaron unas
       matrices y punzones para ser impresos en 3D con PLA y relleno al 100\% y utilizados en una morsa de banco. Esto
       permite que tengamos control total sobre los pliegues, radios y tensiones generadas en las chapas al momento del
       plegado.
 
       En las figuras \ref{fig:fabricacion.lid} y \ref{fig:fabricacion.corner} se pueden ver las herramientas que
-      diseñamos y como quedan despues de hacer el pliegue. Seguimos desarrollando herramientas que permitan tener mas
+      diseñamos y como quedan después de hacer el pliegue. Seguimos desarrollando herramientas que permitan tener mas
       control sobre la linea de pliegue, pero ya fuimos capaces de crear un primer prototipo que se puede ver en la
       figura \ref{fig:fabricacion.prototipo1}.
       \begin{figure}[!ht]
@@ -844,7 +844,7 @@ a realizar, que será detallada en la siguiente sección.
           \centering
           \includegraphics[width=\textwidth]{image/fabrication/corner_bent.png}
         \end{minipage}
-        \caption{Fabricacion del Corner con matriz y punzon impreso en 3D.}
+        \caption{Fabricación del Corner con matriz y punzón impreso en 3D.}
         \label{fig:fabricacion.corner}
       \end{figure}
       \begin{figure}[!ht]
@@ -858,7 +858,7 @@ a realizar, que será detallada en la siguiente sección.
           \centering
           \includegraphics[width=\textwidth]{image/fabrication/lid_bent.png}
         \end{minipage}
-        \caption{Fabricacion del Lid con matriz y punzon impreso en 3D.}
+        \caption{Fabricación del Lid con matriz y punzón impreso en 3D.}
         \label{fig:fabricacion.lid}
       \end{figure}
       \begin{figure}[H]
@@ -877,7 +877,7 @@ a realizar, que será detallada en la siguiente sección.
       \begin{figure}[H]
         \centering
         \includegraphics[width=0.4\textwidth]{image/structure/muestras.png}
-        \caption{Colocacion de muestras}
+        \caption{Colocación de muestras}
         \label{fig:structure-muestra}
       \end{figure}
 
@@ -889,21 +889,21 @@ a realizar, que será detallada en la siguiente sección.
         \caption{Vista explotada del \acrshort{pms}.}
       \end{wrapfigure}
 
-      El \acrshort{pms} alberga la bateria y la placa del mismo. Para la bateria fue necesario crear un soporte que
-      la agarra a la tapa y la mantiene fija en todo momento. El montaje de la placa va a depender de la disposicion
+      El \acrshort{pms} alberga la batería y la placa del mismo. Para la batería fue necesario crear un soporte que
+      la agarra a la tapa y la mantiene fija en todo momento. El montaje de la placa va a depender de la disposición
       de los elementos de la misma. La limitante es el espacio vertical. Actualmente la placa, con componentes no puede
       medir mas de 8.4mm de alto. Si logramos disponer los elementos de tal forma de que se pueda levantar para colocar
-      tornillos, se usaran tornillos. Caso contrario, se usaran remaches de plastico fundido. Va a existir una ventana
-      en la tapa superior de la \acrshort{pms} por donde saldran todos los cables que van a la \acrshort{obc} y a la
+      tornillos, se usaran tornillos. Caso contrario, se usaran remaches de plástico fundido. Va a existir una ventana
+      en la tapa superior de la \acrshort{pms} por donde saldrán todos los cables que van a la \acrshort{obc} y a la
       Payload Unit. La ventana no esta planteada en el diseño porque va a depender de como se puedan disponer los
       elementos de la \acrshort{pms} y la \acrshort{obc}. La tapa que tiene en la parte frontal de la carcasa esta para
-      tener acceso a los conectores de potencia y balanceo de la bateria para desconectarla completamente del CubeSat y 
+      tener acceso a los conectores de potencia y balanceo de la batería para desconectarla completamente del CubeSat y 
       cargarla externamente. La tapa es removible y se fija con imanes.
 
-      La \acrshort{obc} es la mas simple de todas. Es solo una tapa con tornillos. Para el montaje de la placa tambien
+      La \acrshort{obc} es la mas simple de todas. Es solo una tapa con tornillos. Para el montaje de la placa también
       ocurre lo mismo que para la placa de la \acrshort{pms}. La placa con componentes no puede medir mas de 8mm de
-      alto, por lo que dependiendo de la disposicion de los componentes, se vera si se usan tornillos o remaches de
-      plastico derretido. En el diseño falta tambien la misma ventana por donde van a pasar los cables.
+      alto, por lo que dependiendo de la disposición de los componentes, se vera si se usan tornillos o remaches de
+      plástico derretido. En el diseño falta también la misma ventana por donde van a pasar los cables.
       \begin{figure}[!ht]
         \centering
         \includegraphics[width=0.5\textwidth]{image/structure/OBC_exploded.png}
@@ -915,27 +915,27 @@ a realizar, que será detallada en la siguiente sección.
         \includegraphics[width=0.3\textwidth]{image/structure/Payload_exploded.png}
         \caption{Vista explotada del Payload Unit.}
       \end{wrapfigure}
-      El Payload Unit es el que alberga las tres zonas termicas reguladas, las de cuales cada una alberga dos muestras.
-      Este subsistema es el unico que no tiene placa. El Payload Unit tiene una tapa superior, que como se menciono
+      El Payload Unit es el que alberga las tres zonas térmicas reguladas, las de cuales cada una alberga dos muestras.
+      Este subsistema es el único que no tiene placa. El Payload Unit tiene una tapa superior, que como se menciono
       previamente, es por la cual se cargaran las muestras en el momento previo a cargar el CubeSat al cohete. Por otro
-      lado, la carcasa tiene tres aberturas las cuales son para exponer una chapa que esta en contacto con las peltier
-      de cada zona termica. Esta chapa, por el momento va a estar al raz de la carcasa, para aportar discipacion para
+      lado, la carcasa tiene tres aberturas las cuales son para exponer una chapa que esta en contacto con las Peltier
+      de cada zona térmica. Esta chapa, por el momento va a estar al ras de la carcasa, para aportar disipación para
       las celdas Peltier. Esta planeado determinar de forma experimental si se requiere aumentar la superficie de
-      discipacion (agregando por ejemplo un discipador) o es necesario emplear un sistema de discipacion activo.
+      disipación (agregando por ejemplo un disipador) o es necesario emplear un sistema de disipación activo.
       Decidimos hacer pruebas experimentales ya que no conocemos con exactitud cual va a ser la demanda para llevar cada
-      bloque y las muestras a la temperatura deseada. Ademas es posible que durante el periodo de estabilizacion termica
-      la solucion de discipacion no sea suficiente, pero una vez estabilizado si lo sea. Como planeamos que la
-      estabilizacion termica ocurra bajo la supervision del equipo, no seria necesario cambiar el sistema de
-      discipacion.
+      bloque y las muestras a la temperatura deseada. Ademas es posible que durante el periodo de estabilización térmica
+      la solución de disipación no sea suficiente, pero una vez estabilizado si lo sea. Como planeamos que la
+      estabilización térmica ocurra bajo la supervisión del equipo, no seria necesario cambiar el sistema de
+      disipación.
 
-      Cada zona termica regulada esta compuesta por una chapa plegada, perforada y mecanizada, a la cual se le agregan 4
-      separadores plasticos pegados con pegamento epoxico. A esa pieza que llamamos "Mount" se le coloca el bloque
-      mecanizado de aluminio que albergara los tubos de plastico donde se colocaran las muestras. La forma en la que el
-      bloque mecanizado se unira a el mount aun no esta definida. Dentro de las opciones estan: Soldadura aditiva (mig,
-      tig o con estaño), pegamento epoxico termico, o silicona termica. Se prefiere las soldaduras aditivas por su
-      mejor conduccion termica. Ademas, al mount se le coloca la Celda Peltier (con pasta termica de ambos lados), la
+      Cada zona térmica regulada esta compuesta por una chapa plegada, perforada y mecanizada, a la cual se le agregan 4
+      separadores plásticos pegados con pegamento epoxico. A esa pieza que llamamos "Mount" se le coloca el bloque
+      mecanizado de aluminio que albergara los tubos de plástico donde se colocaran las muestras. La forma en la que el
+      bloque mecanizado se unirá a el mount aun no esta definida. Dentro de las opciones están: Soldadura aditiva (mig,
+      tig o con estaño), pegamento epoxico térmico, o silicona térmica. Se prefiere las soldaduras aditivas por su
+      mejor conducción térmica. Ademas, al mount se le coloca la Celda Peltier (con pasta térmica de ambos lados), la
       cual es fijada por otra chapa de aluminio plegada, perforada y mecanizada, la cual es la principal forma de
-      disipacion para la celda peltier. La parte plegada de la chapa de transferencia termica queda expuesta al exterior
+      disipación para la celda Peltier. La parte plegada de la chapa de transferencia térmica queda expuesta al exterior
       por medio de una ventana en la carcasa de la Payload Unit.
       \begin{figure}[!ht]
         \centering
@@ -948,7 +948,7 @@ a realizar, que será detallada en la siguiente sección.
           \centering
           \includegraphics[width=1\textwidth]{image/structure/SampleUnit_exploded.png}
         \end{minipage}
-        \caption{Vistas varias de la zona termica regulada.}
+        \caption{Vistas varias de la zona térmica regulada.}
       \end{figure}
 
   \subsection{Criterios de Margenes}
@@ -968,7 +968,7 @@ a realizar, que será detallada en la siguiente sección.
           Varillas          & 4                 & $13.8 \, g$           & $55.2 \, g$ \\ \hline
           Tornillos M3      & 78                & $0.5 \, g$            & $39 \, g$ \\ \hline
           Tuercas M3        & 32                & $0.5 \, g$            & $16 \, g$ \\ \hline
-          Baterias 18650    & 5                 & $46 \, g$             & $230 \, g$ \\ \hline
+          Baterías 18650    & 5                 & $46 \, g$             & $230 \, g$ \\ \hline
           Raspberry Pi Zero & 1                 & $12.1 \,g$            & $12.1 \, g$ \\ \hline
           Carcasas Subsust. & -                 & $0,92 \, g/cm^3$      & $170 \, g$ \\ \hline
           Unidad Termoregul.& 3                 & $64 \, g$             & $192 \, g$ \\ \hline
@@ -980,10 +980,10 @@ a realizar, que será detallada en la siguiente sección.
       Consideramos que con el margen de aproximadamente $160 \, g$ sobrantes, los componentes de cada subsistema
       (placas, integrados, módulos, cables, soldaduras, etc.) el CubeSat se mantendrá dentro del régimen de $1 \, Kg \pm
       20 \, g$ adaptando su posterior diseño a estas condiciones. Se considera un margen del 10\% de error, lo que
-      dejaria al CubeSat en aproximadamente $80 \, g$ sin placas. En caso de ser necesario, se agregaran pesos
+      dejaría al CubeSat en aproximadamente $80 \, g$ sin placas. En caso de ser necesario, se agregaran pesos
       muertos para llegar al régimen o se realizaran recortes en las caras de las carcasas. Algo a tener en cuenta es
       que el peso final de las carcasas va a ser menor debido a que el calculo realizado no tiene en cuenta la
-      posibilidad de hacer rellenos vacios como lo hacen las impresoras 3D FDM.
+      posibilidad de hacer rellenos vacíos como lo hacen las impresoras 3D FDM.
 
     \subsubsection{Presupuesto Preliminar de Potencia}
       El presupuesto de potencia se calculó considerando el caso mas desfavorable en cada uno de los componentes.
@@ -1010,15 +1010,15 @@ a realizar, que será detallada en la siguiente sección.
       \label{tab:consumo_componentes}
       \end{table}
 
-      Para la mision elegimos tener 5 celdas 18650 de 3.6 V cada una con una capacidad de 3350 mAh y una capacidad
-      maxima de descarga de 1.5C \cite{datasheet-cmicr18650-f9l}. Se dispondran todas en serie, teniendo un voltaje
-      nominal de 18V a 3350mAh. Esto nos dará un tiempo de autonomia de 105 minutos. Esto es considerando el caso mas
-      desfavorable, el cual seria que las zonas termicas irradian toda su energia termica al ambiente, haciendo que las
-      peltier esten siempre al maximo de consumo permitido (10W). Para el futuro, se buscara hacer ensayos reales del
+      Para la misión elegimos tener 5 celdas 18650 de 3.6 V cada una con una capacidad de 3350 mAh y una capacidad
+      máxima de descarga de 1.5C \cite{datasheet-cmicr18650-f9l}. Se dispondrán todas en serie, teniendo un voltaje
+      nominal de 18V a 3350mAh. Esto nos dará un tiempo de autonomía de 105 minutos. Esto es considerando el caso mas
+      desfavorable, el cual seria que las zonas térmicas irradian toda su energía térmica al ambiente, haciendo que las
+      Peltier estén siempre al máximo de consumo permitido (10W). Para el futuro, se buscara hacer ensayos reales del
       consumo de cada componente y se buscara que cada uno de ellos sea el menor posible, pero como estimativo, y
-      considerando una temperatura ambiente de $25\Celsius$, las celdas peltier consumiran al rededor de 2 a 5W para un
-      $\Delta T = 20\Celsius$ \cite{datasheet-peltier}, lo cual implicaria un consumo de 20W por hora, dandonos un total
-      de 3 horas de autonomia. Para determinar la potencia de los sensores se ha considerado sus respectivos datasheet
+      considerando una temperatura ambiente de $25\Celsius$, las celdas Peltier consumirán al rededor de 2 a 5W para un
+      $\Delta T = 20\Celsius$ \cite{datasheet-peltier}, lo cual implicaría un consumo de 20W por hora, dándonos un total
+      de 3 horas de autonomía. Para determinar la potencia de los sensores se ha considerado sus respectivos datasheet
       \cite{datasheet-mpu9250} \cite{datasheet-bpm280}.
 
     \subsubsection{Presupuesto Preliminar de Datos}
@@ -1158,7 +1158,7 @@ a realizar, que será detallada en la siguiente sección.
     \item \textbf{Etapa 3:} Colocación de las Muestras.\\
       Una vez que la temperatura de la bahía de muestras ya esta estabilizada y asegurada, se procede a destapar la
       bahía de muestras, para la posterior colocación de las mismas. La colocación de las muestras va a generar una
-      diferencia en la temperatura, por lo que es requisito estar monitoreando que la misma no varié demasiado del punto
+      diferencia en la temperatura, por lo que es requisito estar monitorizando que la misma no varié demasiado del punto
       configurado para evitar estresar los organismos presentes en las muestras.
     \item \textbf{Etapa 4:} Preparación para el lanzamiento.\\
       Con el CubeSat en estado de Pre Lanzamiento, todos los sensores verificados, y todas las muestras cargadas, se
@@ -1284,13 +1284,13 @@ a realizar, que será detallada en la siguiente sección.
           \centering
           \begin{tabular}{|c|c|}
             \hline
-            Frecuencia & Aceleracion G \\ \hline
+            Frecuencia & Aceleración G \\ \hline
             $20 \, Hz$ & $0.01 \, G^2/Hz$ \\ \hline
             $80 \, Hz$ & $0.04 \, G^2/Hz$ \\ \hline
             $500 \, Hz$ & $0.04 \, G^2/Hz$ \\ \hline
             $2000 \, Hz$ & $0.01 \, G^2/Hz$ \\ \hline
           \end{tabular}
-          \captionof{table}{Puntos de aceleraciones G segun frecuencia.}
+          \captionof{table}{Puntos de aceleraciones G según frecuencia.}
           \label{tab:accel}
         \end{minipage}
         \hspace{0.05\textwidth}
@@ -1333,7 +1333,7 @@ a realizar, que será detallada en la siguiente sección.
         \begin{minipage}{0.5\textwidth}
           \centering
           \includegraphics[width=\textwidth]{image/fem/ansys_cubesat-vibration_strain-x.png}
-          \caption{Análisis de tensión en el eje x}
+          \caption{Análisis de tensión en el eje Z}
           \label{fig:fem_strain-x}
         \end{minipage}
       \end{figure}
@@ -1500,11 +1500,11 @@ a realizar, que será detallada en la siguiente sección.
       \hline
     \end{tabular}
     }
-    \caption{Analisis de Riesgos}
+    \caption{Análisis de Riesgos}
     \label{tab:mi_tabla}
   \end{table}
 
-  \subsection{Plan de Verificacion y Ensayos}
+  \subsection{Plan de Verificación y Ensayos}
     En esta sección se detallan los ensayos que se realizarán a los distintos prototipos que surgirán durante el
     desarrollo del CubeSat, que servirán para validar y obtener una retroalimentación del proceso de diseño.
 
@@ -1548,7 +1548,7 @@ a realizar, que será detallada en la siguiente sección.
 
         \item \textbf{Medición de voltaje y corriente durante carga y descarga:} Durante las fases de carga y descarga,
           se monitorearan de forma continua los valores de tensión y corriente entregados por la batería. Esto permitirá
-          evaluar la estabilidad de las baterias frente a distintas condiciones de carga, asi como detectar cadas de tensión
+          evaluar la estabilidad de las baterías frente a distintas condiciones de carga, así como detectar cadas de tensión
           o comportamientos no deseados que puedan comprometer la operación de los subsistemas.
 
         \item \textbf{Medición de temperatura:} durante los ensayos anteriores se registrará también la evolución
@@ -1556,22 +1556,22 @@ a realizar, que será detallada en la siguiente sección.
           seguridad o el rendimiento del sistema.
       \end{itemize}
 
-    \subsubsection{Electronica}
-      Para hacer una prueba a la electronica, se ensamblara el CubeSat sin estructura ni carcasa, para poder conectarlo
-      a una fuente de alimentacion externa. Con la fuente externa podemos monitorear el consumo del CubeSat bajo
-      condiciones preestablecidas y comparar si los consumos son acordes a los estimados y si la medicion esta dentro de
+    \subsubsection{Electrónica}
+      Para hacer una prueba a la electrónica, se ensamblara el CubeSat sin estructura ni carcasa, para poder conectarlo
+      a una fuente de alimentación externa. Con la fuente externa podemos monitorear el consumo del CubeSat bajo
+      condiciones preestablecidas y comparar si los consumos son acordes a los estimados y si la medición esta dentro de
       los margenes de error establecidos. Por otro lado podemos acceder
       a la \acrshort{pms} para medir los voltajes de las fuentes de salida y compararlos con los reportados por la misma
-      en la interfaz web. Asi mismo, se realizaran pruebas intensivas de las fuentes, para encontrar los limites
+      en la interfaz web. Así mismo, se realizaran pruebas intensivas de las fuentes, para encontrar los limites
       operativos y ver si las protecciones implementadas funcionan correctamente. Con la \acrshort{pms} probada, se
       procede a hacer una prueba de estabilidad de programa, la cual involucra dejar el CubeSat en modo lanzamiento por
-      un periodo prolongado (por lo menos 4 veces el tiempo de mision maximo) para corroborar que los programas sean
-      estables y no generen corrupcion ni perdida de datos.
+      un periodo prolongado (por lo menos 4 veces el tiempo de misión máximo) para corroborar que los programas sean
+      estables y no generen corrupción ni perdida de datos.
 
-    \subsubsection{Transferencia termica}
-      Se ensamblara el CubeSat y se colocaran muestras de agua para probar la capacidad de discipacion y transferencia
-      termica de las celdas peltier. Asimismo, se verificara que los cambios de temperatura no signifiquen un problema
-      para la estructura plastica. Por otro lado se validara el sistema de discipacion pasivo para las celdas peltier.
+    \subsubsection{Transferencia térmica}
+      Se ensamblara el CubeSat y se colocaran muestras de agua para probar la capacidad de disipación y transferencia
+      térmica de las celdas Peltier. Asimismo, se verificara que los cambios de temperatura no signifiquen un problema
+      para la estructura plástica. Por otro lado se validara el sistema de disipación pasivo para las celdas Peltier.
 
 \section{Plan de Proyecto}
 
@@ -1759,23 +1759,23 @@ a realizar, que será detallada en la siguiente sección.
      Micro SD 16GB                                  & 2     & 13619   & 27238  \\
      Arduino NANO                                   & 1     & 6190    & 6190   \\
      Puente H L298N                                 & 2     & 5000    & 10000  \\
-     Conversor analogico-digital ADS1115            & 1     & 6000    & 6000   \\
+     Conversor analógico-digital ADS1115            & 2     & 6000    & 12000  \\
      Sensor de corriente INA219                     & 1     & 6000    & 6000   \\
-     Plancha de aluminio 2mm 250x250mm 1050         & 1     & 7300    & 7300   \\
-     Varillas acero 316 5mm 100mm                   & 4     & 1800    & 7200   \\
+     Plancha de aluminio 2x250x250mm                & 1     & 7300    & 7300   \\
+     Varillas acero 5mm 96mm                        & 4     & 1800    & 7200   \\
      Baterías 18650 CMICR18650-F9L                  & 5     & 15000   & 75000  \\
      Filamento PP-T grilon3                         & 0.5   & 24780   & 12390  \\
      PCB virgen 20x10cm                             & 1     & 6700    & 6700   \\
      Celda Peltier 30x30mm                          & 3     & 18700   & 56100  \\
      Thermistor ntc 100k                            & 4     & 3890    & 15560  \\
      MPU9250 (\acrshort{imu})                       & 1     & 22490   & 22490  \\
-     BMP280 (Barometro)                             & 1     & 2344    & 2344   \\
+     BMP280 (Barómetro)                             & 1     & 2344    & 2344   \\
      Tornillos M3x6mm cabeza Allen fresada          & 78    & 100     & 7800   \\
      Tuercas Nyloc M3                               & 32    & 60      & 1920   \\
      Componentes electrónicos varios                & 1     & 10000   & 10000  \\
      Tornillería varia                              & 1     & 5000    & 5000   \\
      \hline
-     \multicolumn{3}{|r|}{\textbf{Total:}} & \textbf{321531} \\
+     \multicolumn{3}{|r|}{\textbf{Total:}} & \textbf{327531} \\
      \hline
      \end{tabular}
      \caption{Costos}
