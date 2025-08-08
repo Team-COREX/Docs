@@ -33,6 +33,7 @@
 \RequirePackage{caption}
 \RequirePackage{pgfplots}
 \RequirePackage{circuitikz}
+\RequirePackage{multirow}
 
 % configuracion de hipervinculos
 \hypersetup{

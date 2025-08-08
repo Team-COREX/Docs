@@ -764,9 +764,9 @@ a realizar, que será detallada en la siguiente sección.
       \end{figure}
 
       Después de haber colocado las varillas, se puede proceder a colocar los diferentes subsistemas uno por uno,
-      conectándolos entre si. Luego se coloca la tapa superior (plano +Z), se fijan las varillas con los tornillos, y
-      utilizando la herramienta de ajuste diseñada para acceder a las tuercas superiores, se colocan los tornillos con
-      las tuercas auto bloqueantes respetando el orden De esquina al centro.
+      conectándolos entre si. Luego se coloca la tapa superior (plano +Z), se fijan las varillas con los tornillos.
+      Utilizando la herramienta de ajuste diseñada para acceder a las tuercas superiores, se colocan los tornillos con
+      las tuercas auto bloqueantes respetando el orden de esquina al centro.
 
       \begin{figure}[H]
         \begin{minipage}{0.49\textwidth}
@@ -793,12 +793,12 @@ a realizar, que será detallada en la siguiente sección.
       \end{figure}
 
     \subsubsection{Fabricación}
-      La fabricación del CubeSat es relativamente simple, ya que solamente se requiere una plancha de aluminio como
-      materia prima para obtener el esqueleto básico del mismo. La plancha de aluminio requiere ser cortada previo al
-      plegado, ya que estos cortes implementan geometrías que no solo facilitan los pliegues, si no que en algunos casos
-      los hacen posibles, agregando puntos de alivio. Ademas de los cortes, es necesario hacer las marcas de centro para
-      las perforaciones necesarias, ya que hacer los agujeros en tamaño completo puede provocar deformaciones en los
-      mismos al momento del plegado.
+      Para la fabricacion del CubeSat, solamente se requiere una plancha de aluminio como materia prima para obtener el
+      esqueleto básico del mismo. La plancha de aluminio debe ser cortada previo al plegado, ya que algunos cortes
+      implementan geometrías que no solo facilitan los pliegues, si no que en algunos casos los hacen posibles,
+      agregando puntos de alivio. Ademas de los cortes, es necesario hacer las marcas de centro para las perforaciones
+      necesarias, ya que hacer los agujeros en tamaño completo puede provocar deformaciones en los mismos al momento del
+      plegado.
       \begin{figure}[H]
         \begin{minipage}{0.5\textwidth}
           \centering
@@ -827,8 +827,7 @@ a realizar, que será detallada en la siguiente sección.
       En las figuras \ref{fig:fabricacion.lid} y \ref{fig:fabricacion.corner} se pueden ver las herramientas que
       diseñamos y como quedan despues de hacer el pliegue. Seguimos desarrollando herramientas que permitan tener mas
       control sobre la linea de pliegue, pero ya fuimos capaces de crear un primer prototipo que se puede ver en la
-      figura
-      \ref{fig:fabricacion.prototipo1}.
+      figura \ref{fig:fabricacion.prototipo1}.
       \begin{figure}[!ht]
         \centering
         \begin{minipage}{.32\textwidth}
@@ -845,7 +844,7 @@ a realizar, que será detallada en la siguiente sección.
           \centering
           \includegraphics[width=\textwidth]{image/fabrication/corner_bent.png}
         \end{minipage}
-        \caption{Fabricacion del Corner con matriz y punzon personalizado.}
+        \caption{Fabricacion del Corner con matriz y punzon impreso en 3D.}
         \label{fig:fabricacion.corner}
       \end{figure}
       \begin{figure}[!ht]
@@ -859,13 +858,13 @@ a realizar, que será detallada en la siguiente sección.
           \centering
           \includegraphics[width=\textwidth]{image/fabrication/lid_bent.png}
         \end{minipage}
-        \caption{Fabricacion del Lid con matriz y punzon personalizado.}
+        \caption{Fabricacion del Lid con matriz y punzon impreso en 3D.}
         \label{fig:fabricacion.lid}
       \end{figure}
       \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{image/fabrication/prototype.jpg}
-        \caption{Prototipo plegado con herramientas personalizadas.}
+        \caption{Prototipo plegado con herramientas impresas en 3D.}
         \label{fig:fabricacion.prototipo1}
       \end{figure}
 
@@ -958,29 +957,30 @@ a realizar, que será detallada en la siguiente sección.
 
     \subsubsection{Presupuesto Preliminar de Masa}
       El presupuesto de masa se calcula considerando que la estructura y las baterías tienen prioridad para ser
-      integradas. El sobrante (por el momento) será utilizado para los componentes internos de cada subsistema.
+      integradas.
       \begin{table}[H]
         \centering
         \begin{tabular}{|c|c|c|c|}
           \hline
-          \textbf{Elemento} & \textbf{Cantidad}                 & \textbf{Peso simple}  & \textbf{Subtotal} \\ \hline
-          Lids              & 2x $10.385 \cdot 10^{-6} \, m^3$  & $2698.4 \, kg/m^3$    & $56.05 \, g$ \\ \hline
-          Corners           & 4x $6.699 \cdot 10^{-6} \, m^3$   & $2698.4 \, kg/m^3$    & $72.312 \, g$ \\ \hline
-          Tornillos M3      & 78                                & $0.5 \, g/u$          & $39 \, g$ \\ \hline
-          Tuercas M3        & 32                                & $0.5 \, g/u$          & $16 \, g$ \\ \hline
-          Baterias 18650    & 5                                 & $46 \, g/u$           & $230 \, g$ \\ \hline
-          Raspberry Pi Zero & 1                                 & $12.1 \,g/u$          & $12.1 \, g$ \\ \hline
-          Celdas Peltier    & 3                                 & $24 \, g/u$           & $72 \, g$ \\ \hline
-          Carcasas Subsust. & -                                 & $0,92 \, g/cm^3$      & $170 \, g$ \\ \hline
-          Unidad Termoregul.& 3                                 & $80 \, g/u$           & $240 \, g$ \\ \hline
-          \textbf{Total}    & -                                 & -                     & $907.46 \, g$ \\ \hline
+          \textbf{Elemento} & \textbf{Cantidad} & \textbf{Peso simple}  & \textbf{Subtotal} \\ \hline
+          Lids              & 2                 & $26.8 \, g$           & $53.6 \, g$ \\ \hline
+          Corners           & 4                 & $17.8 \, g$           & $71.2 \, g$ \\ \hline
+          Varillas          & 4                 & $13.8 \, g$           & $55.2 \, g$ \\ \hline
+          Tornillos M3      & 78                & $0.5 \, g$            & $39 \, g$ \\ \hline
+          Tuercas M3        & 32                & $0.5 \, g$            & $16 \, g$ \\ \hline
+          Baterias 18650    & 5                 & $46 \, g$             & $230 \, g$ \\ \hline
+          Raspberry Pi Zero & 1                 & $12.1 \,g$            & $12.1 \, g$ \\ \hline
+          Carcasas Subsust. & -                 & $0,92 \, g/cm^3$      & $170 \, g$ \\ \hline
+          Unidad Termoregul.& 3                 & $64 \, g$             & $192 \, g$ \\ \hline
+          \textbf{Total}    & -                 & -                     & $839.1 \, g$ \\ \hline
         \end{tabular}
         \caption{Presupuesto de Pesos.}
       \end{table}
 
-      Consideramos que con el margen de aproximadamente $100 \, g$ sobrantes, los componentes de cada subsistema
+      Consideramos que con el margen de aproximadamente $160 \, g$ sobrantes, los componentes de cada subsistema
       (placas, integrados, módulos, cables, soldaduras, etc.) el CubeSat se mantendrá dentro del régimen de $1 \, Kg \pm
-      20 \, g$ adaptando su posterior diseño a estas condiciones. En caso de ser necesario, se agregaran pesos
+      20 \, g$ adaptando su posterior diseño a estas condiciones. Se considera un margen del 10\% de error, lo que
+      dejaria al CubeSat en aproximadamente $80 \, g$ sin placas. En caso de ser necesario, se agregaran pesos
       muertos para llegar al régimen o se realizaran recortes en las caras de las carcasas. Algo a tener en cuenta es
       que el peso final de las carcasas va a ser menor debido a que el calculo realizado no tiene en cuenta la
       posibilidad de hacer rellenos vacios como lo hacen las impresoras 3D FDM.
@@ -1012,10 +1012,14 @@ a realizar, que será detallada en la siguiente sección.
 
       Para la mision elegimos tener 5 celdas 18650 de 3.6 V cada una con una capacidad de 3350 mAh y una capacidad
       maxima de descarga de 1.5C \cite{datasheet-cmicr18650-f9l}. Se dispondran todas en serie, teniendo un voltaje
-      nominal de 18V a 3350mAh. Esto nos dará un tiempo de autonomia de 105 minutos. Esto es considerando casos mas
-      desfavorables. Para el futuro, se buscara hacer ensayos reales del consumo de cada componente y se buscara que
-      cada uno de ellos sea el menor posible.  Para determinar la potencia de los sensores se ha considerado sus
-      respectivos datasheet \cite{datasheet-mpu9250} \cite{datasheet-bpm280}.
+      nominal de 18V a 3350mAh. Esto nos dará un tiempo de autonomia de 105 minutos. Esto es considerando el caso mas
+      desfavorable, el cual seria que las zonas termicas irradian toda su energia termica al ambiente, haciendo que las
+      peltier esten siempre al maximo de consumo permitido (10W). Para el futuro, se buscara hacer ensayos reales del
+      consumo de cada componente y se buscara que cada uno de ellos sea el menor posible, pero como estimativo, y
+      considerando una temperatura ambiente de $25\Celsius$, las celdas peltier consumiran al rededor de 2 a 5W para un
+      $\Delta T = 20\Celsius$ \cite{datasheet-peltier}, lo cual implicaria un consumo de 20W por hora, dandonos un total
+      de 3 horas de autonomia. Para determinar la potencia de los sensores se ha considerado sus respectivos datasheet
+      \cite{datasheet-mpu9250} \cite{datasheet-bpm280}.
 
     \subsubsection{Presupuesto Preliminar de Datos}
       Durante el vuelo se generaran y almacenaran diversos tipos de datos relacionados tanto con la misión primaria como
@@ -1046,6 +1050,7 @@ a realizar, que será detallada en la siguiente sección.
 
         \begin{table}[H]
         \centering
+        \resizebox{\textwidth}{!}{
         \begin{tabular}{|l|c|c|c|c|}
         \hline
         \textbf{Parámetro} & \textbf{Tipo} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
@@ -1058,6 +1063,7 @@ a realizar, que será detallada en la siguiente sección.
         \textbf{Total estimado} & -    & -     & -         & $\boldsymbol{\approx 685.07}$ \\
         \hline
         \end{tabular}
+        }
         \caption{Volumen de datos total y de cada variable físico-ambiental}
         \label{tab:volumen_datos}
         \end{table}
@@ -1066,6 +1072,7 @@ a realizar, que será detallada en la siguiente sección.
 
         \begin{table}[H]
         \centering
+        \resizebox{\textwidth}{!}{
         \begin{tabular}{|l|c|c|c|c|}
         \hline
         \textbf{Parámetro} & \textbf{Tipo} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
@@ -1078,6 +1085,7 @@ a realizar, que será detallada en la siguiente sección.
         \textbf{Total estimado}      & -     & -   & -         & $\boldsymbol{\approx 34.52}$ \\
         \hline
         \end{tabular}
+        }
         \caption{Volumen de datos de los controles de temperatura de las muestras celulares}
         \label{tab:volumen_datos_temperatura}
         \end{table}
@@ -1194,7 +1202,7 @@ a realizar, que será detallada en la siguiente sección.
 
     \begin{table}[H]
     \centering
-    \small
+    \resizebox{\textwidth}{!}{
     \begin{tabular}{|p{2.2cm}|p{2.3cm}|p{2.3cm}|p{2.5cm}|p{2cm}|p{2.5cm}|}
     \hline
     \textbf{Material} & \centering\textbf{Módulo de elasticidad} & \centering\textbf{Límite Elástico} & \centering\textbf{Límite de Rotura} & \centering\textbf{Densidad} & \centering\textbf{Usado en} \tabularnewline
@@ -1206,6 +1214,7 @@ a realizar, que será detallada en la siguiente sección.
     Polipropileno & \centering $1461 \cdot 10^6\,Pa$ & \centering $34.6 \cdot 10^6\,Pa$ & \centering $37.62 \cdot 10^6\,Pa$ & \centering $903.4\,kg/m^3$ & Rieles de Apoyo y carcasas \tabularnewline
     \hline
     \end{tabular}
+    }
     \caption{Lista de materiales empleados.}
     \label{tab:materiales_empleados}
     \end{table}
@@ -1407,82 +1416,93 @@ a realizar, que será detallada en la siguiente sección.
 
       Concluimos entonces que nuestra propuesta de estructura es valida y soportara las condiciones de lanzamiento.
 
-\subsection{Análisis de Riesgos}
-En esta sección se presenta un análisis de riesgos para los subsistemas del CubeSat, utilizando una metodología de matriz de riesgo de 5x5. Este enfoque asigna un nivel de severidad y una probabilidad de ocurrencia a cada evento potencial, permitiendo una priorización clara de las estrategias de mitigación.
-
-\subsubsection{Escala de severidad}
-\begin{enumerate}[label=\textbf{\arabic*.}]
-    \item \textbf{Insignificante:} Su ocurrencia genera consecuencias que no afectan el funcionamiento del sistema ni comprometen los objetivos del proyecto.
+  \subsection{Análisis de Riesgos}
+    En esta sección se presenta un análisis de riesgos para los subsistemas del CubeSat, utilizando una metodología de
+    matriz de riesgo de 5x5. Este enfoque asigna un nivel de severidad y una probabilidad de ocurrencia a cada evento
+    potencial, permitiendo una priorización clara de las estrategias de mitigación.
+  
+  \subsubsection{Escala de severidad}
+  \begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Insignificante:} Su ocurrencia genera consecuencias que no afectan el funcionamiento del sistema ni
+      comprometen los objetivos del proyecto.
     \item \textbf{Menor:} Puede causar pequeñas pérdidas, pero sus consecuencias son fácilmente gestionables.
-    \item \textbf{Moderada:} Genera un impacto considerable que requerirá de tiempo y demás recursos para ser solucionado.
-    \item \textbf{Importante:} Las consecuencias requieren intervención inmediata porque pueden causar daños a largo plazo, afectando seriamente el cumplimiento de objetivos.
-    \item \textbf{Catastrófica:} El impacto es crítico. Las consecuencias ponen en riesgo la viabilidad del proyecto o generan grandes pérdidas.
-\end{enumerate}
-
-\subsubsection{Escala de probabilidad}
-\begin{enumerate}
+    \item \textbf{Moderada:} Genera un impacto considerable que requerirá de tiempo y demás recursos para ser
+      solucionado.
+    \item \textbf{Importante:} Las consecuencias requieren intervención inmediata porque pueden causar daños a largo
+      plazo, afectando seriamente el cumplimiento de objetivos.
+    \item \textbf{Catastrófica:} El impacto es crítico. Las consecuencias ponen en riesgo la viabilidad del proyecto o
+      generan grandes pérdidas.
+  \end{enumerate}
+  
+  \subsubsection{Escala de probabilidad}
+  \begin{enumerate}
     \item \textbf{Muy baja:} Ocurrencia casi imposible.
     \item \textbf{Baja:} Podría ocurrir, pero sería extraño.
     \item \textbf{Media:} Puede ocurrir ocasionalmente.
     \item \textbf{Alta:} Casi seguro que suceda.
     \item \textbf{Muy alta:} Podemos dar por hecho que sucederá.
-\end{enumerate}
-
-\subsubsection{Impacto del riesgo}
-Se calcula multiplicando la severidad y la probabilidad de cada riesgo.
-
-\begin{itemize}
-    \item \textbf{Bajo (1-6):} Podemos desestimar estos riesgos, ya que su ocurrencia es poco probable y, en caso de ocurrir, no afectan significativamente al proyecto.
+  \end{enumerate}
+  
+  \subsubsection{Impacto del riesgo}
+    Se calcula multiplicando la severidad y la probabilidad de cada riesgo.
+  
+  \begin{itemize}
+    \item \textbf{Bajo (1-6):} Podemos desestimar estos riesgos, ya que su ocurrencia es poco probable y, en caso de
+      ocurrir, no afectan significativamente al proyecto.
     \item \textbf{Medio (7-12):} No debemos ignorar estos riesgos, pero tampoco son nuestra prioridad.
     \item \textbf{Alto (13-25):} Su mitigación es prioritaria, ya que comprometen la ejecución exitosa del proyecto.
-\end{itemize}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
-\hline
-\multicolumn{2}{|c|}{} & \multicolumn{5}{c|}{\textbf{Severidad}}  \\
-\hline
-\multicolumn{2}{|c|}{} & \textbf{Insignificante} & \textbf{Menor} & \textbf{Moderada} & \textbf{Importante} & \textbf{Catastrófica} \\
-\hline
-\multirow{5}{*}{\rotatebox{90}{\textbf{Probabilidad}}} & \textbf{Muy baja} &  &  &  & Fallo de comunicación pre lanzamiento y pos lanzamiento & Contaminación o degradación de muestras biológicas \\
-\cline{2-7}
-& \textbf{Baja} &  &  &  & Mal funcionamiento de la IMU o barómetro & Fallo del suministro eléctrico  \\
-\cline{2-7}
-& \textbf{Media} &  &  &  & Rotura de cápsulas de muestras & Pérdida de datos por fallo de almacenamiento \\
-\cline{2-7}
-& \textbf{Alta} &  &  & Fallo del sistema de regulación térmica &  &  \\
-\cline{2-7}
-& \textbf{Muy alta} &  &  &  &  &  \\
-\hline
-\end{tabular}
-\caption{Impacto de los riesgos}
-\end{table}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{ | m{2.5cm} | m{3cm} | m{2.5cm} | m{4.5cm} | m{2cm} | }
-\hline
-\textbf{Riesgo} & \textbf{Causa} & \textbf{Consecuencias} & \textbf{Mitigación} & \textbf{Impacto} \\
-\hline
-Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Diseño de porta-cápsulas amortiguadoras. Pruebas de vibración según estándar GEVS. Cierre redundante de las tapas. & 12 - Medio\\ 
-\hline
-Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Control de temperatura con sensores. Validación térmica en cámara climática. Modos de degradación segura que desactivan los elementos Peltier para reducir consumo. & 12 - Medio \\
-\hline
-Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad (checksum SHA-256). Script de conmutación automática probado en PDR. Redundancia de almacenamiento de datos críticos. & 15 - Alto \\
-\hline
-Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en PMS. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. & 10 - Medio \\
-\hline
-Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. & 8 - Medio \\
-\hline
-Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. Uso de materiales biocompatibles. Control de humedad en bahía de muestras. Análisis de vacío. & 5 - Bajo \\
-\hline
-Fallo de comunicación pre lanzamiento y pos lanzamiento & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Conexión por UART. & 8 - Medio\\
-\hline
-\end{tabular}
-\caption{Analisis de Riesgos}
-\label{tab:mi_tabla}
-\end{table}
+  \end{itemize}
+  
+  \begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|c|c|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+      \hline
+      \multicolumn{2}{|c|}{} & \multicolumn{5}{c|}{\textbf{Severidad}}  \\
+      \hline
+      \multicolumn{2}{|c|}{} & \textbf{Insignificante} & \textbf{Menor} & \textbf{Moderada} & \textbf{Importante} & \textbf{Catastrófica} \\
+      \hline
+      \multirow{5}{*}{\rotatebox{90}{\textbf{Probabilidad}}} & \textbf{Muy baja} &  &  &  & Fallo de comunicación pre lanzamiento y pos lanzamiento & Contaminación o degradación de muestras biológicas \\
+      \cline{2-7}
+      & \textbf{Baja} &  &  &  & Mal funcionamiento de la IMU o barómetro & Fallo del suministro eléctrico  \\
+      \cline{2-7}
+      & \textbf{Media} &  &  &  & Rotura de cápsulas de muestras & Pérdida de datos por fallo de almacenamiento \\
+      \cline{2-7}
+      & \textbf{Alta} &  &  & Fallo del sistema de regulación térmica &  &  \\
+      \cline{2-7}
+      & \textbf{Muy alta} &  &  &  &  &  \\
+      \hline
+    \end{tabular}
+    }
+    \caption{Impacto de los riesgos}
+  \end{table}
+      
+  \begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{ | m{2.5cm} | m{3cm} | m{2.5cm} | m{4.5cm} | m{2cm} | }
+      \hline
+      \textbf{Riesgo} & \textbf{Causa} & \textbf{Consecuencias} & \textbf{Mitigación} & \textbf{Impacto} \\
+      \hline
+      Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Diseño de porta-cápsulas amortiguadoras. Pruebas de vibración según estándar GEVS. Cierre redundante de las tapas. & 12 - Medio\\ 
+      \hline
+      Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Control de temperatura con sensores. Validación térmica en cámara climática. Modos de degradación segura que desactivan los elementos Peltier para reducir consumo. & 12 - Medio \\
+      \hline
+      Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad (checksum SHA-256). Script de conmutación automática probado en PDR. Redundancia de almacenamiento de datos críticos. & 15 - Alto \\
+      \hline
+      Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en PMS. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. & 10 - Medio \\
+      \hline
+      Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. & 8 - Medio \\
+      \hline
+      Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. Uso de materiales biocompatibles. Control de humedad en bahía de muestras. Análisis de vacío. & 5 - Bajo \\
+      \hline
+      Fallo de comunicación pre lanzamiento y pos lanzamiento & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Conexión por UART. & 8 - Medio\\
+      \hline
+    \end{tabular}
+    }
+    \caption{Analisis de Riesgos}
+    \label{tab:mi_tabla}
+  \end{table}
 
   \subsection{Plan de Verificacion y Ensayos}
     En esta sección se detallan los ensayos que se realizarán a los distintos prototipos que surgirán durante el
