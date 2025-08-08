@@ -35,6 +35,8 @@
 \RequirePackage{circuitikz}
 \RequirePackage{multirow}
 \RequirePackage{pdfpages}
+\RequirePackage{forest}
+\RequirePackage{xcolor}
 
 % configuracion de hipervinculos
 \hypersetup{
@@ -110,6 +112,35 @@
 \newcommand{\grupo}[1]{\def\@grupo{#1}}
 \newcommand{\fecha}[1]{\def\@fecha{#1}}
 \newcommand{\docn}[1]{\def\@docn{#1}}
+
+% Para sistema de archivos
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+
+\def\Size{4pt}
+\tikzset{
+  folder/.pic={
+    \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+      (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+    \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+      (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  }
+}
+
+\forestset{
+  folder node/.style={
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+    }
+  },
+  file node/.style={
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- (.child anchor) \forestoption{edge label};
+    }
+  }
+}
 
 % UNIDADES UTILES
 % --- Resistencias ---
