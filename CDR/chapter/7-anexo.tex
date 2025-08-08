@@ -485,6 +485,16 @@
       landscape=true
     ]{annex/PMS_sch.pdf}
 
+  \phantomsection
+  \refstepcounter{section}
+  \addcontentsline{toc}{section}{\numberline{\thesection}Dibujos Tecnicos}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{Estructura},anexo:planos.estructura},
+      landscape=true
+    ]{annex/structure_drawing.pdf}
+
 \end{landscape}
 \restoregeometry
 \setCustomPageStyle

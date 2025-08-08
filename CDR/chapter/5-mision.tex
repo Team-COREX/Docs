@@ -681,6 +681,63 @@ a realizar, que será detallada en la siguiente sección.
     Contiene las muestras biológicas sometidas a condiciones de temperatura controladas y es con con quien el
     \acrshort{tru} interactúa, el cual se encarga de su monitoreo y regulación.
 
+  \subsection{Requisitos}
+    \textbf{Nivel 1 – Requisitos de misión}
+    \begin{enumerate}
+        \item El CubeSat debe cumplir la misión primaria de registrar variables físicas durante todo el vuelo:
+        \begin{itemize}
+            \item Presión atmosférica.
+            \item Temperatura ambiente.
+            \item Aceleración en tres ejes.
+            \item Ángulos de giro en tres ejes.
+        \end{itemize}
+        \item El CubeSat debe cumplir la misión secundaria de analizar la viabilidad de células eucariotas
+          (\textit{Giardia Lamblia}) sometidas a condiciones extremas de vuelo, incluyendo:
+        \begin{itemize}
+            \item Variaciones de temperatura controladas (10\,°C, 37\,°C y 55\,°C).
+            \item Vibraciones y aceleraciones propias del lanzamiento y vuelo.
+            \item Microgravedad y cambios de presión.
+        \end{itemize}
+    \end{enumerate}
+    
+    \textbf{Nivel 2 – Requisitos de sistema}
+    \begin{enumerate}
+        \item Masa total $\leq$ 1\,kg $\pm$ 20\,g.
+        \item Autonomía mínima de 105 minutos bajo consumo máximo estimado.
+        \item Capacidad de almacenamiento redundante para todos los datos de misión.
+        \item Interfaz HMI física y virtual para configuración, operación y descarga de datos.
+        \item Estructura compatible con las dimensiones y condiciones mecánicas de un CubeSat estándar.
+        \item Preservación de integridad de muestras biológicas hasta su recuperación.
+    \end{enumerate}
+    
+    \textbf{Nivel 3 – Requisitos de subsistema}
+    \begin{enumerate}
+        \item Estructura: Fabricada en láminas de aluminio plegado de 2\,mm; resistir cargas y vibraciones de
+          lanzamiento; proveer acceso rápido para carga de muestras.
+        \item PMS: Regulación de 3.3\,V, 5\,V y 12\,V; protección contra sobrecorriente y cortocircuitos; medición de
+          voltaje y corriente por riel.
+        \item OBC: Basada en Raspberry Pi Zero 2 W con SO Raspberry Pi OS Lite; control de adquisición de datos y TRU;
+          gestión de almacenamiento RAID 1 en microSD.
+        \item TRU: Control independiente de tres zonas térmicas; precisión de $\pm$1\,°C en regulación; sensores de
+          temperatura dedicados.
+        \item Sensores ambientales: IMU (MPU9250) para aceleración y orientación; BMP280 para presión y temperatura
+          ambiente.
+        \item Payload Unit: Alojamiento seguro para seis muestras (2 por zona); montajes térmicos con celdas Peltier.
+        \item HMI: Selector físico de modos de operación (apagado, pre-lanzamiento, reposo, lanzamiento, recuperación de
+          datos, prueba); interfaz web para monitoreo y descarga.
+    \end{enumerate}
+    
+    \textbf{Nivel 4 – Requisitos de componente e interfaz}
+    \begin{enumerate}
+        \item Baterías Li-Ion 18650, 3.6\,V, 3350\,mAh, en serie (5 celdas).
+        \item Capacidad de descarga $\geq$ 1.5\,A por celda.
+        \item Conector HMI JST HX de 6 pines con entradas pull-up.
+        \item Celdas Peltier de 3$\times$3\,cm, 12\,V, control PWM.
+        \item Sensores con comunicación I\textsuperscript{2}C.
+        \item Estructura con fijación M3 y tuercas autofrenantes.
+        \item Ventanas de disipación para Peltier con posibilidad de disipador adicional.
+    \end{enumerate}
+
   \subsection{Descripción del equipo de soporte en tierra}
     \subsubsection{Interfaz web de monitoreo}
       Se desarrolló una \textbf{interfaz web de monitoreo} —en adelante denominada \emph{SatView}— que permite visualizar, de forma diferida, los datos recolectados por el CubeSat una vez finalizado el vuelo.  
@@ -774,6 +831,10 @@ a realizar, que será detallada en la siguiente sección.
       Los diferentes separadores se colocan de forma segura en sus correspondientes espacios en la estructura, y se
       imprimen por separado utilizando la técnica de impresión 3D (FDM) en polipropileno, que tiene muy buenas
       propiedades de adherencia entre capas, permitiendo (en caso de ser necesario) crear volúmenes que sean herméticos.
+
+    \subsubsection{Dimensiones y referencias}
+      Revisar la seccion \ref{anexo:planos.estructura} para ver planos con vistas principales, dimensiones y pata de
+      referencia.
 
     \subsubsection{Proceso de Integración}
       El armado del CubeSat, comienza con la colocación de la tapa inferior (plano -Z) sobre el banco de armado, con los
