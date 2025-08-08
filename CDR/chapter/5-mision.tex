@@ -677,6 +677,27 @@ a realizar, que será detallada en la siguiente sección.
     Contiene las muestras biológicas sometidas a condiciones de temperatura controladas y es con con quien el
     \acrshort{tru} interactúa, el cual se encarga de su monitoreo y regulación.
 
+  \subsection{Descripción del equipo de soporte en tierra}
+    \subsubsection{Interfaz web de monitoreo}
+      Se desarrolló una interfaz web que permite la visualización de los datos recolectados por el CubeSat en diferido,
+      es decir, una vez finalizado el vuelo. Esta herramienta permite explorar de manera visual las variables físicas
+      medidas por los sensores a bordo, representándolas mediante gráficos en función del tiempo.  La interfaz fue
+      desarrollada con HTML, CSS y JavaScript, la interpretacion y procesamiento de datos se realiza del lado del
+      cliente, es decir, en la computadora que visualiza los datos para minimizar la carga de la computadora a bordo.
+      Puede ser ejecutada localmente desde cualquier navegador moderno, sin la necesidad de conexion a internet ni la
+      instalación de software adicional.
+
+      De esta forma, en la estación terrena solo se requerirá una notebook con sistema operativo linux, 2GB de RAM y por
+      lo menos 15GB de almacenamiento disponible, capacidades básicas para descargar los archivos y ejecutar la interfaz
+      de monitoreo.
+
+    \subsubsection{Procedimiento de descarga}
+      La recuperacion de datos se llevará a cabo una vez recuperado físicamente el CubeSat mediante conexion directa. El
+      procedimiento consiste en desmontar la computadora a bordo, conectarla a una notebook a través de un puerto UART,
+      para lo que requeriremos el cable de transmisión de datos pertinente, montar el sistema de archivos de la memoria
+      interna, copiar los datos alamacenados en formato JSON y cargarlos localmente en el interfaz web para poder
+      visualizarlos.
+
   \subsection{Herramientas de Cálculo Empleadas}
     Para el desarrollo, simulación y verificación de cada uno de los subsistemas involucrados, se emplearan herramientas
     de cálculo y software específicos que permitirán modelar los componentes y sus comportamientos, estimar el consumo
