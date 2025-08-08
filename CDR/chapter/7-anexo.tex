@@ -467,6 +467,23 @@
     \label{gantt-software2}
     \end{figure}
     \vspace*{\fill}
+    \newpage
+  
+  \phantomsection
+  \refstepcounter{section}
+  \addcontentsline{toc}{section}{\numberline{\thesection}Esquematicos}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{\acrfull{obc}},anexo:obc.schematic},
+      landscape=true
+    ]{annex/OBC_sch.pdf}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{\acrfull{pms}},anexo:pms.schematic},
+      landscape=true
+    ]{annex/PMS_sch.pdf}
 
 \end{landscape}
 \restoregeometry

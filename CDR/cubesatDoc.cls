@@ -34,6 +34,7 @@
 \RequirePackage{pgfplots}
 \RequirePackage{circuitikz}
 \RequirePackage{multirow}
+\RequirePackage{pdfpages}
 
 % configuracion de hipervinculos
 \hypersetup{
