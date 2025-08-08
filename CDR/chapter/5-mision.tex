@@ -683,17 +683,25 @@ a realizar, que será detallada en la siguiente sección.
 
   \subsection{Descripción del equipo de soporte en tierra}
     \subsubsection{Interfaz web de monitoreo}
-      Se desarrolló una interfaz web que permite la visualización de los datos recolectados por el CubeSat en diferido,
-      es decir, una vez finalizado el vuelo. Esta herramienta permite explorar de manera visual las variables físicas
-      medidas por los sensores a bordo, representándolas mediante gráficos en función del tiempo.  La interfaz fue
-      desarrollada con HTML, CSS y JavaScript, la interpretacion y procesamiento de datos se realiza del lado del
-      cliente, es decir, en la computadora que visualiza los datos para minimizar la carga de la computadora a bordo.
-      Puede ser ejecutada localmente desde cualquier navegador moderno, sin la necesidad de conexion a internet ni la
-      instalación de software adicional.
+      Se desarrolló una \textbf{interfaz web de monitoreo} —en adelante denominada \emph{SatView}— que permite visualizar, de forma diferida, los datos recolectados por el CubeSat una vez finalizado el vuelo.  
+      Esta herramienta facilita la exploración visual de las variables físicas medidas por los sensores a bordo, representándolas mediante gráficos en función del tiempo.  
+      Adicionalmente, incorpora un módulo interactivo en 3D del satélite, que permite manipular la línea temporal de la misión, observar el estado de las variables en cada instante y reproducir la animación completa del vuelo.
 
-      De esta forma, en la estación terrena solo se requerirá una notebook con sistema operativo linux, 2GB de RAM y por
-      lo menos 15GB de almacenamiento disponible, capacidades básicas para descargar los archivos y ejecutar la interfaz
-      de monitoreo.
+      La interfaz fue implementada con \emph{HTML}, \emph{CSS} y \emph{JavaScript}. El procesamiento e interpretación de los datos se realiza íntegramente en el cliente (navegador del usuario), minimizando así la carga computacional de la computadora a bordo.  
+      Esta última se encarga de servir los datos almacenados en formato CSV y de proveer los archivos de la interfaz web, que se ejecuta en el navegador tras acceder a la URL local hosteada por la Raspberry Pi Zero 2~W.  
+      La conexión se establece dentro del rango de la red Wi-Fi generada por la Raspberry, sin requerir acceso a internet.
+
+      En la estación terrena, el único requisito es disponer de una notebook con sistema operativo Linux, al menos 2~GB de memoria RAM y 15~GB de almacenamiento libre para la descarga y gestión de los archivos.  
+      Cualquier dispositivo con un navegador web compatible podrá conectarse simultáneamente para la visualización de los datos.
+
+    \subsubsection{Procedimiento de acceso}
+      Para acceder a la interfaz \emph{SatView} durante la fase de recuperación de datos:
+      \begin{enumerate}
+        \item Iniciar la red Wi-Fi generada por la Raspberry Pi Zero 2~W.
+        \item Conectar la notebook u otro dispositivo a dicha red.
+        \item Abrir un navegador web e ingresar la dirección IP local asignada (por defecto: \texttt{http://192.168.4.1:8001}).
+        \item La interfaz se cargará automáticamente, permitiendo navegar por los gráficos y el modelo 3D.
+      \end{enumerate}
 
     \subsubsection{Procedimiento de descarga}
       La recuperacion de datos se llevará a cabo una vez recuperado físicamente el CubeSat mediante conexion directa. El
