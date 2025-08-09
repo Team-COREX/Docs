@@ -1710,66 +1710,70 @@ a realizar, que será detallada en la siguiente sección.
     \item \textbf{Alta:} Casi seguro que suceda.
     \item \textbf{Muy alta:} Podemos dar por hecho que sucederá.
   \end{enumerate}
+
+  \begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}| p{2cm} |p{2cm}| p{2cm}|}
+\hline \bf Probabilidad/ Severidad & \bf 1-Muy baja & \bf 2-Baja & \bf 3-Media & \bf 4-Alta & \bf 5-Muy alta\\ [10pt]
+
+\hline \bf 5-Catastrófico & \cellcolor{yellow!50} & \cellcolor{red!50} & \cellcolor{red!50} & \cellcolor{red!50} &\cellcolor{red!50} \\ [10pt]
+
+\hline \bf 4-Importante & \cellcolor{yellow!50} & \cellcolor{yellow!50} & \cellcolor{red!50} & \cellcolor{red!50} &\cellcolor{red!50} \\ [10pt]
+
+\hline \bf 3-Moderada &\cellcolor{green!50} & \cellcolor{yellow!50} & \cellcolor{yellow!50} & \cellcolor{red!50} &\cellcolor{red!50} \\ [10pt]
+
+\hline \bf 2-Menor & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{yellow!50} &\cellcolor{yellow!50} &\cellcolor{red!50} \\ [10pt]
+
+\hline \bf 1-Insignificante & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} &\cellcolor{yellow!50} &\cellcolor{yellow!50} \\ [10pt]
+\hline
+\end{tabular} \\
+\caption{Matriz de riesgo}
+\end{table}
   
   \subsubsection{Impacto del riesgo}
     Se calcula multiplicando la severidad y la probabilidad de cada riesgo.
-  
-  \begin{itemize}
-    \item \textbf{Bajo (1-6):} Podemos desestimar estos riesgos, ya que su ocurrencia es poco probable y, en caso de
-      ocurrir, no afectan significativamente al proyecto.
-    \item \textbf{Medio (7-12):} No debemos ignorar estos riesgos, pero tampoco son nuestra prioridad.
-    \item \textbf{Alto (13-25):} Su mitigación es prioritaria, ya que comprometen la ejecución exitosa del proyecto.
-  \end{itemize}
-  
-  \begin{table}[H]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{|c|c|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
-      \hline
-      \multicolumn{2}{|c|}{} & \multicolumn{5}{c|}{\textbf{Severidad}}  \\
-      \hline
-      \multicolumn{2}{|c|}{} & \textbf{Insignificante} & \textbf{Menor} & \textbf{Moderada} & \textbf{Importante} & \textbf{Catastrófica} \\
-      \hline
-      \multirow{5}{*}{\rotatebox{90}{\textbf{Probabilidad}}} & \textbf{Muy baja} &  &  &  & Fallo de comunicación pre lanzamiento y pos lanzamiento & Contaminación o degradación de muestras biológicas \\
-      \cline{2-7}
-      & \textbf{Baja} &  &  &  & Mal funcionamiento de la IMU o barómetro & Fallo del suministro eléctrico  \\
-      \cline{2-7}
-      & \textbf{Media} &  &  &  & Rotura de cápsulas de muestras & Pérdida de datos por fallo de almacenamiento \\
-      \cline{2-7}
-      & \textbf{Alta} &  &  & Fallo del sistema de regulación térmica &  &  \\
-      \cline{2-7}
-      & \textbf{Muy alta} &  &  &  &  &  \\
-      \hline
-    \end{tabular}
-    }
-    \caption{Impacto de los riesgos}
-  \end{table}
-      
+
+
+\begin{table}[H]
+\centering
+%\scriptsize
+\begin{tabular}{|p{2cm}|p{10cm}|}
+\hline \bf Color & \bf Descripción \\
+\hline \cellcolor{red! 50} & Su mitigación es prioritaria, ya que comprometen la ejecución exitosa
+del proyecto. \\ [10pt]
+\hline \cellcolor{yellow! 50} & Deben revisarse para implementar estrategias de mejora. \\[10pt]
+\hline \cellcolor{green! 50} & Su ocurrencia es poco probable. Sin embargo, pueden considerarse para un análisis más detallado. \\ [10pt]
+\hline
+\end{tabular}
+\caption{Impacto del riesgo}
+\end{table}
+
   \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
     \begin{tabular}{ | m{2.5cm} | m{3cm} | m{2.5cm} | m{4.5cm} | m{2cm} | }
       \hline
-      \textbf{Riesgo} & \textbf{Causa} & \textbf{Consecuencias} & \textbf{Mitigación} & \textbf{Impacto} \\
+      \textbf{Riesgo} & \textbf{Causa} & \textbf{Consec.} & \textbf{Mitigación} & \textbf{Impacto} \\
       \hline
-      Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Diseño de porta-cápsulas amortiguadoras. Pruebas de vibración según estándar GEVS. Cierre redundante de las tapas. & 12 - Medio\\ 
+      Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Análisis FEM de su portador y rediseño en caso de ser necesario. & \cellcolor{yellow! 50}\\ 
       \hline
-      Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Control de temperatura con sensores. Validación térmica en cámara climática. Modos de degradación segura que desactivan los elementos Peltier para reducir consumo. & 12 - Medio \\
+      Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Ensayos apropiados de capacidad calorífica y consumo energético. & \cellcolor{yellow! 50}\\
       \hline
-      Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad (checksum SHA-256). Script de conmutación automática probado en PDR. Redundancia de almacenamiento de datos críticos. & 15 - Alto \\
+      Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad. Script de conmutación automática. Redundancia de almacenamiento de datos críticos. & \cellcolor{yellow! 50} \\
       \hline
-      Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en PMS. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. & 10 - Medio \\
+      Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en PMS. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. & \cellcolor{yellow! 50}\\
       \hline
-      Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. & 8 - Medio \\
+      Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. &\cellcolor{green! 50} \\
       \hline
-      Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. Uso de materiales biocompatibles. Control de humedad en bahía de muestras. Análisis de vacío. & 5 - Bajo \\
+      Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. & \cellcolor{yellow! 50} \\
       \hline
-      Fallo de comunicación pre lanzamiento y pos lanzamiento & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Conexión por UART. & 8 - Medio\\
+      Fallo de comunicación pre lanzamiento y pos lanzamiento & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Múltiples opciones de conexión. & \cellcolor{yellow! 50}\\
       \hline
     \end{tabular}
     }
     \caption{Análisis de Riesgos}
-    \label{tab:mi_tabla}
+    \label{tab:analisis-riesgos}
   \end{table}
 
   \subsection{Plan de Verificación y Ensayos}
