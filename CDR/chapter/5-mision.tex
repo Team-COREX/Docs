@@ -131,7 +131,7 @@ a realizar, que será detallada en la siguiente sección.
     \begin{itemize}
       \item \textbf{Condición de vuelo (CubeSat):} las muestras serán enviadas a bordo del CubeSat y sometidas a
         diferentes temperaturas: $10\Celsius$, $37\Celsius$ (considerada óptima para el crecimiento) y $55\Celsius$. Por
-        cada zona de temperatura regulada, habra dos muestras de 2ml cada una.
+        cada zona de temperatura regulada, habrá dos muestras de 2ml cada una.
 
         Todas las capsulas estarán posicionadas con una inclinación de 45º con respecto al eje horizontal, condición
         necesaria para favorecer la adherencia del parásito al medio de cultivo. Se busca analizar el impacto combinado
@@ -183,7 +183,7 @@ a realizar, que será detallada en la siguiente sección.
     en el experimento, manteniendo condiciones estandarizadas que aseguren su viabilidad y reproducibilidad.
 
     \subsubsection{Cultivo}
-    Para cultivarlos \cite{Lauwaet2007-tes} axenicamente se utiliza medio TYI-S-33 (pH 7) suplementado con 10\% de suero
+    Para cultivarlo axenicamente se utiliza medio TYI-S-33 (pH 7) suplementado con 10\% de suero
     bovino adulto y 5\% de bilis bovina (medio completo de crecimiento) (Diamond, Harlow un volumen determinado de
     medio. Los tubos se colocaron en gradillas orientadas con una inclinación de aproximadamente $45\degree$, dentro de
     una estufa de cultivo a $37 \Celsius$.
@@ -337,7 +337,7 @@ a realizar, que será detallada en la siguiente sección.
       \label{fig:sistema_pms}
     \end{figure}
 
-    Revise la seccion \ref{anexo:pms.schematic} para ver el esquematico del \acrfull{pms}.
+    Revise la sección \ref{anexo:pms.schematic} para ver el esquemático del \acrfull{pms}.
 
   \subsubsection{On-board Computer (\acrshort{obc})}
     Tiene como función principal la gestión autónoma de la misión
@@ -385,7 +385,7 @@ a realizar, que será detallada en la siguiente sección.
       \label{fig:sistema_obc}
     \end{figure}
 
-    Revise la seccion \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
+    Revise la sección \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
 
     \subsubsection{Human-Machine Interface \acrshort{hmi}}
       La principal forma de interacción entre el usuario y el
@@ -618,7 +618,7 @@ a realizar, que será detallada en la siguiente sección.
       \end{figure}
 
       La parte virtual del \acrshort{hmi} es una pagina web, la cual se hace disponible dependiendo de la "llave"
-      conectada a la parte fisica del \acrshort{hmi}. Esta interfaz web, es accesible gracias al punto de acceso WiFi
+      conectada a la parte física del \acrshort{hmi}. Esta interfaz web, es accesible gracias al punto de acceso WiFi
       que genera la Raspberry Pi Zero 2 W. Desde la interfaz web, el usuario puede consultar variables criticas del
       sistema (temperatura, voltajes, corrientes, estado de sensores, entre otros), así como habilitar o
       deshabilitar subsistemas específicos, incluyendo rieles de alimentación y módulos funcionales. Se pueden
@@ -739,34 +739,44 @@ a realizar, que será detallada en la siguiente sección.
     \end{enumerate}
 
   \subsection{Descripción del equipo de soporte en tierra}
-    \subsubsection{Interfaz web de monitoreo}
-      Se desarrolló una \textbf{interfaz web de monitoreo} —en adelante denominada \emph{SatView}— que permite visualizar, de forma diferida, los datos recolectados por el CubeSat una vez finalizado el vuelo.  
-      Esta herramienta facilita la exploración visual de las variables físicas medidas por los sensores a bordo, representándolas mediante gráficos en función del tiempo.  
-      Adicionalmente, incorpora un módulo interactivo en 3D del satélite, que permite manipular la línea temporal de la misión, observar el estado de las variables en cada instante y reproducir la animación completa del vuelo.
+    Se desarrolló una \textbf{interfaz web de monitoreo} —en adelante denominada \emph{SatView}— que permite visualizar,
+    de forma diferida, los datos recolectados por el CubeSat una vez finalizado el vuelo.  Esta herramienta facilita la
+    exploración visual de las variables físicas medidas por los sensores a bordo, representándolas mediante gráficos en
+    función del tiempo.  Adicionalmente, incorpora un módulo interactivo en 3D del satélite, que permite manipular la
+    línea temporal de la misión, observar el estado de las variables en cada instante y reproducir la animación completa
+    del vuelo.
 
-      La interfaz fue implementada con \emph{HTML}, \emph{CSS} y \emph{JavaScript}. El procesamiento e interpretación de los datos se realiza íntegramente en el cliente (navegador del usuario), minimizando así la carga computacional de la computadora a bordo.  
-      Esta última se encarga de servir los datos almacenados en formato CSV y de proveer los archivos de la interfaz web, que se ejecuta en el navegador tras acceder a la URL local hosteada por la Raspberry Pi Zero 2~W.  
-      La conexión se establece dentro del rango de la red Wi-Fi generada por la Raspberry, sin requerir acceso a internet.
+    La interfaz fue implementada con \emph{HTML}, \emph{CSS} y \emph{JavaScript}. El procesamiento e interpretación de
+    los datos se realiza íntegramente en el cliente (navegador del usuario), minimizando así la carga computacional de
+    la computadora a bordo.  Esta última se encarga de servir los datos almacenados en formato CSV y de proveer los
+    archivos de la interfaz web, que se ejecuta en el navegador tras acceder a la URL local hosteada por la Raspberry Pi
+    Zero 2~W.  La conexión se establece dentro del rango de la red Wi-Fi generada por la Raspberry, sin requerir acceso
+    a internet.
 
-      En la estación terrena, el único requisito es disponer de una notebook con sistema operativo Linux, al menos 2~GB de memoria RAM y 15~GB de almacenamiento libre para la descarga y gestión de los archivos.  
-      Cualquier dispositivo con un navegador web compatible podrá conectarse simultáneamente para la visualización de los datos.
+    En la estación terrena, el único requisito es disponer de una notebook con sistema operativo basado en Linux o
+    Windows, al menos 2~GB de memoria RAM y 15~GB de almacenamiento libre para la descarga y gestión de los archivos.
+    Cualquier dispositivo con un navegador web compatible podrá conectarse simultáneamente para la visualización de los
+    datos.
+
+    Puede revisar la seccion \ref{anexo:webpage} para tener un vistazo de \emph{SatView}.
 
     \subsubsection{Procedimiento de acceso}
       Para acceder a la interfaz \emph{SatView} durante la fase de recuperación de datos:
       \begin{enumerate}
         \item Iniciar la red Wi-Fi generada por la Raspberry Pi Zero 2~W.
         \item Conectar la notebook u otro dispositivo a dicha red.
-        \item Abrir un navegador web e ingresar la dirección IP local asignada (por defecto: \texttt{http://192.168.4.1:8001}).
+        \item Abrir un navegador web e ingresar la dirección IP local asignada (por defecto:
+          \texttt{http://192.168.4.1:8001}).
         \item La interfaz se cargará automáticamente, permitiendo navegar por los gráficos y el modelo 3D.
       \end{enumerate}
 
     \subsubsection{Procedimiento de descarga}
-      La recuperacion de datos se llevará a cabo una vez recuperado físicamente el CubeSat mediante conexion directa. El
-      procedimiento consiste en desmontar la computadora a bordo, conectarla a una notebook a través de un puerto UART,
-      para lo que requeriremos el cable de transmisión de datos pertinente, montar el sistema de archivos de la memoria
-      interna, copiar los datos alamacenados en formato JSON y cargarlos localmente en el interfaz web para poder
-      visualizarlos.
-
+      La recuperación de datos se llevará a cabo una vez recuperado físicamente el CubeSat mediante conexión directa. El
+      CubeSat dispone de un modo de recuperación de datos, el cual se activa insertando la llave adecuada en el puerto
+      físico del \acrshort{hmi}. Una vez realizado, la \acrshort{obc} creara una red WiFi. Siguiendo el procedimiento de
+      acceso, una vez en la interfaz de \emph{SatView}, se presentaran una serie de botones para descargar los datos de
+      la misión.
+      
   \subsection{Herramientas de Cálculo Empleadas}
     Para el desarrollo, simulación y verificación de cada uno de los subsistemas involucrados, se emplearan herramientas
     de cálculo y software específicos que permitirán modelar los componentes y sus comportamientos, estimar el consumo
@@ -2038,3 +2048,24 @@ a realizar, que será detallada en la siguiente sección.
      \caption{Costos}
      \label{tab:costos}
    \end{table}
+
+   \subsection{Estado de insumos}
+    Actualmente hemos adquirido la Raspberry Pi Zero 2 W, que es uno de los componentes centrales y uno de los mas
+    propensos a dejar de estar disponible y el filamento de Polipropileno. Se presenta una lista de los elementos que
+    aun no se han adquirido pero siguen estando disponibles:
+    \begin{itemize}
+      \item Celdas Peltier 30x30mm
+      \item Puente H L298N
+      \item Conversor Analogico-Digital ADS1115
+      \item \acrfull{imu} MPU9250
+      \item Barometro BMP280
+      \item Sensor de Corriente INA219
+      \item Arduino Nano
+      \item Celdas Li-Ion CMICR18650-F9L
+      \item Termistores
+      \item Tornilleria
+    \end{itemize}
+
+    Algunos elementos no listados ya fueron adquiridos para el prototipo, pero sera necesario comprarlos nuevamente
+    (chapa de aluminio, varillas, PCB Virgen, etc). Apenas tengamos la confirmación de clasificación, se comenzara con
+    la compra de los elementos a medida que se vayan necesitando en el desarrollo.
