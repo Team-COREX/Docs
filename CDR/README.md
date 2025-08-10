@@ -27,5 +27,5 @@ latexmk -pdf main.tex
 Para comprimir el documento PDF, ejecutá el siguiente comando:
 
 ```bash
-gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=LAMBDA-PDR.pdf main.pdf
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=LAMBDA-CDR.pdf main.pdf
 ```
