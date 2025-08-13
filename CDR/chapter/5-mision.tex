@@ -343,22 +343,17 @@ a realizar, que será detallada en la siguiente sección.
     Tiene como función principal la gestión autónoma de la misión
     durante todo el vuelo. Esta unidad esta basada en una Raspberry Pi Zero 2 W, equipada con el sistema operativo
     Raspberry Pi OS Lite, una versión optimizada sin entorno gráfico. Esta configuración fue seleccionada por su
-    bajo consumo energético, reducido tamaño y alta estabilidad operativa, cualidades esenciales para sistemas
-    embarcados en entornos aeroespaciales.
+    bajo consumo energético, reducido tamaño y alta estabilidad operativa.
 
     El propósito fundamental del \acrshort{obc} es leer y almacenar el registro de los sensores, tales como
     aceleración, orientación, presión atmosférica y temperatura ambiente. Estas mediciones son gestionadas por un
     programa que se ejecuta de manera automática, y almacenadas de forma estructurada facilitando su posterior
-    lectura y procesamiento.
+    lectura y procesamiento. También es responsable del control de subsistemas clave, como la \acrfull{tru} , utilizado
+    para la misión secundaria, en conjunto con el \acrfull{pms}.
 
-    El \acrshort{obc} también es responsable del control de subsistemas clave, como la \acrfull{tru} , utilizado
-    para la misión secundaria, en conjunto con el \acrfull{pms} y la lectura de los sensores ambientales. El
-    \acrshort{obc} esta constantemente conectado a los subsistemas previamente mencionados para poder tener control
-    total sobre ellos.
-
-    Una vez finalizado el vuelo, los archivos generados son puestos a disposición usando el \acrshort{hmi},
-    habilitando su análisis y visualización sin necesidad de equipo especializado. Esta separación entre adquisición
-    y procesamiento permite una asignación eficiente de recursos, manteniendo al sistema embarcado centrado
+    Una vez finalizado el vuelo, los archivos generados estarán disponibles al usuario usando el \acrshort{hmi},
+    permitiendo su análisis y visualización sin necesidad de equipo especializado. Esta separación entre adquisición
+    y procesamiento permite una asignación eficiente de recursos, manteniendo al \acrshort{obc} centrado
     exclusivamente en tareas criticas durante la misión.
 
     \begin{figure}[H]
@@ -385,10 +380,10 @@ a realizar, que será detallada en la siguiente sección.
       \label{fig:sistema_obc}
     \end{figure}
 
-   Revise la seccion \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
+   Puede dirigirse a la seccion \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
 
    En el diagrama ~\ref{fig:filesystem} se presenta la estructura del sistema de archivos diseñada para la misión.
-   Cada dato capturado por los sensores es leído por OBC, que se encarga de almacenar dicho dato en un archivo
+   Cada dato capturado por los sensores es leído por la \acrshort{obs}, que se encarga de almacenar dicho dato en un archivo
    específico. Junto a este archivo, se crea un segundo archivo con el mismo nombre seguido del sufijo "\_timestamp",
    donde se guardará la marca de tiempo en que se tomó la medición.
    
@@ -400,9 +395,9 @@ a realizar, que será detallada en la siguiente sección.
 
    El archivo CSV resultante cumple dos funciones clave:
     \begin{itemize}
-        \item Permite que HMI lea y muestre los datos en tiempo real para supervisión.
-        \item Facilita el post-procesamiento posterior, en el cual los datos serán graficados y analizados visualmente
-        para extraer conclusiones sobre el comportamiento del sistema.
+        \item Permite que el \acrshort{hmi} lea y muestre los datos en tiempo real para supervisión.
+        \item Facilita el post-procesamiento, donde los datos serán graficados, permitiendo su análisis visual
+        para extraer conclusiones sobre el comportamiento del sistema y la misión.
     \end{itemize}
 
 
