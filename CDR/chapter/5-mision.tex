@@ -270,8 +270,8 @@ a realizar, que será detallada en la siguiente sección.
         tensión y corriente) y gestionar el encendido y apagado selectivo de distintos rieles de alimentación lo que
         contribuye a una mejor eficiencia energética y diagnostico en vuelo, 
       \item Generar y estabilizar distintos niveles
-        de tensión requeridos por los subsistemas del CubeSat, como 3.3V para sensores, 5V para la computadora de
-        abordo y 12V para cargas especificas.
+          de tensión requeridos por los subsistemas del CubeSat, como 3.3V para sensores, 5V para la \acrshort{obc}
+           y 12V para cargas específicas.
     \end{itemize}
 
     Con la finalidad de disminuir la carga en las baterías, se suministrará energía al \acrshort{pms} por medio de
@@ -827,7 +827,7 @@ a realizar, que será detallada en la siguiente sección.
   \subsubsection{Thermal Regulation Unit (\acrshort{tru})}
     Tiene como objetivo controlar activamente la temperatura
     de distintas muestras biológicas durante el vuelo del CubeSat, en el contexto de la misión secundaria. Este
-    sistema sirve para generar condiciones térmicas especificas en los compartimientos que contienen los
+    sistema sirve para generar condiciones térmicas específicas en los compartimientos que contienen los
     microorganismos.  El sistema esta compuesto por los siguientes elementos principales:
 
   \begin{itemize} 
@@ -861,10 +861,10 @@ a realizar, que será detallada en la siguiente sección.
         \item El CubeSat debe cumplir la misión secundaria de analizar la viabilidad de células eucariotas
           (\textit{Giardia Lamblia}) sometidas a condiciones extremas de vuelo, incluyendo:
         \begin{itemize}
-            \item Variaciones de temperatura controladas (10\,°C, 37\,°C y 55\,°C).
-            \item Vibraciones y aceleraciones propias del lanzamiento y vuelo.
-            \item Microgravedad y cambios de presión.
+            \item vibraciones y aceleraciones propias del lanzamiento y vuelo,
+            \item microgravedad y cambios de presión.
         \end{itemize}
+            Además, debe ser capaz de mantener muestras a distintas temperaturas controladas (10\,°C, 37\,°C y 55\,°C).
     \end{enumerate}
     
     \textbf{Nivel 2 – Requerimientos de sistema}
@@ -915,7 +915,7 @@ a realizar, que será detallada en la siguiente sección.
 
     La interfaz fue implementada con \emph{HTML}, \emph{CSS} y \emph{JavaScript}. El procesamiento e interpretación de
     los datos se realiza íntegramente en el cliente (navegador del usuario), minimizando así la carga computacional de
-    la computadora a bordo.  Esta última se encarga de servir los datos almacenados en formato CSV y de proveer los
+    la \acrshort{obc}.  Esta última se encarga de servir los datos almacenados en formato CSV y de proveer los
     archivos de la interfaz web, que se ejecuta en el navegador tras acceder a la URL local hosteada por la Raspberry Pi
     Zero 2~W.  La conexión se establece dentro del rango de la red Wi-Fi generada por la Raspberry, sin requerir acceso
     a internet.
@@ -1854,7 +1854,7 @@ del proyecto. \\ [10pt]
 
   \subsection{General}
     Para llevar a cabo la misión del CubeSat, se ha definido una estructura de trabajo que
-    divide al equipo en diferentes grupos, cada uno con responsabilidades especificas. Esta división
+    divide al equipo en diferentes grupos, cada uno con responsabilidades específicas. Esta división
     busca optimizar el desarrollo del proyecto mediante una organización eficiente de tareas y
     recursos humanos.
     \subsubsection{Organización del Equipo}
