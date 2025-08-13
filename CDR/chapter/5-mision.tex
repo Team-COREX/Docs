@@ -383,7 +383,7 @@ a realizar, que será detallada en la siguiente sección.
    Puede dirigirse a la seccion \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
 
    En el diagrama ~\ref{fig:filesystem} se presenta la estructura del sistema de archivos diseñada para la misión.
-   Cada dato capturado por los sensores es leído por la \acrshort{obs}, que se encarga de almacenar dicho dato en un archivo
+   Cada dato capturado por los sensores es leído por la \acrshort{obc}, que se encarga de almacenar dicho dato en un archivo
    específico. Junto a este archivo, se crea un segundo archivo con el mismo nombre seguido del sufijo "\_timestamp",
    donde se guardará la marca de tiempo en que se tomó la medición.
    
@@ -563,19 +563,28 @@ a realizar, que será detallada en la siguiente sección.
           en modos de bajo consumo de potencia (idle, stand-by, deep sleep, etc.). Se disminuye la frecuencia de lectura
           de ciertos sensores. Si el modo anterior fue el de \textit{pre lanzamiento} el subsistema \acrshort{tru} se
           mantiene activo.
-        \item \textbf{Lanzamiento:} Realiza solamente las rutinas criticas para el cumplimiento de la
-          misión. Cortando cualquier vía de comunicación con la estación terrestre.
+        \item \textbf{Lanzamiento:} Este modo se activa cuando el conector externo está ausente, funcionando como un mecanismo de
+            "Remove Before Flight". En esta condición, el CubeSat ejecuta únicamente las rutinas críticas necesarias para garantizar
+             el cumplimiento de la misión, evitando operaciones no esenciales durante la fase de lanzamiento.
         \item \textbf{Recuperación de datos:} Rehabilita la comunicación con la estación terrestre permitiendo la
-          visualización, análisis y descarga de datos.
+          descarga de datos para su posterior procesamiento y análisis.
         \item \textbf{Prueba:} Este modo será utilizado durante le desarrollo del CubeSat permitiendo acceso
           administrativo al sistema.
       \end{itemize}
 
-      El conector utilizado es un JST HX de 6 pines (macho), de los cuales 3 pines son leídos por la Raspberry Pi. Esos
+      El conector utilizado es un JST HX de 6 pines (macho en la \acrshort{obc} y hembra para el usuario) (fig. ~\ref{fig:conector-jst}),
+      de los cuales 3 pines son leídos por la Raspberry Pi. Esos
       pines están configurados con resistencias pull-up. Esto significa que, en ausencia de conexión externa, dichas
       entradas leen un nivel lógico alto (1). Las diferentes "llaves" conectaran los pines leídos por la Raspberry Pi en
       diferentes puntos, los cuales son los que determinan el modo de operación. En la figura \ref{fig:seleccion_modos}
-      se puede ver la parte física del \acrshort{hmi} representada.
+      se puede ver una representación de la parte física del \acrshort{hmi}.
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{image/conector/conector-jst.png}
+        \caption{Conector JST HX de 6 pines macho.}
+        \label{fig:conector-jst}
+      \end{figure}
 
       \begin{figure}[H]
         \centering
@@ -775,7 +784,8 @@ a realizar, que será detallada en la siguiente sección.
       \end{figure}
 
       La parte virtual del \acrshort{hmi} es una pagina web, la cual se hace disponible dependiendo de la "llave"
-      conectada a la parte física del \acrshort{hmi}. Esta interfaz web, es accesible gracias al punto de acceso WiFi
+      conectada a la parte física del \acrshort{hmi}, en los modos: \textit{prueba, pre lanzamiento y recuperación  de datos}.
+      Esta interfaz web, es accesible gracias al punto de acceso WiFi
       que genera la Raspberry Pi Zero 2 W. Desde la interfaz web, el usuario puede consultar variables criticas del
       sistema (temperatura, voltajes, corrientes, estado de sensores, entre otros), así como habilitar o
       deshabilitar subsistemas específicos, incluyendo rieles de alimentación y módulos funcionales. Se pueden
