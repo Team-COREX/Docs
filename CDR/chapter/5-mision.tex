@@ -155,6 +155,7 @@ a realizar, que será detallada en la siguiente sección.
     \end{itemize}
 
    \subsection{Procedimientos previos al lanzamiento}
+   \label{sec:procedimientos-prev-lanzamiento}
     Esta sección describe los procedimientos necesarios para el cultivo y traslado de las muestras biológicas utilizadas
     en el experimento, manteniendo condiciones que aseguren su viabilidad y reproducibilidad.
  
@@ -173,11 +174,12 @@ a realizar, que será detallada en la siguiente sección.
     en el que puedan ser transportadas bajo condiciones óptimas. Estas condiciones consisten en mantener las muestras a $37\Celsius$ y con una inclinación de
     $45\degree$. Para ello, se prevé diseñar un dispositivo de transporte con control de temperatura, regulado a
     aproximadamente $4\Celcius$, temperatura a la cual las muestras biológicas entran en un estado de inhibición metabólica
-    reversible. El tiempo de traslado puede extenderse hasta 48 horas desde el momento de cultivo sin que esto afecte
+    reversible. El tiempo de traslado puede extenderse hasta las 48 horas desde la finalización del cultivo sin que esto afecte
     significativamente las condiciones de crecimiento del parásito.
 
   \subsection{Ensayos luego del lanzamiento}
-   Los ensayos se llevarán a cabo posteriormente al lanzamiento y estarán a cargo de personal especializado del laboratorio
+  \label{sec:procedimientos-ensayo}
+   Los ensayos se llevarán a cabo posteriormente al lanzamiento, y estarán a cargo de personal capacitado del laboratorio
    de microbiología. El objetivo es evaluar si las condiciones a las que fueron sometidas las muestras afectaron su viabilidad
    y determinar si los factores de estrés desencadenaron mecanismos clásicos de adaptación en Giardia lamblia, tales como
    enquistamiento, apoptosis u otros procesos relacionados.
@@ -1366,54 +1368,48 @@ a realizar, que será detallada en la siguiente sección.
       aproximadamente 7.62 GB.
 
 \section{Secuencia de Operación}
-  Para poder llevar a cabo la misión, es necesario obtener las muestras primero. Para la obtención de las muestras, se
-  utilizaran las instalaciones mas cercanas a la zona de lanzamiento, para cultivar las muestras varios días antes del
-  día de lanzamiento. Una vez cultivadas las muestras, el día antes o durante el mismo día del lanzamiento, se buscan
-  las muestras para ser almacenadas en un lugar seguro durante toda la secuencia de lanzamiento hasta que haya que
-  cargar las muestras en el CubeSat.
+  Para el día del lanzamiento, se prevé seguir con la secuencia:
 
-  Para el día del lanzamiento, se provee que que todo el evento siga la siguiente secuencia:
   \begin{itemize}
-    \item \textbf{Etapa 1:} Arranque del CubeSat.\\
-      Durante esta etapa, se enciende el CubeSat, y se coloca la llave de Pre Lanzamiento, la cual inicializara todos
-      los subsistemas. En esta etapa, el CubeSat puede ser conectado a una fuente de alimentación externa para hacer que
-      la entrada en régimen permanente para la temperatura de la bahía de muestras no consuma mucha batería por el pico inicial
-      de cambio de temperatura requerido.
-    \item \textbf{Etapa 2:} Validación de los sistemas.\\
+    \item \textbf{Etapa 1:} Traslado de muestras.
+      Se buscan las muestras previamente cultivadas y se sigue con el procedimiento de traslado descripto en la sección ~\ref{sec:procedimientos-prev-lanzamiento}.
+    \item \textbf{Etapa 2:} Arranque del CubeSat.\\
+      Una vez en el lugar de lanzamiento, se coloca la llave correspondiente en el \arcshort{hmi} físico para establecer el modo de Pre Lanzamiento, en el cual
+      se inicializan todos los subsistemas. En esta etapa, el CubeSat puede ser conectado a una fuente de alimentación externa para alcanzar el
+      régimen permanente de las distintas temperaturas controladas sin consumir energía extra de las baterías.
+    \item \textbf{Etapa 3:} Validación de los sistemas.\\
       Mientras el CubeSat estabiliza la temperatura en modo Pre Lanzamiento, se abre un canal de comunicación con el
-      CubeSat vía WiFi, al cual uno de los integrantes de Software y Hardware se conectaran mediante una computadora,
+      CubeSat vía WiFi, al cual uno de los integrantes de Software y Hardware se conectarán mediante una computadora,
       para hacer la validación de todos los sensores, y verificar que estén en estados operativos. También, se
-      corroboraran los voltajes y consumos reportados de las baterías, para verificar que también se encuentren en
+      corroborarán los voltajes y consumos reportados de las baterías, para verificar que también se encuentren en
       niveles óptimos.
-    \item \textbf{Etapa 3:} Colocación de las Muestras.\\
-      Una vez que la temperatura de la bahía de muestras ya esta estabilizada y asegurada, se procede a destapar la
-      bahía de muestras, para la posterior colocación de las mismas. La colocación de las muestras va a generar una
-      diferencia en la temperatura, por lo que es requisito estar monitorizando que la misma no varié demasiado del punto
+    \item \textbf{Etapa 4:} Colocación de las Muestras.\\
+      Una vez que la temperatura de la bahía de muestras ya esté estabilizada y asegurada, se procede a destapar la
+      bahía de muestras y a la colocación de las mismas. La colocación de las muestras va a generar una
+      diferencia en la temperatura, por lo que se monitoreará constantemente que la misma no varié demasiado del punto
       configurado para evitar estresar los organismos presentes en las muestras.
-    \item \textbf{Etapa 4:} Preparación para el lanzamiento.\\
+    \item \textbf{Etapa 5:} Preparación para el lanzamiento.\\
       Con el CubeSat en estado de Pre Lanzamiento, todos los sensores verificados, y todas las muestras cargadas, se
       procede a fijar todas las tapas, desconectar la fuente de alimentación externa, y cargar el CubeSat a la bahía de
       carga del Cohete. En este estado, el CubeSat seguirá teniendo el puerto de comunicación vía WiFi disponible, hasta
       que se retire la llave de Pre Lanzamiento o "Remove Before Flight".
-    \item \textbf{Etapa 5:} Lanzamiento, apogeo y aterrizaje.\\
-      Durante esta etapa, no hay telemetría que recibir, ni parámetros que monitoreos. Solo se mantienen las muestras
-      terrestres en condiciones optimas, las cuales van a ser comparadas con las del CubeSat una vez sea recuperado.
-    \item \textbf{Etapa 6:} Recuperación del CubeSat.\\
-      Una vez recuperado el CubeSat, se colocara la llave de recuperación de datos, y se colocara la fuente de
-      alimentación externa para evitar dañar las baterías y mantener las muestras estables. Con la fuente conectada, se
-      procede a extraer las muestras de la bahía de muestras, para su posterior almacenaje en un medio seguro y bajo en
-      estrés. Al mismo tiempo, integrantes del equipo de Software y Hardware se encargaran de realizar la descarga de
-      los datos del CubeSat a una plataforma local para su posterior procesamiento.
-    \item \textbf{Etapa 7:} Procesamiento de datos.\\
-      Con los datos del CubeSat descargados y guardados en un lugar seguro, se puede colocar la llave de apagado del
-      CubeSat y desconectar la fuente externa. Con las herramientas desarrolladas por el equipo de software, se
-      realizara el procesamiento de las muestras, para buscar patrones y presentarlos en un informe.
-    \item \textbf{Etapa 8:} Control de las muestras.\\
-      Con el equipo requerido, se hará la comparación de las muestras de tierra, las muestras del CubeSat y las muestras
-      de laboratorio, en búsqueda de fluctuaciones en la reproducción de las células, cantidad de células muertas y
-      alteraciones provocadas en las mismas por sus sistemas de defensa basados en estrés.
-    \item \textbf{Etapa 9:} Presentación de los datos.\\
-      Los informes son presentados con conclusiones respecto a los resultados obtenidos durante el lanzamiento.
+    \item \textbf{Etapa 6:} Lanzamiento, apogeo y aterrizaje.\\
+      Luego de retirar la llave de Pre Lanzamineto, el CubeSat está preparado para la misión. Durante esta etapa
+      no hay telemetría, ni parámetros para monitorear en tiempo real.
+    \item \textbf{Etapa 7:} Recuperación del CubeSat.\\
+      Una vez recuperado el CubeSat, se coloca la llave de recuperación de datos y se conecta la fuente de
+      alimentación externa al CubeSat para evitar agotar la energía de las baterías y mantener las muestras estables. Luego, se
+      procede a extraer las muestras de la bahía de muestras y se las coloca en el dispositivo de traslado nuevamente.
+      Al mismo tiempo, se procede a la descarga de los datos del CubeSat en una plataforma local para su posterior procesamiento.
+      Una vez finalizada la recuperación de datos, se puede colocar la llave de apagado del CubeSat y desconectar la fuente externa.
+    \item \textbf{Etapa 9:} Control de las muestras.\\
+      Se procede al análisis de las muestras siguiendo el procedimiento descripto en la sección ~\ref{sec:procedimientos-ensayo}.
+    \item \textbf{Etapa 8:} Procesamiento de datos.\\
+      Con los datos del CubeSat descargados y guardados en un lugar seguro, se realiza el procesamiento de los mismos utilizando las
+      herramientas desarrolladas por el equipo de software, con el fin buscar patrones y equipirarlos con los resultados de los ensayos
+      de las muestras.
+  \item \textbf{Etapa 10:} Presentación de los datos.\\
+      Se elabora un informe con conclusiones respecto a los resultados obtenidos durante el lanzamiento.
   \end{itemize}
 
 \section{Aseguramiento de Misión}
