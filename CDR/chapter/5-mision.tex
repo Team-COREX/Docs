@@ -1259,8 +1259,8 @@ a realizar, que será detallada en la siguiente sección.
       Durante el vuelo se generaran y almacenaran diversos tipos de datos relacionados tanto con la misión primaria como
       con la misión secundaria. A continuación se detalla el presupuesto preliminar de almacenamiento de datos
       considerando un periodo de recolección de 4 horas.  Cada muestra registrada incluye el instante temporal y el
-      valor medido del parámetro, ocupando 4 bytes cada uno, lo que da un total de 8 bytes por muestra. Ademas,
-      consideramos la mayor frecuencia de muestreo permitida por cada sensor.
+      valor medido del parámetro, ocupando 4 bytes cada uno, lo que da un total de 8 bytes por muestra, a excepción que 
+      se indique lo contrario. Ademas, consideramos la mayor frecuencia de muestreo permitida por cada sensor.
 
       \begin{table}[H]
       \centering
@@ -1287,21 +1287,22 @@ a realizar, que será detallada en la siguiente sección.
         \resizebox{\textwidth}{!}{
         \begin{tabular}{|l|c|c|c|c|}
         \hline
-        \textbf{Parámetro} & \textbf{Tipo} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
+        \textbf{Parámetro} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
         \hline
-        Presión               & float & 157   & 2,260,800  & $\approx$ 8.63     \\
-        Temperatura ambiente  & float & 157   & 2,260,800  & $\approx$ 8.63     \\
-        Aceleración           & float & 4000  & 57,600,000  & $\approx$ 219.73   \\
-        Ángulo de giro        & float & 8000  & 115,200,000 & $\approx$ 439.45   \\
+        Presión               & 157   & 2,260,800  & $\approx$ 17.26     \\
+        Temperatura ambiente  & 157   & 2,260,800  & $\approx$ 17.26     \\
+        Aceleración           & 4000  & 57,600,000  & $\approx$ 878.92   \\
+        Ángulo de giro        & 8000  & 115,200,000 & $\approx$ 1757.84   \\
         \hline
-        \textbf{Total estimado} & -    & -     & -         & $\boldsymbol{\approx 676.44}$ \\
+        \textbf{Total estimado} & -    & -     & -         & $\boldsymbol{\approx 2671.28}$ \\
         \hline
         \end{tabular}
         }
-        \caption{Volumen de datos total y de cada variable físico-ambiental}
+        \caption{Volumen de datos total y de cada variable físico-ambiental.}
         \label{tab:volumen_datos}
         \end{table}
-
+        Notar que en aceleración y ángulo de giro se a considerado un tamaño de muestra de 16 bytes debido a los tres ejes mas la marca de tiempo.
+        
         \item \textbf{Control de temperatura de de las muestras celulares}
 
         \begin{table}[H]
@@ -1309,20 +1310,15 @@ a realizar, que será detallada en la siguiente sección.
         \resizebox{\textwidth}{!}{
         \begin{tabular}{|l|c|c|c|c|}
         \hline
-        \textbf{Parámetro} & \textbf{Tipo} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
+        \textbf{Parámetro} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
         \hline
-        Temperatura ideal de cultivo & float & 157 & 2,260,800 & $\approx$ 8.63 \\
-        Temperatura menor            & float & 157 & 2,260,800 & $\approx$ 8.63 \\
-        Temperatura mayor            & float & 157 & 2,260,800 & $\approx$ 8.63 \\
-        Temperatura ambiente         & float & 157 & 2,260,800 & $\approx$ 8.63 \\
-        \hline
-        \textbf{Total estimado}      & -     & -   & -         & $\boldsymbol{\approx 34.52}$ \\
-        \hline
+        Temperatura & 157   & 2,260,800  & $\approx$ 51.78     \\
         \end{tabular}
         }
         \caption{Volumen de datos de los controles de temperatura de las muestras celulares}
         \label{tab:volumen_datos_temperatura}
         \end{table}
+        La medida de la temperatura es 24 bytes debido a las marcas de tiempo y las temperaturas que se toman para cada una de las muestras.
 
         \item \textbf{Información gravada previamente}
 
@@ -1353,13 +1349,13 @@ a realizar, que será detallada en la siguiente sección.
       \hline
       \textbf{Apartado} & \textbf{Tamaño estimado [MB]} \\
       \hline
-      Variables físicas              & 685.07 \\
-      Back up Variables físicas      & 685.07 \\
-      Temperaturas celulares         & 34.52  \\
-      Back up Temperaturas celulares & 34.52  \\
+      Variables físicas              & 2671.28 \\
+      Back up Variables físicas      & 2671.28 \\
+      Temperaturas celulares         & 51.78  \\
+      Back up Temperaturas celulares & 51.78  \\
       Información grabada previamente & 2355 \\
       \hline
-      \textbf{Tamaño total}          & \textbf{3794.3} \\
+      \textbf{Tamaño total}          & \textbf{7801.12} \\
       \hline
       \end{tabular}
       \caption{Tamaño total estimado}
@@ -1367,7 +1363,7 @@ a realizar, que será detallada en la siguiente sección.
       \end{table}
 
       Teniendo en cuenta todos los datos a ser almacenados, estimamos un volumen total de
-      aproximadamente 3.7 GB.
+      aproximadamente 7.62 GB.
 
 \section{Secuencia de Operación}
   Para poder llevar a cabo la misión, es necesario obtener las muestras primero. Para la obtención de las muestras, se
