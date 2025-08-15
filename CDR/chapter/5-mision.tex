@@ -276,7 +276,7 @@ a realizar, que será detallada en la siguiente sección.
 
     Con la finalidad de disminuir la carga en las baterías, se suministrará energía al \acrshort{pms} por medio de
     una fuente de alimentación externa durante la fase inicial de regulación de temperatura ya que este es momento
-    donde los elementos reguladores demandan mayor cantidad de energía.  Al llegar a las temperaturas deseadas, ya
+    donde los elementos reguladores demandan mayor cantidad de energía.  Al llegar a las temperaturas deseadas,
     la demanda de energía es mucho menor, posibilitando la desconexión de la fuente externa sin perjudicar la
     autonomía del CubeSat.
 
@@ -572,19 +572,19 @@ a realizar, que será detallada en la siguiente sección.
           administrativo al sistema.
       \end{itemize}
 
-      El conector utilizado es un JST HX de 6 pines (macho en la \acrshort{obc} y hembra para el usuario) (fig. ~\ref{fig:conector-jst}),
-      de los cuales 3 pines son leídos por la Raspberry Pi. Esos
-      pines están configurados con resistencias pull-up. Esto significa que, en ausencia de conexión externa, dichas
-      entradas leen un nivel lógico alto (1). Las diferentes "llaves" conectaran los pines leídos por la Raspberry Pi en
-      diferentes puntos, los cuales son los que determinan el modo de operación. En la figura \ref{fig:seleccion_modos}
-      se puede ver una representación de la parte física del \acrshort{hmi}.
-
-      \begin{figure}[H]
+      \begin{wrapfigure}{L}{0.3\textwidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{image/conector/conector-jst.png}
+        \includegraphics[width=0.9\linewidth]{image/conector/conector-jst.png}
         \caption{Conector JST HX de 6 pines macho.}
         \label{fig:conector-jst}
-      \end{figure}
+      \end{wrapfigure}
+      El conector utilizado es un JST HX de 6 pines (macho en la \acrshort{obc} y hembra para el usuario) (fig.
+      ~\ref{fig:conector-jst}), de los cuales 3 pines son leídos por la Raspberry Pi. Esos pines están configurados con
+      resistencias pull-up. Esto significa que, en ausencia de conexión externa, dichas entradas leen un nivel lógico
+      alto (1). Las diferentes "llaves" conectaran los pines leídos por la Raspberry Pi en diferentes puntos, los cuales
+      son los que determinan el modo de operación. En la figura \ref{fig:seleccion_modos} se puede ver una
+      representación de la parte física del \acrshort{hmi}.
+
 
       \begin{figure}[H]
         \centering
@@ -785,21 +785,20 @@ a realizar, que será detallada en la siguiente sección.
         \label{fig:seleccion_modos}
       \end{figure}
 
-      La parte virtual del \acrshort{hmi} es una pagina web, la cual se hace disponible dependiendo de la "llave"
-      conectada a la parte física del \acrshort{hmi}, en los modos: \textit{prueba, pre lanzamiento y recuperación  de datos}.
-      Esta interfaz web, es accesible gracias al punto de acceso WiFi
-      que genera la Raspberry Pi Zero 2 W. Desde la interfaz web, el usuario puede consultar variables criticas del
-      sistema (temperatura, voltajes, corrientes, estado de sensores, entre otros), así como habilitar o
-      deshabilitar subsistemas específicos, incluyendo rieles de alimentación y módulos funcionales. Se pueden
-      observar imagenes del prototípo de la interfaz web en el Anexo \ref{anexo:webpage} Ademas de su rol operativo,
-      la interfaz esta diseñada también como una herramienta para el análisis post-misión. Una vez concluido el
-      vuelo, permite la visualización, procesamiento y descarga de los archivos de datos registrados. Dicho
+      La parte virtual del \acrshort{hmi} es una pagina web, la cual se hace disponible cuando la "llave" de prueba, pre
+      lanzamiento o recuperacion de datos es conectada a la parte física del \acrshort{hmi}, Esta interfaz web, es
+      accesible gracias al punto de acceso WiFi que genera la Raspberry Pi Zero 2 W. Desde la interfaz web, el usuario
+      puede consultar variables criticas del sistema (temperatura, voltajes, corrientes, estado de sensores, entre
+      otros), así como habilitar o deshabilitar subsistemas específicos, incluyendo rieles de alimentación y módulos
+      funcionales. Se pueden observar imagenes del prototípo de la interfaz web en el Anexo \ref{anexo:webpage} Ademas
+      de su rol operativo, la interfaz esta diseñada también como una herramienta para el análisis post-misión. Una vez
+      concluido el vuelo, permite la visualización, procesamiento y descarga de los archivos de datos registrados. Dicho
       procesamiento se realiza directamente en el cliente web, lo que reduce la carga sobre el sistema embarcado y
       permite un análisis dinámico sin necesidad de infraestructura adicional.
 
       Adicionalmente, y reservadas exclusivamente para situaciones de emergencia, estarán habilitadas la conexión
       SSH (a través de la misma red local) y la conexión UART mediante un puerto físico. Esta ultima constituye la
-      única via de comunicación que permanece activa durante todo el ciclo operativo del CubeSat.
+      única via de comunicación que permanece activa mientras el CubeSat no este en modo lanzamiento.
 
   \subsubsection{Data Storage}
     La arquitectura de almacenamiento esta compuesta por dos tarjetas microSD de 16 GB:
@@ -827,10 +826,10 @@ a realizar, que será detallada en la siguiente sección.
   \end{itemize}
 
   \subsubsection{Thermal Regulation Unit (\acrshort{tru})}
-    Tiene como objetivo controlar activamente la temperatura
-    de distintas muestras biológicas durante el vuelo del CubeSat, en el contexto de la misión secundaria. Este
-    sistema sirve para generar condiciones térmicas específicas en los compartimientos que contienen los
-    microorganismos.  El sistema esta compuesto por los siguientes elementos principales:
+    Tiene como objetivo controlar activamente la temperatura de distintas muestras biológicas durante el vuelo del
+    CubeSat, en el contexto de la misión secundaria. Este sistema sirve para generar condiciones térmicas específicas en
+    los compartimientos que contienen los microorganismos.  El sistema esta compuesto por los siguientes elementos
+    principales:
 
   \begin{itemize} 
     \item Celdas Peltier: dispositivos termoeléctricos capaces de generar un delta de temperatura en
@@ -863,10 +862,10 @@ a realizar, que será detallada en la siguiente sección.
         \item El CubeSat debe cumplir la misión secundaria de analizar la viabilidad de células eucariotas
           (\textit{Giardia Lamblia}) sometidas a condiciones extremas de vuelo, incluyendo:
         \begin{itemize}
-            \item vibraciones y aceleraciones propias del lanzamiento y vuelo,
-            \item microgravedad y cambios de presión.
+            \item Temperaturas Controladas ($10\Celsius$, $37\Celsius$ y $55\Celsius$).
+            \item Vibraciones y aceleraciones propias del lanzamiento y vuelo.
+            \item Microgravedad y cambios de presión.
         \end{itemize}
-            Además, debe ser capaz de mantener muestras a distintas temperaturas controladas (10\,°C, 37\,°C y 55\,°C).
     \end{enumerate}
     
     \textbf{Nivel 2 – Requerimientos de sistema}
@@ -909,18 +908,16 @@ a realizar, que será detallada en la siguiente sección.
 
   \subsection{Descripción del equipo de soporte en tierra}
     Se desarrolló una \textbf{interfaz web de monitoreo} —en adelante denominada \emph{SatView}— que permite visualizar,
-    de forma diferida, los datos recolectados por el CubeSat una vez finalizado el vuelo.  Esta herramienta facilita la
-    exploración visual de las variables físicas medidas por los sensores a bordo, representándolas mediante gráficos en
-    función del tiempo.  Adicionalmente, incorpora un módulo interactivo en 3D del satélite, que permite manipular la
-    línea temporal de la misión, observar el estado de las variables en cada instante y reproducir la animación completa
-    del vuelo.
+    de forma diferida, los datos recolectados por el CubeSat en tiempo real antes del lanzamiento y los recolectados una
+    vez finalizada la mision.  Esta herramienta facilita la exploración visual de las variables físicas medidas por los
+    sensores a bordo, representándolas mediante gráficos en función del tiempo.  Adicionalmente, incorpora un módulo
+    interactivo en 3D del satélite, que permite manipular la línea temporal de la misión, observar el estado de las
+    variables en cada instante y reproducir la animación completa del vuelo.
 
     La interfaz fue implementada con \emph{HTML}, \emph{CSS} y \emph{JavaScript}. El procesamiento e interpretación de
     los datos se realiza íntegramente en el cliente (navegador del usuario), minimizando así la carga computacional de
-    la \acrshort{obc}.  Esta última se encarga de servir los datos almacenados en formato CSV y de proveer los
-    archivos de la interfaz web, que se ejecuta en el navegador tras acceder a la URL local hosteada por la Raspberry Pi
-    Zero 2~W.  La conexión se establece dentro del rango de la red Wi-Fi generada por la Raspberry, sin requerir acceso
-    a internet.
+    la \acrshort{obc}. Esta última se encarga de servir los datos almacenados en formato \acrshort{csv} y de proveer los
+    archivos de la interfaz web.
 
     En la estación terrena, el único requisito es disponer de una notebook con sistema operativo basado en Linux o
     Windows, al menos 2~GB de memoria RAM y 15~GB de almacenamiento libre para la descarga y gestión de los archivos.
@@ -930,7 +927,7 @@ a realizar, que será detallada en la siguiente sección.
     Puede revisar la seccion \ref{anexo:webpage} para tener un vistazo de \emph{SatView}.
 
     \subsubsection{Procedimiento de acceso}
-      Para acceder a la interfaz \emph{SatView} durante la fase de recuperación de datos:
+      Para acceder a la interfaz \emph{SatView}:
       \begin{enumerate}
         \item Iniciar la red Wi-Fi generada por la Raspberry Pi Zero 2~W.
         \item Conectar la notebook u otro dispositivo a dicha red.
@@ -938,14 +935,7 @@ a realizar, que será detallada en la siguiente sección.
           \texttt{http://192.168.4.1:8001}).
         \item La interfaz se cargará automáticamente, permitiendo navegar por los gráficos y el modelo 3D.
       \end{enumerate}
-
-    \subsubsection{Procedimiento de descarga}
-      La recuperación de datos se llevará a cabo una vez recuperado físicamente el CubeSat mediante conexión directa. El
-      CubeSat dispone de un modo de recuperación de datos, el cual se activa insertando la llave adecuada en el puerto
-      físico del \acrshort{hmi}. Una vez realizado, la \acrshort{obc} creara una red WiFi. Siguiendo el procedimiento de
-      acceso, una vez en la interfaz de \emph{SatView}, se presentaran una serie de botones para descargar los datos de
-      la misión.
-      
+ 
   \subsection{Herramientas de Cálculo Empleadas}
     Para el desarrollo, simulación y verificación de cada uno de los subsistemas involucrados, se emplearan herramientas
     de cálculo y software específicos que permitirán modelar los componentes y sus comportamientos, estimar el consumo
@@ -980,17 +970,12 @@ a realizar, que será detallada en la siguiente sección.
       \end{wrapfigure}
       Como se mencionó previamente, la estructura del CubeSat fue diseñada a partir de láminas de aluminio de 2mm de
       espesor plegadas, para maximizar el volumen interno disponible. Esta configuración permite lograr una estructura
-      rígida, de fabricación sencilla, y con un bajo peso de fabricación, gracias a la gran cantidad de puntos de
-      fijación distribuidos a lo largo de la estructura.
-
-      La estructura principal del CubeSat está compuesta por dos tapas, ubicadas en las caras +Z y -Z (lids), unidas
-      entre sí mediante cuatro esquineros (corners). Todas las piezas se fijan utilizando tornillos M3 y tuercas
-      autofrenantes. Los orificios de fijación están avellanados, evitando cualquier protrusión externa.
+      rígida, de fabricación sencilla, y de bajo peso.
 
       La estructura del CubeSat, consta de 2 tapas, ubicadas en las caras +Z y -Z (lids), unidas a través de 4
       esquineros (corners). La fijación de cada una de estas partes se realiza mediante tornillos y tuercas
-      autofrenantes M3. Todos los agujeros llevan un corte exterior avellanado, logrando que el CubeSat no tenga
-      protuberancias.
+      autofrenantes M3. Todos los agujeros de tornillos son avellanados, permitiendo que el CubeSat no tenga
+      protuberancias al momento de ensamblarlo.
 
       \begin{wrapfigure}{R}{0.4\textwidth}
         \centering
@@ -998,16 +983,18 @@ a realizar, que será detallada en la siguiente sección.
         \caption{Vista superior, sin tapa}
         \label{fig:superior}
       \end{wrapfigure}
-      El CubeSat cuenta, además, con ocho puntos de apoyo ubicados en las caras +Y y -Y (sides), fabricados mediante
+      El CubeSat cuenta con ocho puntos de apoyo ubicados en las caras +Y y -Y (sides), fabricados mediante
       impresión 3D por Modelado por Deposición Fundida (FDM) en polipropileno, un material que se seleccionó por su baja
       densidad, lo cual reduce la masa total del sistema, y por su buena capacidad de sellado y excelente adherencia
-      entre capas, permitiendo que la resistencia interna del CubeSat sea hermética.
+      entre capas, permitiendo que los modulos internos del CubeSat puedan ser hermeticos.
 
-      Para el montaje de la electrónica, se diseñó una estructura interna compuesta por 3 separadores, los cuales fijan
-      los módulos en los ejes X e Y, no obstante, no hay fijación en el eje Z para permitir el movimiento de los
-      diferentes componentes, lo que permite aprovechar y ocupar todo el volumen del CubeSat.
+      El CubeSat alberga diferentes modulos, los cuales sirven para proveer una separacion fisica entre diferentes
+      subsistemas. Los modulos ocupan todo el espacio disponible en el plano XY. Esto es para no necesitar fijar los
+      diferentes modulos a la estructura con tornilleria. La altura de cada modulo esta pensada en base a lo que
+      alberga, y entre todos los modulos se completa el espacio disponible en el eje Z, por lo que cuando el CubeSat
+      esta completamente ensamblado, no hay espacio para que los modulos se desplacen en el eje Z.
 
-      Los diferentes separadores se colocan de forma segura en sus correspondientes espacios en la estructura, y se
+      Los diferentes modulos se colocan de forma segura en sus correspondientes espacios en la estructura, y se
       imprimen por separado utilizando la técnica de impresión 3D (FDM) en polipropileno, que tiene muy buenas
       propiedades de adherencia entre capas, permitiendo (en caso de ser necesario) crear volúmenes que sean herméticos.
 
@@ -1036,7 +1023,7 @@ a realizar, que será detallada en la siguiente sección.
         \end{minipage}
       \end{figure}
 
-      Después de haber colocado las varillas, se puede proceder a colocar los diferentes subsistemas uno por uno,
+      Después de haber colocado las varillas, se puede proceder a colocar los diferentes modulos uno por uno,
       conectándolos entre si. Luego se coloca la tapa superior (plano +Z), se fijan las varillas con los tornillos.
       Utilizando la herramienta de ajuste diseñada para acceder a las tuercas superiores, se colocan los tornillos con
       las tuercas auto bloqueantes respetando el orden de esquina al centro.
@@ -1144,7 +1131,7 @@ a realizar, que será detallada en la siguiente sección.
     \subsubsection{Colocación de Muestras}
       La estructura del CubeSat permitirá que las muestras se puedan colocar después de finalizar el ensamblaje de la
       estructura. Esto se hace posible gracias a las aberturas de las tapas, de las cuales la del plano +Z, va a ser
-      para acceder a una tapa en la carcasa que aloje el subsistema de carga útil, y por donde se carguen las muestras a
+      para acceder a una tapa en la carcasa que aloje el modulo de carga útil, y por donde se carguen las muestras a
       analizar. Esta tapa va a ser fijada con la tornillería correspondiente
 
       \begin{figure}[H]
@@ -1154,8 +1141,8 @@ a realizar, que será detallada en la siguiente sección.
         \label{fig:structure-muestra}
       \end{figure}
 
-    \subsubsection{Subsistemas}
-      La estructura tiene tres subsistemas: \acrshort{pms}, \acrshort{obc} y Payload Unit.
+    \subsubsection{Modulos}
+      La estructura tiene tres modulos: \acrshort{pms}, \acrshort{obc} y \acrshort{pu}.
       \begin{wrapfigure}{R}{0.35\textwidth}
         \centering
         \includegraphics[width=0.3\textwidth]{image/structure/PMS_exploded.png}
@@ -1166,17 +1153,16 @@ a realizar, que será detallada en la siguiente sección.
       la agarra a la tapa y la mantiene fija en todo momento. El montaje de la placa va a depender de la disposición
       de los elementos de la misma. La limitante es el espacio vertical. Actualmente la placa, con componentes no puede
       medir mas de 8.4mm de alto. Si logramos disponer los elementos de tal forma de que se pueda levantar para colocar
-      tornillos, se usaran tornillos. Caso contrario, se usaran remaches de plástico fundido. Va a existir una ventana
-      en la tapa superior de la \acrshort{pms} por donde saldrán todos los cables que van a la \acrshort{obc} y a la
-      Payload Unit. La ventana no esta planteada en el diseño porque va a depender de como se puedan disponer los
-      elementos de la \acrshort{pms} y la \acrshort{obc}. La tapa que tiene en la parte frontal de la carcasa esta para
-      tener acceso a los conectores de potencia y balanceo de la batería para desconectarla completamente del CubeSat y 
-      cargarla externamente. La tapa es removible y se fija con imanes.
+      tornillos, se usaran tornillos. Caso contrario, se usaran remaches de plástico fundido. La \acrshort{pms} tiene
+      una abertura por la tapa superior por donde saldrán todos los cables que van a la \acrshort{obc} y a la
+      \acrshort{pu}. La tapa que tiene en la parte frontal de la carcasa esta para tener acceso a los conectores de
+      potencia y balanceo de la batería para desconectarla completamente del CubeSat y cargarla externamente. La tapa es
+      removible y se fija con imanes Ademas, hay una abertura por donde se expone el conector del \acrshort{hmi}.
 
-      La \acrshort{obc} es la mas simple de todas. Es solo una tapa con tornillos. Para el montaje de la placa también
-      ocurre lo mismo que para la placa de la \acrshort{pms}. La placa con componentes no puede medir mas de 8mm de
-      alto, por lo que dependiendo de la disposición de los componentes, se vera si se usan tornillos o remaches de
-      plástico derretido. En el diseño falta también la misma ventana por donde van a pasar los cables.
+      La \acrshort{obc} es la mas simple de todas. Es solo una tapa con tornillos. La placa con componentes no puede
+      medir mas de 8mm de alto, por lo que dependiendo de la disposición de los componentes, se vera si se usan
+      tornillos o remaches de plástico derretido. En el diseño falta también la misma ventana por donde van a pasar los
+      cables.
       \begin{figure}[!ht]
         \centering
         \includegraphics[width=0.5\textwidth]{image/structure/OBC_exploded.png}
@@ -1188,12 +1174,12 @@ a realizar, que será detallada en la siguiente sección.
         \includegraphics[width=0.3\textwidth]{image/structure/Payload_exploded.png}
         \caption{Vista explotada del Payload Unit.}
       \end{wrapfigure}
-      El Payload Unit es el que alberga las tres zonas térmicas reguladas, las de cuales cada una alberga dos muestras.
-      Este subsistema es el único que no tiene placa. El Payload Unit tiene una tapa superior, que como se menciono
+      La \acrshort{pu} es el que alberga las tres zonas térmicas reguladas, las de cuales cada una alberga dos muestras.
+      Este subsistema es el único que no tiene placa. La \acrshort{pu} tiene una tapa superior, que como se menciono
       previamente, es por la cual se cargaran las muestras en el momento previo a cargar el CubeSat al cohete. Por otro
       lado, la carcasa tiene tres aberturas las cuales son para exponer una chapa que esta en contacto con las Peltier
       de cada zona térmica. Esta chapa, por el momento va a estar al ras de la carcasa, para aportar disipación para
-      las celdas Peltier. Esta planeado determinar de forma experimental si se requiere aumentar la superficie de
+      las celdas Peltier. Está planeado determinar de forma experimental si se requiere aumentar la superficie de
       disipación (agregando por ejemplo un disipador) o es necesario emplear un sistema de disipación activo.
       Decidimos hacer pruebas experimentales ya que no conocemos con exactitud cual va a ser la demanda para llevar cada
       bloque y las muestras a la temperatura deseada. Ademas es posible que durante el periodo de estabilización térmica
@@ -1203,7 +1189,7 @@ a realizar, que será detallada en la siguiente sección.
 
       Cada zona térmica regulada esta compuesta por una chapa plegada, perforada y mecanizada, a la cual se le agregan 4
       separadores plásticos pegados con pegamento epoxico. A esa pieza que llamamos "Mount" se le coloca el bloque
-      mecanizado de aluminio que albergara los tubos de plástico donde se colocaran las muestras. La forma en la que el
+      mecanizado de aluminio que albergará los tubos de plástico donde se colocarán las muestras. La forma en la que el
       bloque mecanizado se unirá a el mount aun no esta definida. Dentro de las opciones están: Soldadura aditiva (mig,
       tig o con estaño), pegamento epoxico térmico, o silicona térmica. Se prefiere las soldaduras aditivas por su
       mejor conducción térmica. Ademas, al mount se le coloca la Celda Peltier (con pasta térmica de ambos lados), la
