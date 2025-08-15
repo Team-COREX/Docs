@@ -1874,26 +1874,26 @@ del proyecto. \\ [10pt]
 \caption{Impacto del riesgo}
 \end{table}
 
-  \begin{table}[H]
+   \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
     \begin{tabular}{ | m{2.5cm} | m{3cm} | m{2.5cm} | m{4.5cm} | m{2cm} | }
       \hline
-      \textbf{Riesgo} & \textbf{Causa} & \textbf{Consec.} & \textbf{Mitigación} & \textbf{Impacto} \\
+      \textbf{Riesgo} & \textbf{Causa} & \textbf{Consec.} & \textbf{Mitigación} & \textbf{Impacto: P/S} \\
       \hline
-      Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Análisis FEM de su portador y rediseño en caso de ser necesario. & \cellcolor{yellow! 50}\\ 
+      Rotura de cápsulas de muestras & Sobrecargas mecánicas o vibraciones excesivas & Pérdida parcial o total de las muestras biológicas & Análisis FEM de su portador, ensayos y rediseño en caso de ser necesario. & \cellcolor{yellow! 50} 1/5\\ 
       \hline
-      Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Ensayos apropiados de capacidad calorífica y consumo energético. & \cellcolor{yellow! 50}\\
+      Fallo del sistema de regulación térmica & Mal dimensionamiento de los elementos Peltier o fallo de controlador en vuelo. & Exposición de muestras a temperaturas fuera de rango. & Ensayos apropiados de capacidad calorífica y consumo energético. & \cellcolor{yellow! 50} 3/3\\
       \hline
-      Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad. Script de conmutación automática. Redundancia de almacenamiento de datos críticos. & \cellcolor{yellow! 50} \\
+      Pérdida de datos por fallo de almacenamiento & Corrupción de tarjeta microSD o falla en conmutación RAID por script. & Pérdida parcial o total de registros de muestras. & Verificación periódica de integridad. Script de conmutación automática. Redundancia de almacenamiento de datos críticos. & \cellcolor{red! 50} 2/5\\
       \hline
-      Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Protección contra sobre-corriente y subtensión en PMS. Pruebas de ciclos de carga-descarga de batería. Rieles críticos alimentados desde canales independientes. & \cellcolor{yellow! 50}\\
+      Fallo del suministro eléctrico & Sobrecarga de rieles, cortocircuito o desconexión no deseada. & Apagado de subsistemas. & Ensayos en fases de prueba y rediseño en caso de ser necesario. Rieles críticos alimentados desde canales independientes. & \cellcolor{red! 50} 2/5\\
       \hline
-      Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. &\cellcolor{green! 50} \\
+      Mal funcionamiento de la IMU o barómetro & Descalibración por choque mecánico o ruido eléctrico. & Imposibilidad de determinar fases de vuelo con precisión. & Pruebas previas en condiciones similares. &\cellcolor{yellow! 50} 1/4\\
       \hline
-      Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. & \cellcolor{yellow! 50} \\
+      Contaminación o degradación de muestras biológicas & Fugas de medios de cultivo, exposición al ambiente. & Resultados experimentales no válidos, pérdida de muestras. & Sellado hermético de tubos. & \cellcolor{yellow! 50} 1/4\\
       \hline
-      Fallo de comunicación pre lanzamiento y pos lanzamiento & Rotura de hardware por aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Múltiples opciones de conexión. & \cellcolor{yellow! 50}\\
+      Fallo de comunicación pos lanzamiento & Rotura de hardware en aterrizaje o vuelo. & Imposibilidad de monitoreo inmediato luego del lanzamiento. & Múltiples opciones de conexión. & \cellcolor{yellow! 50} 2/3\\
       \hline
     \end{tabular}
     }
