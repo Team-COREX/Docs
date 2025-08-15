@@ -979,15 +979,16 @@ a realizar, que será detallada en la siguiente sección.
       interna de la tapa inferior (plano -Z), utilizando los tornillos correspondientes.
 
       \begin{figure}[H]
-        \begin{minipage}{0.49\textwidth}
+        \begin{minipage}{0.4\textwidth}
           \centering
-          \includegraphics[width=0.9\textwidth]{image/structure/integracion1.png}
+          \includegraphics[width=1\textwidth]{image/structure/integracion1.png}
           \caption{Integración paso 1}
           \label{fig:integracion1}
         \end{minipage}
-        \begin{minipage}{0.49\textwidth}
+        \hfill
+        \begin{minipage}{0.4\textwidth}
           \centering
-          \includegraphics[width=0.9\textwidth]{image/structure/integracion2.png}
+          \includegraphics[width=1\textwidth]{image/structure/integracion2.png}
           \caption{Integración paso 2}
           \label{fig:integracion2}
         \end{minipage}
@@ -1021,10 +1022,11 @@ a realizar, que será detallada en la siguiente sección.
         \caption{Integración paso 5}
         \label{fig:integracion5}
       \end{figure}
+      \newpage
 
     \subsubsection{Modulo \acrshort{pms}}
       \begin{wrapfigure}{R}{0.35\textwidth}
-        \hspace{-0.5cm}
+        \vspace{-1cm}
         \centering
         \includegraphics[width=0.3\textwidth]{image/structure/PMS_exploded.png}
         \caption{Vista explotada del \acrshort{pms}.}
@@ -1065,7 +1067,7 @@ a realizar, que será detallada en la siguiente sección.
 
       En la tabla \ref{tab:estructura.bom.obc} se puede ver un listado de los componentes requeridos.
 
-      \begin{figure}[!ht]
+      \begin{figure}[H]
         \centering
         \begin{minipage}{0.45\textwidth}
           \centering
@@ -1333,7 +1335,7 @@ a realizar, que será detallada en la siguiente sección.
       Revise la sección \ref{anexo:pms.schematic} para ver el esquemático del \acrfull{pms}. En la tabla
       \ref{tab:electronica.bom.obc} puede ver la lista de materiales para la placa del \acrshort{pms}.
 
-      \begin{table}[!ht]
+      \begin{table}[H]
         \centering
         \begin{tabular}{|c|c|}
           \hline
@@ -1616,6 +1618,7 @@ a realizar, que será detallada en la siguiente sección.
     \caption{Lista de materiales empleados.}
     \label{tab:materiales_empleados}
     \end{table}
+    \newpage
 
     \subsubsection{Preparación del modelo}
       \begin{wrapfigure}{r}{0.4\textwidth}
@@ -1696,7 +1699,7 @@ a realizar, que será detallada en la siguiente sección.
               ylabel={Aceleración [$G^2$/Hz]},
               grid=both,
               ymin=0,
-              height=6cm,
+              height=5cm,
             ]
               \addplot[
                 color=blue,
@@ -1724,6 +1727,7 @@ a realizar, que será detallada en la siguiente sección.
           \caption{Análisis de estrés}
           \label{fig:fem_stress}
         \end{minipage}
+        \hfill
         \begin{minipage}{0.5\textwidth}
           \centering
           \includegraphics[width=\textwidth]{image/fem/ansys_cubesat-vibration_strain-x.png}
@@ -1738,6 +1742,7 @@ a realizar, que será detallada en la siguiente sección.
           \caption{Análisis de tensión en el eje Y}
           \label{fig:fem_strain-y}
         \end{minipage}
+        \hfill
         \begin{minipage}{0.5\textwidth}
           \centering
           \includegraphics[width=\textwidth]{image/fem/ansys_cubesat-vibration_strain-z.png}
@@ -1778,6 +1783,7 @@ a realizar, que será detallada en la siguiente sección.
           \caption{Análisis de tensión}
           \label{fig:fem_static_strain}
         \end{minipage}
+        \hfill
         \begin{minipage}{0.5\textwidth}
           \centering
           \includegraphics[width=\textwidth]{image/fem/ansys_cubesat-static_stress.png}
@@ -1792,6 +1798,7 @@ a realizar, que será detallada en la siguiente sección.
           \caption{Análisis de factor de seguridad}
           \label{fig:fem_static_safety}
         \end{minipage}
+        \hfill
         \begin{minipage}{0.5\textwidth}
           \centering
           \includegraphics[width=\textwidth]{image/fem/ansys_cubesat-static_deformation.png}
@@ -1864,12 +1871,11 @@ a realizar, que será detallada en la siguiente sección.
 \begin{table}[H]
 \centering
 %\scriptsize
-\begin{tabular}{|p{2cm}|p{10cm}|}
+\begin{tabular}{|p{1.5cm}|p{13cm}|}
 \hline \bf Color & \bf Descripción \\
-\hline \cellcolor{red! 50} & Su mitigación es prioritaria, ya que comprometen la ejecución exitosa
-del proyecto. \\ [10pt]
+\hline \cellcolor{red! 50} & Su mitigación es prioritaria. Comprometen el exito de la mision \\ [10pt]
 \hline \cellcolor{yellow! 50} & Deben revisarse para implementar estrategias de mejora. \\[10pt]
-\hline \cellcolor{green! 50} & Su ocurrencia es poco probable. Sin embargo, pueden considerarse para un análisis más detallado. \\ [10pt]
+\hline \cellcolor{green! 50} & Ocurrencia poco probable. Pueden considerarse para un análisis más detallado. \\ [10pt]
 \hline
 \end{tabular}
 \caption{Impacto del riesgo}
@@ -1878,7 +1884,7 @@ del proyecto. \\ [10pt]
    \begin{table}[H]
     \centering
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{ | m{2.5cm} | m{3cm} | m{2.5cm} | m{4.5cm} | m{2cm} | }
+    \begin{tabular}{ | m{3.5cm} | m{3.5cm} | m{3.5cm} | m{5cm} | m{2cm} | }
       \hline
       \textbf{Riesgo} & \textbf{Causa} & \textbf{Consec.} & \textbf{Mitigación} & \textbf{Impacto: P/S} \\
       \hline
