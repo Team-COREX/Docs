@@ -1616,11 +1616,6 @@ a realizar, que será detallada en la siguiente sección.
     \label{tab:materiales_empleados}
     \end{table}
 
-    Debido a que aun no esta completamente definido como será la disposición interna de cada subsistema del CubeSat,
-    para las simulaciones colocamos objetos que tienen las mismas dimensiones y materiales de las carcasas de los
-    subsistemas, pero solidos (rellenos) y ajustados para que tengan el peso necesario para que el CubeSat llegue al
-    kilogramo.
-
     \subsubsection{Preparación del modelo}
       \begin{wrapfigure}{r}{0.4\textwidth}
         \vspace{-0.5cm}
@@ -1634,10 +1629,11 @@ a realizar, que será detallada en la siguiente sección.
       ahí, se importa la geometría a ANSYS Mechanical, el cual nos permite crear la selección y asignación de los
       materiales, fijar superficies de contacto y establecer superficies de fijación. Luego de importar la geometría,
       ANSYS Mechanical automáticamente genera la malla para su posterior uso en simulación.  Es importante mencionar que
-      para las simulaciones, los tornillos y tuercas no están siendo tomados en cuenta. Esto se debe a que la
-      complejidad que le agrega a la malla, y la cantidad de nodos que son necesarios para poder incluir las 32 tuercas
-      y los 40 tornillos a la malla y al análisis, excede los limites de la licencia educativa por la cual estamos
-      haciendo uso del software. En la Figura \ref{fig:fem_mesh} se puede ver la malla generada.
+      para las simulaciones, los tornillos y tuercas no están siendo tomados en cuenta y los modulos son reemplazados
+      con bloques solidos de polipropileno. Esto se debe a que la complejidad que le agrega a la malla, y la cantidad de
+      nodos que son necesarios para poder incluir las tuercas, tornillos y gemoetrias internas de los modulos a la malla
+      y al análisis, excede los limites de la licencia educativa por la cual estamos haciendo uso del software. En la
+      Figura \ref{fig:fem_mesh} se puede ver la malla generada.
 
       Para la correcta visualización de las imágenes presentes en esta sección serán anexadas en el mayor tamaño posible
       en el Anexo \ref{anexo:simulaciones}
