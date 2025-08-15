@@ -173,7 +173,7 @@ a realizar, que será detallada en la siguiente sección.
     En día de lanzamiento, se buscarán las muestras previamente cultivadas y serán almacenadas en un lugar seguro
     en el que puedan ser transportadas bajo condiciones óptimas. Estas condiciones consisten en mantener las muestras a $37\Celsius$ y con una inclinación de
     $45\degree$. Para ello, se prevé diseñar un dispositivo de transporte con control de temperatura, regulado a
-    aproximadamente $4\Celcius$, temperatura a la cual las muestras biológicas entran en un estado de inhibición metabólica
+    aproximadamente $4\Celsius$, temperatura a la cual las muestras biológicas entran en un estado de inhibición metabólica
     reversible. El tiempo de traslado puede extenderse hasta las 48 horas desde la finalización del cultivo sin que esto afecte
     significativamente las condiciones de crecimiento del parásito.
 
@@ -196,9 +196,9 @@ a realizar, que será detallada en la siguiente sección.
    como gen constitutivo de referencia. Se evaluarán cambios en la expresión respecto al cultivo control en condiciones óptimas de
    laboratorio.
 
-   Adicionalmente, para analizar el proceso de enquistamiento —respuesta típica al estrés en Giardia lamblia—, se efectuarán ensayos
-   de inmunofluorescencia y observaciones mediante microscopía de fluorescencia, buscando identificar vesículas específicas de
-   enquistamiento como indicadores adicionales de estrés celular.
+   Adicionalmente, para analizar el proceso de enquistamiento , se efectuarán ensayos de inmunofluorescencia y
+   observaciones mediante microscopía de fluorescencia, buscando identificar vesículas específicas de enquistamiento
+   como indicadores adicionales de estrés celular.
   
   \section{Descripción del CubeSat}
   En esta sección se presenta una descripción técnica del CubeSat diseñado para llevar a cabo las misiones planteadas
@@ -339,8 +339,6 @@ a realizar, que será detallada en la siguiente sección.
       \label{fig:sistema_pms}
     \end{figure}
 
-    Revise la sección \ref{anexo:pms.schematic} para ver el esquemático del \acrfull{pms}.
-
   \subsubsection{On-board Computer (\acrshort{obc})}
     Tiene como función principal la gestión autónoma de la misión
     durante todo el vuelo. Esta unidad esta basada en una Raspberry Pi Zero 2 W, equipada con el sistema operativo
@@ -381,8 +379,6 @@ a realizar, que será detallada en la siguiente sección.
       \caption{Diagrama en bloques del \acrshort{obc}.}
       \label{fig:sistema_obc}
     \end{figure}
-
-   Puede dirigirse a la seccion \ref{anexo:obc.schematic} para ver el esquematico de la \acrfull{obc}.
 
    En el diagrama ~\ref{fig:filesystem} se presenta la estructura del sistema de archivos diseñada para la misión.
    Cada dato capturado por los sensores es leído por la \acrshort{obc}, que se encarga de almacenar dicho dato en un archivo
@@ -1243,6 +1239,127 @@ a realizar, que será detallada en la siguiente sección.
         \label{fig:structure-muestra}
       \end{figure}
 
+  \subsection{Electronica}
+    La electrinica del CubeSat es, en gran parte, digital. Se busco tener una separacion rigurosa entre la electronica
+    que maneja las fuentes y la potencia, con la electronica que maneja la logica y almacenaje de datos. Por ello, el
+    CubeSat tendra dos placas: Una en el \acrshort{pms} y otra en el \acrshort{obc}.
+
+    \subsubsection{Placa \acrshort{obc}}
+      La placa del \acrshort{obc} alberga el cerebro del CubeSat. En ella, estara la Raspberry Pi Zero 2 W, la cual es
+      la encargada de leer todos los sensores, almacenar los datos y controlar el resto de los subsistemas del CubeSat.
+      En esta placa, se encontrara la \acrshort{imu} MPU9250 y el sensor de presion y temperatura BMP280. Ademas, por
+      medio del conversor analogico a digital ADS1115, la Raspberry lee los sensores de temperatura de la \acrshort{pu},
+      con los cuales comanda a la \acrshort{pms} para regular la temperatura.
+
+      La comunicacion entre la \acrshort{obc} y la \acrshort{pms} es realizada mediante el protocolo $I^2C$. La
+      Raspberry Pi cumpliria el rol de "Master", mientras que el resto de los sensores, y la \acrshort{pms} cumplirian
+      el rol de "Slave".
+
+      Cabe destacar, que al momento de diseñar la placa, se priorizara tener la menor cantidad de componentes en formato
+      "PCB con Pines macho". En algunos casos (por ejemplo, el MPU9250 o la Raspberry), nuestras capacidades de fabricacion
+      no son tan altas, por lo que ciertos componentes permaneceran en su formato de placa, y se montaran sobre la placa
+      que fabriquemos.
+
+      Revise la sección \ref{anexo:obc.schematic} para ver el esquemático del \acrfull{obc}. En la tabla
+      \ref{tab:electronica.bom.obc} puede ver la lista de materiales para la placa del \acrshort{obc}.
+
+      \begin{table}[!ht]
+        \centering
+        \begin{tabular}{|c|c|}
+          \hline
+          \textbf{Item}           & \textbf{Cantidad} \\ \hline
+          Resistencias            & 9 \\ \hline
+          Capacitores             & 3 \\ \hline
+          Fusibles                & 3 \\ \hline
+          Conectores              & 3 \\ \hline
+          Raspberry Pi Zero 2 W   & 1 \\ \hline
+          Barometro BMP280        & 1 \\ \hline
+          \acrshort{imu} MPU9250  & 1 \\ \hline
+          \acrshort{adc} ADS1115  & 1 \\ \hline
+          Termistores NTC 100K    & 3 \\ \hline
+        \end{tabular}
+        \caption{Lista de Materiales para la placa \acrshort{obc}}
+        \label{tab:electronica.bom.obc}
+      \end{table}
+
+    \subsubsection{Placa \acrshort{pms}}
+      La placa del \acrshort{pms} alberga todo lo que es fuentes de voltaje, monitoreo y control de potencia. El
+      componente central de esta placa es el Atmega328P, un microcontrolador de proposito general el cual se encarga de
+      recibir comandos via $I^2C$ de la \acrshort{obc} y reportar las diferentes lecturas o ejecutar ordenes. Ademas, el
+      \acrshort{pms} da la posibilidad al CubeSat de ser alimentado externamente, sin consumir las baterias.
+
+      Para las fuentes, la \acrshort{pms} implementa tres fuentes DC-DC del tipo "Buck". Estas fuentes (modelo HW-133B)
+      vienen en formato de "PCB" o "Modulo Arduino". Como el integrado y los componentes son manejables, y los
+      requerimientos para hacer una placa con esos componentes no son tan elevados, se decidio hacer que las fuentes se
+      integren en el diseño del circuito impreso, y que los componentes se monten directamente sobre ella, sin ningun
+      otra PCB entre medio. Ademas, esto es necesario, ya que el integrado DC-DC MP1584EN que usan las fuentes, tienen
+      un pin de control de salida, por lo que podemos con el Atmega328P, elegir el estado de la salida. En el
+      formato "PCB" de la fuente, el pin de activacion no esta disponible. Este detalle es importante, ya que permite
+      poder reducir el consumo cuando no es necesario tener todos los subsistemas activos. Como un extra, se agrego un
+      sensor de corriente INA219 para tener una medicion del consumo de corriente durante la mision. Este sensor, nos
+      permite, en conjunto con las mediciones de voltaje, tener un muy buen estimativo de la energia consumida, y por
+      lo tanto tener un estimativo de la energia disponible o restante.
+
+      La \acrshort{pms} implementa un sistema de "Arbitraje de fuente" utilizando MOSFETs y Amplificadores
+      Operacionales. Esto significa que el CubeSat, tiene mas de una fuente de energia disponible y puede priorizar la
+      utilizacion de una sobre otra. En este caso, el CubeSat tiene 2 posibles fuentes: La bateria interna o una fuente
+      externa. La fuente externa tiene prioridad respecto de la bateria. Cuando esta se conecta, la bateria queda
+      electronicamente desconectada del PMS y todo el CubeSat se alimenta de la fuente externa. Debido a la complejidad
+      de carga de la bateria, se opto por no permitir que la bateria se cargue cuando se conecte la fuente externa. El
+      cambio entre bateria y fuente externa no provoca ningun fenomeno o interrupcion en la operacion del CubeSat.
+
+      Para el control de la \acrshort{tru}, el \acrshort{pms} implementa dos integrados de puente H L298N para poder
+      controlar la polaridad y la potencia de las celdas Peltier. El puente H tiene varios modos de polaridad
+      disponibles. Para nuestra aplicacion, solo se utilizan los modos "Clockwise" y "CounterClockwise", que basicamente
+      invierten la polaridad. Para el control de la potencia, el Atmega328P genera tres señales cuadradas con capacidad
+      de ser moduladas por ancho de pulso (PWM).
+
+      Para ahorrar energia, el \acrshort{pms} tiene conectado el \acrshort{hmi}. Dependiendo del estado, diferentes
+      railes y subsistemas son activados o desactivados. Cuando se coloca la llave de "Apagado", el \acrshort{pms} envia
+      al \acrshort{obc} un aviso de que debe apagarse. Esto garantiza que todos los archivos fueron escritos y todos los
+      programas terminados, para tener un apagado seguro de la Raspberry. Una vez completado el apagado, el Atmega328P
+      apaga todas las fuentes y se pone en reposo hasya que cambie el estado del \acrshort{hmi}. Esto es posible gracias
+      a que la fuente DC-DC permanece encendida en todo momento, y es un MOSFET el que se desactiva, apagando el rail de
+      5V para el resto del CubeSat.
+
+      Por una falta de pines en el Atmega328P, se utiliza el conversor analogico a digital ADS1115 y el expansor de
+      $I^2C$ a paralelo PCF8574. Estos, estaran conectados a un bus $I^2C$ secundario, en el cual el Atmega328P actuara
+      como "Master" y el resto de los sensores como "Slave".
+
+      A travez del $I^2C$, la \acrshort{obc} solicita datos al Atmega328P. Estos datos pueden ser: Voltajes de todas las
+      fuentes, voltaje de la bateria, voltaje de las celdas, temperatura de la bateria, consumo de corriente total
+      actual y estado del HMI. Ademas, puede escribir estados y variables, como: Estado de las fuentes, estado de la 
+      alimentacion y potencia de las celdas Peltier por individual.
+
+      Revise la sección \ref{anexo:pms.schematic} para ver el esquemático del \acrfull{pms}. En la tabla
+      \ref{tab:electronica.bom.obc} puede ver la lista de materiales para la placa del \acrshort{pms}.
+
+      \begin{table}[!ht]
+        \centering
+        \begin{tabular}{|c|c|}
+          \hline
+          \textbf{Item}               & \textbf{Cantidad} \\ \hline
+          Resistencias                & 39 \\ \hline
+          Capacitores                 & 31 \\ \hline
+          Diodos                      & 4 \\ \hline
+          Polyfuses                   & 7 \\ \hline
+          Conectores                  & 8 \\ \hline
+          MOSFETs                     & 2 \\ \hline
+          ATmega328P-A                & 1 \\ \hline
+          Sensor de Corriente INA219  & 1 \\ \hline
+          Fuente DC-DC HW-133B        & 3 \\ \hline
+          \acrshort{adc} ADS1115      & 1 \\ \hline
+          Inversor 4069               & 1 \\ \hline
+          Puente H L298HN             & 2 \\ \hline
+          OpAmp LM2904                & 1 \\ \hline
+          Expansor I2C PCF8574AT      & 1 \\ \hline
+          Cristal (16 MHz)            & 1 \\ \hline
+          Termistor NTC 100K          & 1 \\ \hline
+          Celdas 18650                & 5 \\ \hline
+        \end{tabular}
+        \caption{Lista de Materiales para la placa \acrshort{pms}}
+        \label{tab:electronica.bom.pms}
+      \end{table}
 
   \subsection{Criterios de Margenes}
     Para en análisis de presupuestos preliminares establecimos los margenes considerando las condiciones mas
@@ -1344,40 +1461,36 @@ a realizar, que será detallada en la siguiente sección.
         \item \textbf{Variables físicas y ambientales}
 
         \begin{table}[H]
-        \centering
-        \resizebox{\textwidth}{!}{
-        \begin{tabular}{|l|c|c|c|c|}
-        \hline
-        \textbf{Parámetro} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
-        \hline
-        Presión               & 157   & 2,260,800  & $\approx$ 17.26     \\
-        Temperatura ambiente  & 157   & 2,260,800  & $\approx$ 17.26     \\
-        Aceleración           & 4000  & 57,600,000  & $\approx$ 878.92   \\
-        Ángulo de giro        & 8000  & 115,200,000 & $\approx$ 1757.84   \\
-        \hline
-        \textbf{Total estimado} & -    & -     & -         & $\boldsymbol{\approx 2671.28}$ \\
-        \hline
-        \end{tabular}
-        }
-        \caption{Volumen de datos total y de cada variable físico-ambiental.}
-        \label{tab:volumen_datos}
+          \centering
+          \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Parámetro} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
+            \hline
+            Presión               & 157   & 2,260,800  & $\approx$ 17.26     \\
+            Temperatura ambiente  & 157   & 2,260,800  & $\approx$ 17.26     \\
+            Aceleración           & 4000  & 57,600,000  & $\approx$ 878.92   \\
+            Ángulo de giro        & 8000  & 115,200,000 & $\approx$ 1757.84   \\
+            \hline
+            \textbf{Total estimado} & -    & -         & $\boldsymbol{\approx 2671.28}$ \\
+            \hline
+          \end{tabular}
+          \caption{Volumen de datos total y de cada variable físico-ambiental.}
+          \label{tab:volumen_datos}
         \end{table}
         Notar que en aceleración y ángulo de giro se a considerado un tamaño de muestra de 16 bytes debido a los tres ejes mas la marca de tiempo.
         
         \item \textbf{Control de temperatura de de las muestras celulares}
 
         \begin{table}[H]
-        \centering
-        \resizebox{\textwidth}{!}{
-        \begin{tabular}{|l|c|c|c|c|}
-        \hline
-        \textbf{Parámetro} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
-        \hline
-        Temperatura & 157   & 2,260,800  & $\approx$ 51.78     \\
-        \end{tabular}
-        }
-        \caption{Volumen de datos de los controles de temperatura de las muestras celulares}
-        \label{tab:volumen_datos_temperatura}
+          \centering
+          \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Parámetro} & \textbf{Frecuencia [Hz]} & \textbf{Muestras/4h} & \textbf{Tamaño [MB]} \\
+            \hline
+            Temperatura & 157   & 2,260,800  & $\approx$ 51.78     \\ \hline
+          \end{tabular}
+          \caption{Volumen de datos de los controles de temperatura de las muestras celulares}
+          \label{tab:volumen_datos_temperatura}
         \end{table}
         La medida de la temperatura es 24 bytes debido a las marcas de tiempo y las temperaturas que se toman para cada una de las muestras.
 
@@ -1431,9 +1544,9 @@ a realizar, que será detallada en la siguiente sección.
 
   \begin{itemize}
     \item \textbf{Etapa 1:} Traslado de muestras.
-      Se buscan las muestras previamente cultivadas y se sigue con el procedimiento de traslado descripto en la sección ~\ref{sec:procedimientos-prev-lanzamiento}.
+      Se buscan las muestras previamente cultivadas y se sigue con el procedimiento de traslado descripto en la sección \ref{sec:procedimientos-prev-lanzamiento}.
     \item \textbf{Etapa 2:} Arranque del CubeSat.\\
-      Una vez en el lugar de lanzamiento, se coloca la llave correspondiente en el \arcshort{hmi} físico para establecer el modo de Pre Lanzamiento, en el cual
+      Una vez en el lugar de lanzamiento, se coloca la llave correspondiente en el \acrshort{hmi} físico para establecer el modo de Pre Lanzamiento, en el cual
       se inicializan todos los subsistemas. En esta etapa, el CubeSat puede ser conectado a una fuente de alimentación externa para alcanzar el
       régimen permanente de las distintas temperaturas controladas sin consumir energía extra de las baterías.
     \item \textbf{Etapa 3:} Validación de los sistemas.\\
@@ -1462,7 +1575,7 @@ a realizar, que será detallada en la siguiente sección.
       Al mismo tiempo, se procede a la descarga de los datos del CubeSat en una plataforma local para su posterior procesamiento.
       Una vez finalizada la recuperación de datos, se puede colocar la llave de apagado del CubeSat y desconectar la fuente externa.
     \item \textbf{Etapa 9:} Control de las muestras.\\
-      Se procede al análisis de las muestras siguiendo el procedimiento descripto en la sección ~\ref{sec:procedimientos-ensayo}.
+      Se procede al análisis de las muestras siguiendo el procedimiento descripto en la sección \ref{sec:procedimientos-ensayo}.
     \item \textbf{Etapa 8:} Procesamiento de datos.\\
       Con los datos del CubeSat descargados y guardados en un lugar seguro, se realiza el procesamiento de los mismos utilizando las
       herramientas desarrolladas por el equipo de software, con el fin buscar patrones y equipirarlos con los resultados de los ensayos
