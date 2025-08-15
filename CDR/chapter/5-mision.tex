@@ -586,7 +586,7 @@ a realizar, que será detallada en la siguiente sección.
 
       \begin{figure}[H]
         \centering
-        \resizebox{0.8\textwidth}{!}{%
+        \resizebox{0.9\textwidth}{!}{%
          \begin{tikzpicture}
             \node[shape=rectangle, minimum width=2.5cm, minimum height=0.75cm] at (24.406, 5.625){} node[anchor=north, align=center, text width=2.147cm, inner sep=5pt] at (24.406, 6){Lanzamiento};
             \node[shape=rectangle, minimum width=2.875cm, minimum height=0.75cm] at (18.5, 8.25){} node[anchor=north, align=center, text width=2.522cm, inner sep=5pt] at (18.5, 8.625){Reposo};
@@ -748,8 +748,7 @@ a realizar, que será detallada en la siguiente sección.
             \node[shape=rectangle, minimum width=4.5cm, minimum height=0.75cm] at (25, 14.875){} node[anchor=north, align=center, text width=4.147cm, inner sep=5pt] at (25, 15.25){Connector pinout};
             \draw (23.125, 12) -| (23.125, 12.875);
             \draw (24.625, 12) -| (24.625, 12.875);
-            \node[shape=rectangle, draw, line width=1pt, minimum width=-0.035cm, minimum height=-0.035cm] at (18.969, 3.375){};
-            \draw (22, 16.75) |- (22, 9);
+            \draw (22, 16.75) -- (22, 9);
         \end{tikzpicture}
         }
         \caption{diagrama selección de modos}
