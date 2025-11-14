@@ -1,0 +1,32 @@
+\documentclass{cubesatDoc}
+\usepackage[utf8]{inputenc}
+
+\addbibresource{bibliografia.bib}
+
+\makeglossaries
+\input{acronimos.tex}
+\input{glosario.tex}
+
+\begin{document}
+\titulo{Revisión Crítica de Diseño}
+\subtitulo{Proyecto LAMBDA}
+\grupo{Grupo COREX}
+\fecha{\today}
+\docn{2}
+
+\maketitle
+\setcounter{page}{1}
+\tableofcontents
+
+\printglossary[type=\acronymtype]
+\input{chapter/1-introduccion}
+\input{chapter/2-alcance}
+\input{chapter/3-objetivos}
+\input{chapter/4-equipo}
+\input{chapter/5-mision}
+\input{chapter/6-adicional}
+\input{chapter/7-anexo}
+
+\printbibliography[heading=bibnumbered]
+
+\end{document}

@@ -1,0 +1,519 @@
+\pagestyle{empty}
+\newgeometry{left=3mm,right=3mm,top=3mm,bottom=3mm,}
+\chapter{Anexo}
+
+\section{Página web HMI} \label{anexo:webpage}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=18cm]{image/web/simulacion.jpg}
+    \caption{Página Web 1}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=18cm]{image/web/estadisticas.jpg}
+    \caption{Página Web 2}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=18cm]{image/web/vuelo.jpg}
+    \caption{Página Web 3}
+  \end{figure}
+
+\section{Simulaciones} \label{anexo:simulaciones}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{image/fem/ansys_cubesat-vibration_stress.png}
+    \caption{Análisis de estrés}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-vibration_strain-x.png}
+    \caption{Análisis de tensión en el eje x}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-vibration_strain-y.png}
+    \caption{Análisis de tensión en el eje Y}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-vibration_strain-z.png}
+    \caption{Análisis de tensión en el eje Z}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-static_acceleration.png}
+    \caption{Vector de aceleración para la simulación estática.}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-static_strain.png}
+    \caption{Análisis de fatiga}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-static_stress.png}
+    \caption{Análisis de estrés}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-static_safety.png}
+    \caption{Análisis de factor de seguridad}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{image/fem/ansys_cubesat-static_deformation.png}
+    \caption{Análisis de deformación total}
+  \end{figure}
+
+\begin{landscape}
+\section{Cronograma Mecánica}
+
+ \begin{figure}[H]
+  \centering
+  \resizebox{25cm}{!}{%
+  \begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate,
+    x unit=0.65cm,
+    y unit chart=1cm,
+    bar/.append style={fill=blue!40},
+    milestone/.append style={fill=orange},
+    milestone label font=\bfseries\small,
+    bar label font=\small\slshape,
+    group left shift=0,
+    group right shift=0,
+    group peaks tip position=0,
+    group peaks height=.4
+    ]{2025-07-04}{2025-08-22}
+
+  % Tasks
+  % Encabezado
+  \gantttitlecalendar{month=name,week,day} \\
+
+  \ganttgroup{Primer Prototipo (impreso en 3D)}{2025-07-04}{2025-07-09} \\
+  \ganttbar{Impresión}{2025-07-04}{2025-07-06} \\
+  \ganttbar{Integración}{2025-07-07}{2025-07-08} \\
+  \ganttbar{Ensayos}{2025-07-08}{2025-07-09} \\
+
+  \ganttgroup{Producto Mínimo}{2025-07-10}{2025-08-08} \\
+
+  \ganttgroup{Segundo Prototipo (aluminio)}{2025-07-10}{2025-07-24} \\
+  \ganttbar{Contacto Proveedores}{2025-07-10}{2025-07-14} \\
+  \ganttbar{Correcciones de diseño}{2025-07-15}{2025-07-18} \\
+  \ganttbar{Mecanizado}{2025-07-19}{2025-07-22} \\
+  \ganttbar{Plegado}{2025-07-23}{2025-07-24} \\
+
+  \ganttgroup{Desarrollo de Carcasas}{2025-07-10}{2025-07-24} \\
+  \ganttbar{\acrshort{pms}}{2025-07-10}{2025-07-12} \\
+  \ganttbar{\acrshort{obc}}{2025-07-13}{2025-07-15} \\
+  \ganttbar{\acrshort{pu}}{2025-07-16}{2025-07-21} \\
+  \ganttbar{Impresión 3D}{2025-07-21}{2025-07-24} \\
+
+  \ganttbar{Integración General}{2025-07-25}{2025-07-30} \\
+  \ganttbar{Ensayos}{2025-07-31}{2025-08-07} \\
+
+  \ganttmilestone{Entrega \acrshort{cdr}}{2025-08-08} \\
+
+  \ganttgroup{Producto Final}{2025-08-11}{2025-08-22} \\
+  \ganttbar{Correcciones de diseño)}{2025-08-11}{2025-08-22} \\
+
+  \end{ganttchart}
+  }
+
+  \caption{Cronograma equipo de mecánica, parte 1.}
+     \label{gantt-mecanica1}
+  \end{figure}
+
+  \begin{figure}[H]
+   \centering
+   \resizebox{25cm}{!}{%
+   \begin{ganttchart}[
+     hgrid,
+     vgrid,
+     time slot format=isodate,
+     x unit=0.65cm,
+     y unit chart=1cm,
+     bar/.append style={fill=blue!40},
+     milestone/.append style={fill=orange},
+     milestone label font=\bfseries\small,
+     bar label font=\small\slshape,
+     group left shift=0,
+     group right shift=0,
+     group peaks tip position=0,
+     group peaks height=.4
+     ]{2025-08-22}{2025-10-10}
+
+   % Tasks
+   % Encabezado
+   \gantttitlecalendar{month=name,week,day} \\
+
+  \ganttgroup{Producto Final}{2025-08-22}{2025-09-30} \\
+   \ganttbar{Mecanizado}{2025-08-22}{2025-08-26} \\
+   \ganttbar{Plegado}{2025-08-27}{2025-08-28} \\
+   \ganttbar{Impresión 3D}{2025-08-22}{2025-08-22} \\
+   \ganttbar{Integración (Modulos funcionales)}{2025-08-29}{2025-09-09} \\
+   \ganttbar{Ensayos finales}{2025-09-10}{2025-09-30} \\
+
+   % Milestone Informe final
+   \ganttmilestone{Informe prelanzamiento}{2025-10-10}
+
+   \end{ganttchart}
+   }
+
+  \caption{Cronograma equipo de mecánica, parte 2.}
+      \label{gantt-mecanica2}
+  \end{figure}
+
+\section{Cronograma Electrónica (Hardware)}
+
+ \begin{figure}[H]
+  \centering
+  \resizebox{25cm}{!}{%
+  \begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate,
+    x unit=0.65cm,
+    y unit chart=1cm,
+    bar/.append style={fill=blue!40},
+    milestone/.append style={fill=orange},
+    milestone label font=\bfseries\small,
+    bar label font=\small\slshape,
+    group left shift=0,
+    group right shift=0,
+    group peaks tip position=0,
+    group peaks height=.4
+    ]{2025-07-04}{2025-08-31}
+
+  % July
+  \gantttitlecalendar{month=name,week,day} \\
+
+  % Tasks
+  \ganttgroup{Validación de Subsistemas}{2025-07-04}{2025-07-09} \\
+  \ganttbar[name=rev-pcb]{Revisión de PCB}{2025-07-04}{2025-07-09} \\
+  \ganttbar[name=rev-sensores]{Revisión de Sensores}{2025-07-04}{2025-07-09} \\
+
+  \ganttgroup{CAD Computadora de Vuelo}{2025-07-10}{2025-07-17} \\
+  \ganttbar[name=diseño-esq1]{Diseño esquemático}{2025-07-10}{2025-07-12} \\
+  \ganttlinkedbar{Diseño PCB}{2025-07-13}{2025-07-16} \\
+  \ganttlinkedmilestone[name=team-meating1]{Team Meeting}{2025-07-17} \\
+  \ganttlink{rev-pcb}{diseño-esq1}
+  \ganttlink[link mid=.25]{rev-sensores}{diseño-esq1}
+
+  \ganttgroup{CAD PMS}{2025-07-18}{2025-07-24} \\
+  \ganttbar[name=diseño-esq2]{Diseño esquemático}{2025-07-18}{2025-07-20} \\
+  \ganttlinkedbar{Diseño PCB}{2025-07-20}{2025-07-23} \\
+  \ganttlinkedmilestone[name=team-meating2]{Team Meeting}{2025-07-24} \\ 
+  \ganttlink[link mid=.25]{team-meating1}{diseño-esq2}
+
+  \ganttgroup{CAD TRU}{2025-07-25}{2025-07-31} \\
+  \ganttbar[name=diseño-esq3]{Diseño esquemático}{2025-07-25}{2025-07-27} \\
+  \ganttlinkedbar{Diseño PCB}{2025-07-27}{2025-07-30} \\
+  \ganttlinkedmilestone{Team Meeting}{2025-07-31} \\
+  \ganttlink[link mid=.25]{team-meating2}{diseño-esq3}
+
+  \ganttlinkedbar{Prototipo Mínimo Funcional}{2025-08-01}{2025-08-07} \\
+  \ganttlinkedmilestone[name=entrega-cdr]{Entrega \acrshort{cdr}}{2025-08-08} \\
+
+  \ganttgroup{Construcción 1ra versión}{2025-08-09}{2025-08-18} \\
+  \ganttbar[name=planchado]{Planchado de PCBs}{2025-08-09}{2025-08-11} \\
+  \ganttlinkedbar{Soldado de componentes}{2025-08-12}{2025-08-12} \\
+  \ganttlinkedbar[name=test-points]{Verificación de test points}{2025-08-13}{2025-08-14} \\
+  \ganttlinkedbar{Interconexión de sistemas}{2025-08-15}{2025-08-18} \\
+  \ganttbar[name=iden-errores]{Identificación de errores}{2025-08-15}{2025-08-18} \\
+  \ganttlink[link mid=.25]{test-points}{iden-errores}  
+  \ganttlink[link mid=.25]{entrega-cdr}{planchado}
+
+  \ganttgroup{Construcción Producto Final}{2025-08-19}{2025-08-31} \\
+  \ganttbar[name=planchado2]{Planchado de PCB}{2025-08-19}{2025-08-22} \\
+  \ganttlink[link mid=.25]{iden-errores}{planchado2} 
+  \ganttlinkedbar[name=soldado]{Soldado}{2025-08-23}{2025-08-24} \\
+  \ganttlinkedbar[name=func-conj]{Funcionamiento en conjunto}{2025-08-24}{2025-08-31} \\
+  \ganttbar[name=iden-fallas]{Identificación de posibles fallas}{2025-08-24}{2025-08-31} \\
+
+  \ganttlink[link mid=.25]{soldado}{iden-fallas}
+  \end{ganttchart}
+  }
+
+     \caption{Cronograma equipo de electrónica, desarrollo de hardware.}
+     \label{gantt-hardware}
+  \end{figure}
+
+
+\section{Cronograma Electrónica (Firmware)}
+
+ \begin{figure}[H]
+  \centering
+  \resizebox{25cm}{!}{%
+  \begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate,
+    x unit=0.65cm,
+    y unit chart=1cm,
+    bar/.append style={fill=blue!40},
+    milestone/.append style={fill=orange},
+    milestone label font=\bfseries\small,
+    bar label font=\small\slshape,
+    group left shift=0,
+    group right shift=0,
+    group peaks tip position=0,
+    group peaks height=.4
+    ]{2025-08-09}{2025-10-10}
+
+  % July
+  \gantttitlecalendar{month=name,week=6,day} \\
+
+  % Tasks
+  \ganttgroup{Construcción 1ra versión}{2025-08-09}{2025-08-18} \\
+  \ganttbar{Testing Subsistemas}{2025-08-15}{2025-08-18} \\
+
+  \ganttgroup{Construcción Producto Final}{2025-08-19}{2025-08-31} \\
+  \ganttbar[name=testing1]{Testing Subsistemas}{2025-08-25}{2025-08-31} \\
+
+  \ganttgroup{Planificación de Firmware}{2025-09-01}{2025-09-08}\\
+  \ganttbar[name=diagrama-flujo]{Diagrama de flujo}{2025-09-01}{2025-09-02} \\ 
+  \ganttlinkedbar{Definición de Procesos}{2025-09-03}{2025-09-04} \\
+  \ganttlinkedbar{Definición de Archivos}{2025-09-05}{2025-09-06} \\
+  \ganttlinkedbar[name=def-funciones]{Definición de Funciones}{2025-09-07}{2025-09-08} \\
+  \ganttlink[link mid=.25]{testing1}{diagrama-flujo}
+
+  \ganttgroup{Desarrollo de Firmware}{2025-09-09}{2025-09-28}\\
+  \ganttbar[name=prog-drivers]{Programación de Drivers}{2025-09-09}{2025-09-16} \\ 
+  \ganttlinkedbar{Interrupciones y Manejo de Eventos}{2025-09-17}{2025-09-19} \\
+  \ganttlinkedbar{Lógica integrada}{2025-09-20}{2025-09-25} \\
+  \ganttlinkedbar{API de Datos}{2025-09-26}{2025-09-28} \\
+  \ganttlinkedbar{Funcionamiento continuo}{2025-09-29}{2025-10-01}\\
+  \ganttlinkedbar{Correción de errores}{2025-10-02}{2025-10-07}\\
+
+  \ganttlink[link mid=.25]{def-funciones}{prog-drivers}
+
+  \ganttmilestone{Informe prelanzamiento}{2025-10-10}
+
+  \end{ganttchart}
+  }
+     \caption{Cronograma equipo de electrónica, desarrollo de firmware.}
+    \label{gantt-firmware}
+  \end{figure}
+
+  \section{Cronograma Software}
+    \begin{figure}[H]
+      \centering
+      \resizebox{25cm}{!}{%
+        \begin{ganttchart}[
+        hgrid,
+        vgrid,
+        time slot format=isodate,
+        x unit=0.65cm,
+        y unit chart=0.65cm,
+        bar/.append style={fill=blue!40},
+        milestone/.append style={fill=orange},
+        milestone label font=\bfseries\small,
+        bar label font=\small\slshape,
+        group left shift=0,
+        group right shift=0,
+        group peaks tip position=0,
+        group peaks height=.4
+    ]{2025-07-04}{2025-08-17}
+
+      \gantttitlecalendar{month=name, week, day} \\
+
+      %\ganttlink{req}{tools}
+      %\ganttlink{tools}{design}
+      %\ganttlink{design}{developpdr}
+      %\ganttlink{developpdr}{delivpdr}
+
+      \ganttgroup{Desarrollo de \acrshort{cdr}}{2025-07-08}{2025-08-08} \\
+      \ganttbar{Evaluación y revisión de correcciones}{2025-07-08}{2025-08-07} \\
+      \ganttbar{Desarrollo de \acrshort{cdr}}{2025-07-08}{2025-08-07} \\
+      \ganttlinkedmilestone[name=delivcdr]{Entrega de \acrshort{cdr}}{2025-08-08} \\
+
+      \ganttgroup{Selección de equipo}{2025-08-09}{2025-08-14} \\
+      \ganttbar{Evaluación}{2025-08-09}{2025-08-13} \\
+      \ganttbar{Selección}{2025-08-14}{2025-08-14} \\
+
+      \ganttgroup{Diseño de software}{2025-07-04}{2025-07-09} \\
+      \ganttbar{Especificación de funcionalidades}{2025-07-04}{2025-07-09} \\
+      \ganttbar{Diseño del sistema}{2025-07-04}{2025-07-09} \\
+
+      \ganttgroup{Configuración de entorno}{2025-07-10}{2025-07-19} \\
+      \ganttbar{Configuración del sistema operativo}{2025-07-10}{2025-07-14} \\
+      \ganttbar{Instalación de herramientas}{2025-07-10}{2025-07-14} \\
+      \ganttbar{Configuración de acceso}{2025-07-13}{2025-07-19} \\
+
+      \ganttgroup{Integración de sensores}{2025-07-20}{2025-07-24} \\
+      \ganttbar{Integración con lectura de sensores}{2025-07-20}{2025-07-22} \\
+      \ganttbar{Compresión de datos}{2025-07-23}{2025-07-24} \\
+
+      \ganttgroup{Sprint 1}{2025-07-25}{2025-08-17}\\
+
+      \ganttgroup{Desarrollo backend}{2025-07-25}{2025-08-13} \\
+      \ganttbar{Desarrollo de funcionalidades principales}{2025-07-25}{2025-07-31} \\
+      \ganttbar{Análisis de datos}{2025-07-28}{2025-08-03} \\
+      \ganttbar{Generación de reportes}{2025-08-04}{2025-08-08} \\
+      \ganttbar{Manejo de errores}{2025-08-09}{2025-08-13} \\
+      \ganttbar{Administración de logs}{2025-08-09}{2025-08-13} \\
+
+      \ganttgroup{Almacenamiento}{2025-07-27}{2025-08-02} \\
+      \ganttbar{Almacenamiento de datos}{2025-07-27}{2025-08-02} \\
+      \ganttbar{Implementación RAID 1}{2025-07-27}{2025-08-02} \\
+
+      \ganttgroup{Desarrollo frontend}{2025-08-04}{2025-08-10} \\
+      \ganttbar{Interfaz visual}{2025-08-04}{2025-08-10} \\
+
+      \ganttgroup{Testing}{2025-08-14}{2025-08-17} \\
+      \ganttbar{Pruebas unitarias funcionales}{2025-08-14}{2025-08-15} \\
+      \ganttbar{Pruebas unitarias no funcionales}{2025-08-14}{2025-08-15} \\
+      \ganttbar{Pruebas de estrés}{2025-08-14}{2025-08-15} \\
+      \ganttbar{Validación de hardware}{2025-08-16}{2025-08-17} \\
+      \ganttbar{Corrección de posibles fallos}{2025-08-14}{2025-08-17} \\
+
+    \end{ganttchart}
+    }
+    \caption{Cronograma equipo de software, parte 1.}
+    \label{gantt-software1}
+    \end{figure}
+
+  \newpage
+    \vspace*{\fill}
+    \begin{figure}[H]
+      \centering
+      \resizebox{25cm}{!}{%
+        \begin{ganttchart}[
+        hgrid,
+        vgrid,
+        time slot format=isodate,
+        x unit=0.65cm,
+        y unit chart=0.65cm,
+        bar/.append style={fill=blue!40},
+        milestone/.append style={fill=orange},
+        milestone label font=\bfseries\small,
+        bar label font=\small\slshape,
+        group left shift=0,
+        group right shift=0,
+        group peaks tip position=0,
+        group peaks height=.4
+    ]{2025-08-18}{2025-10-10}
+
+      \gantttitlecalendar{month=name, week=8, day} \\
+
+      %\ganttlink{req}{tools}
+      %\ganttlink{tools}{design}
+      %\ganttlink{design}{developpdr}
+      %\ganttlink{developpdr}{delivpdr}
+
+      \ganttgroup{Sprint 2}{2025-08-18}{2025-09-10}\\
+
+      \ganttgroup{Desarrollo backend}{2025-08-18}{2025-09-06} \\
+      \ganttbar{Desarrollo de funcionalidades principales}{2025-08-18}{2025-08-24} \\
+      \ganttbar{Análisis de datos}{2025-08-21}{2025-08-27} \\
+      \ganttbar{Generación de reportes}{2025-08-28}{2025-09-01} \\
+      \ganttbar{Manejo de errores}{2025-09-02}{2025-09-06} \\
+      \ganttbar{Administración de logs}{2025-09-02}{2025-09-06}\\
+
+      \ganttgroup{Almacenamiento}{2025-08-20}{2025-08-26} \\
+      \ganttbar{Almacenamiento de datos}{2025-08-20}{2025-08-26} \\
+      \ganttbar{Implementación RAID 1}{2025-08-20}{2025-08-26}\\
+
+      \ganttgroup{Desarrollo frontend}{2025-08-28}{2025-09-03} \\
+      \ganttbar{Interfaz visual}{2025-08-28}{2025-09-03} \\
+
+      \ganttgroup{Testing}{2025-09-07}{2025-09-10}  \\
+      \ganttbar{Pruebas unitarias funcionales}{2025-09-07}{2025-09-08} \\
+      \ganttbar{Pruebas unitarias no funcionales}{2025-09-07}{2025-09-08}  \\
+      \ganttbar{Pruebas de estrés}{2025-09-07}{2025-09-08}  \\
+      \ganttbar{Validación de hardware}{2025-09-09}{2025-09-10}  \\
+      \ganttbar{Corrección de posibles fallos}{2025-09-07}{2025-09-10}  \\
+
+      \ganttgroup{Sprint 3}{2025-09-11}{2025-10-04}\\
+
+      \ganttgroup{Desarrollo backend}{2025-09-11}{2025-09-20} \\
+      \ganttbar{Desarrollo de funcionalidades principales}{2025-09-11}{2025-09-17} \\
+      \ganttbar{Análisis de datos}{2025-09-14}{2025-09-20} \\
+      \ganttbar{Generación de reportes}{2025-09-21}{2025-09-25} \\
+      \ganttbar{Manejo de errores}{2025-09-26}{2025-09-30} \\
+      \ganttbar{Administración de logs}{2025-09-26}{2025-09-30} \\
+
+      \ganttgroup{Almacenamiento}{2025-09-13}{2025-09-19} \\
+      \ganttbar{Almacenamiento de datos}{2025-09-13}{2025-09-19} \\
+      \ganttbar{Implementación RAID 1}{2025-09-13}{2025-09-19} \\
+
+      \ganttgroup{Desarrollo frontend}{2025-09-21}{2025-09-27} \\
+      \ganttbar{Interfaz visual}{2025-09-21}{2025-09-27} \\
+
+      \ganttgroup{Testing}{2025-10-01}{2025-10-04} \\
+      \ganttbar{Pruebas unitarias funcionales}{2025-10-01}{2025-10-02} \\
+      \ganttbar{Pruebas unitarias no funcionales}{2025-10-01}{2025-10-02} \\
+      \ganttbar{Pruebas de estrés}{2025-10-01}{2025-10-02} \\
+      \ganttbar{Validación de hardware}{2025-10-03}{2025-10-04} \\
+      \ganttbar{Corrección de posibles fallos}{2025-10-01}{2025-10-04} \\
+
+      \ganttlinkedmilestone[name=delivcdr]{Entrega final}{2025-10-10}
+
+      \end{ganttchart}
+      }
+    \caption{Cronograma equipo de software, parte 2.}
+    \label{gantt-software2}
+    \end{figure}
+    \vspace*{\fill}
+    \newpage
+  
+  \phantomsection
+  \refstepcounter{section}
+  \addcontentsline{toc}{section}{\numberline{\thesection}Esquematicos}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{\acrfull{obc}},anexo:obc.schematic},
+      landscape=true
+    ]{annex/OBC_sch.pdf}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{\acrfull{pms}},anexo:pms.schematic},
+      landscape=true
+    ]{annex/PMS_sch.pdf}
+
+  \phantomsection
+  \refstepcounter{section}
+  \addcontentsline{toc}{section}{\numberline{\thesection}Dibujos Tecnicos}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{Estructura},anexo:planos.estructura},
+      landscape=true
+    ]{annex/structure_drawing.pdf}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{Modulo \acrshort{obc}},anexo:planos.obc},
+      landscape=true
+    ]{annex/OBC_drawing.pdf}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{Modulo \acrshort{pms}},anexo:planos.pms},
+      landscape=true
+    ]{annex/PMS_drawing.pdf}
+    \includepdf[
+      pages=-,
+      pagecommand={\thispagestyle{plain}},
+      addtotoc={1,subsection,1,{Modulo \acrshort{pu}},anexo:planos.pu},
+      landscape=true
+    ]{annex/Payload_drawing.pdf}
+
+\end{landscape}
+\restoregeometry
+\setCustomPageStyle
+
